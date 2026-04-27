@@ -4,6 +4,14 @@
 - status: workspace-dev
 - worktree: ~/Code/PyAutoLabs-wt/workspace-gitignore-noise
 - repos:
+  - autofit_workspace: feature/workspace-gitignore-noise
+  - autogalaxy_workspace: feature/workspace-gitignore-noise
+  - autolens_workspace: feature/workspace-gitignore-noise
+  - autofit_workspace_test: feature/workspace-gitignore-noise
+  - autogalaxy_workspace_test: feature/workspace-gitignore-noise
+  - autolens_workspace_test: feature/workspace-gitignore-noise
+  - autofit_workspace_developer: feature/workspace-gitignore-noise
+  - autolens_workspace_developer: feature/workspace-gitignore-noise
 
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
