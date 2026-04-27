@@ -12,6 +12,13 @@
 - worktree: ~/Code/PyAutoLabs-wt/positions-test-mode-fallback
 - repos:
 
+## history-rewrite-guard
+- issue: https://github.com/PyAutoLabs/PyAutoPrompt/issues/7
+- session: claude --resume "history-rewrite-guard"
+- status: library-dev
+- worktree: ~/Code/PyAutoLabs-wt/history-rewrite-guard
+- repos:
+
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
 - session: claude --resume "profile-smoke-test-runtime"
