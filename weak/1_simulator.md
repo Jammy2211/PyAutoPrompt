@@ -1,3 +1,5 @@
+Do deep research and think hard on planning this one.
+
 I am going to add weak gravitational lens analysis to autolens, whcih is going to be a series of 5 or so 
 claude prompts to get us there.
 

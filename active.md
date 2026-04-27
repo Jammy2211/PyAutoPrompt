@@ -1,3 +1,10 @@
+## pyauto-status-shell
+- issue: https://github.com/PyAutoLabs/PyAutoPrompt/issues/2
+- session: claude --resume "pyauto-status-shell"
+- status: library-dev
+- worktree: ~/Code/PyAutoLabs-wt/pyauto-status-shell
+- repos:
+
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
 - session: claude --resume "profile-smoke-test-runtime"
