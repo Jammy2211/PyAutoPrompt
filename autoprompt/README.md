@@ -3,6 +3,17 @@
 Prompts about the PyAuto workflow infrastructure itself — i.e. the tooling that
 makes prompts in this repo flow smoothly from idea to merged PR.
 
+> ⚠️ **Caveat — drafted from a stale repo state.** These prompts were drafted on
+> 2026-04-27 during a forensic sweep that found local checkouts up to 101 commits
+> behind origin. The trigger looked like a structural workflow flaw, but later
+> analysis showed the drift was largely driven by **stale local checkouts being
+> edited without `git pull` first**, not by missing tooling. Now that PyAutoPrompt
+> is the canonical source-of-truth and `skills/install.sh` auto-discovers across
+> both repos, several of the recommendations here may be over-engineered for the
+> day-to-day case. Re-evaluate whether each measure is still warranted before
+> implementing — the cheap habits (pull before edit, never rewrite history) buy
+> most of the win. Each prompt has its own caveat at the top.
+
 These were drafted after a forensic sweep on 2026-04-27 found that local checkouts
 across 12 repos had drifted up to 101 commits behind origin, with parallel
 "fresh start" history rewrites and 41 redundant local commits. The root causes

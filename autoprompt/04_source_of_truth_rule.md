@@ -1,5 +1,7 @@
 # "Pull before edit" / source-of-truth rule
 
+> ⚠️ **Caveat — drafted from a stale repo state.** This prompt was drafted on 2026-04-27 during a forensic sweep that found local checkouts up to 101 commits behind origin. The trigger looked like a structural workflow flaw, but later analysis showed the drift was largely driven by **stale local checkouts being edited without `git pull` first**, not by missing tooling. Now that PyAutoPrompt is the canonical source-of-truth and `skills/install.sh` auto-discovers across both repos, some of the recommendations below may be over-engineered for the day-to-day case. Re-evaluate whether each measure is still warranted — the cheap habits (pull before edit, never rewrite history) buy most of the win.
+
 Editing on a stale local checkout — without first pulling origin — is what
 created the 41 redundant commits cleaned up on 2026-04-27. Two environments
 (this laptop, plus cloud agents pushing PRs) made the *same* edits independently

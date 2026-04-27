@@ -1,5 +1,7 @@
 # "Never rewrite history" guard in CLAUDE.md / AGENTS.md
 
+> ⚠️ **Caveat — drafted from a stale repo state.** This prompt was drafted on 2026-04-27 during a forensic sweep that found local checkouts up to 101 commits behind origin. The trigger looked like a structural workflow flaw, but later analysis showed the drift was largely driven by **stale local checkouts being edited without `git pull` first**, not by missing tooling. Now that PyAutoPrompt is the canonical source-of-truth and `skills/install.sh` auto-discovers across both repos, some of the recommendations below may be over-engineered for the day-to-day case. Re-evaluate whether each measure is still warranted — the cheap habits (pull before edit, never rewrite history) buy most of the win.
+
 The single most damaging drift mechanism on 2026-04-27 was **independent `git init`
 "fresh start" rewrites** on different machines. The three workspace repos ended
 up with **no merge base at all** with origin — local and origin had each gone
