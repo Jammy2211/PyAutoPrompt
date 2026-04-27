@@ -61,15 +61,17 @@ pyauto-status() {
   wait
 
   # Header.
-  local fmt='%-32s %-30s %-36s %6s %5s %5s  %s\n'
-  printf "$fmt" REPO BRANCH UPSTREAM BEHIND AHEAD DIRTY FLAGS
+  local fmt='%-32s %-30s %-36s %6s %5s %4s %4s  %s\n'
+  printf "$fmt" REPO BRANCH UPSTREAM BEHIND AHEAD MOD UNTR FLAGS
   printf "$fmt" "--------------------------------" \
     "------------------------------" \
     "------------------------------------" \
-    "------" "-----" "-----" "-----"
+    "------" "-----" "----" "----" "-----"
 
-  # Per-repo row. All lookups are local after the fetch sweep.
-  local name branch upstream behind ahead dirty flags counts
+  # Per-repo row. Porcelain is cached so the dirty-files listing below can
+  # reuse it without a second `git status` per repo.
+  declare -A repo_porcelain
+  local name branch upstream behind ahead mod untr flags counts porcelain
   for repo in "${repos[@]}"; do
     name="$(basename "$repo")"
 
@@ -97,13 +99,39 @@ pyauto-status() {
       [[ -e "$fetch_status_dir/$name" ]] && flags+="!"
     fi
 
-    dirty="$(git -C "$repo" status --porcelain 2>/dev/null | wc -l | tr -d ' ')"
-    [[ -z "$dirty" ]] && dirty="?"
+    porcelain="$(git -C "$repo" status --porcelain 2>/dev/null || true)"
+    repo_porcelain["$name"]="$porcelain"
+
+    if [[ -z "$porcelain" ]]; then
+      mod=0
+      untr=0
+    else
+      untr="$(printf '%s\n' "$porcelain" | grep -c '^??' || true)"
+      mod="$(printf '%s\n' "$porcelain" | grep -cv '^??' || true)"
+    fi
 
     [[ "$behind" =~ ^[0-9]+$ ]] && (( behind > 0 )) && flags+="↓"
     [[ "$ahead"  =~ ^[0-9]+$ ]] && (( ahead  > 0 )) && flags+="↑"
-    [[ "$dirty"  =~ ^[0-9]+$ ]] && (( dirty  > 0 )) && flags+="*"
+    (( mod + untr > 0 )) && flags+="*"
 
-    printf "$fmt" "$name" "$branch" "$upstream" "$behind" "$ahead" "$dirty" "$flags"
+    printf "$fmt" "$name" "$branch" "$upstream" "$behind" "$ahead" "$mod" "$untr" "$flags"
+  done
+
+  # Per-repo dirty-file listing. Only repos with non-empty porcelain are
+  # shown — keeps the output empty when everything is clean. The `??` and
+  # ` M` etc. prefixes from porcelain are preserved so users can tell
+  # untracked from modified at a glance.
+  local printed_header=false
+  for repo in "${repos[@]}"; do
+    name="$(basename "$repo")"
+    porcelain="${repo_porcelain[$name]}"
+    [[ -z "$porcelain" ]] && continue
+    if [[ "$printed_header" == "false" ]]; then
+      echo ""
+      echo "Dirty files:"
+      printed_header=true
+    fi
+    echo "  $name:"
+    printf '%s\n' "$porcelain" | sed 's/^/    /'
   done
 }
