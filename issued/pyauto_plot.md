@@ -1,0 +1,1 @@
+Can you merge the environment variables PYAUTO_DISABLE_CRITICAL_CURVES And PYAUTO_FAST_PLOT into jsut PYAUTO_FAST_PLOT

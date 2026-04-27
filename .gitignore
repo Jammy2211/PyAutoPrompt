@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+.DS_Store
+*.swp
+.idea/
+.vscode/
+
+# Scratch space — never check in
+tmp/
