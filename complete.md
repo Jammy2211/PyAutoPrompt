@@ -1,4 +1,11 @@
 
+## pyauto-status-shell
+- issue: https://github.com/PyAutoLabs/PyAutoPrompt/issues/2
+- completed: 2026-04-27
+- library-pr: https://github.com/PyAutoLabs/PyAutoPrompt/pull/3
+- repos: PyAutoPrompt
+- notes: Added `scripts/pyauto_status.sh` defining a `pyauto-status` shell function — a cross-repo git sync dashboard that prints branch, upstream tracking ref, behind/ahead counts, dirty count, and flag glyphs (↓ ↑ * !) for every git repo under `~/Code/PyAutoLabs/`. Sweep of 21 repos completes in ~4s with parallel `git fetch`. Handles missing upstream (`NONE` + `!` flag — caught a real bug: PyAutoPrompt's local `main` had no tracking config, fixed in post-merge cleanup), non-default upstream branches via `@{u}`, fetch failures, and non-git directories. Also extended `scripts/status.sh` with a `--repos` flag that delegates to `pyauto-status`. The function is wired into the `PyAuto`, `PyAutoGPU`, `PyAutoNoJAX` venv-activation aliases in `~/.bashrc` so the dashboard prints automatically every time the user enters the workspace, giving drift state visibility before any work begins. Skipped `PyAutoOld()` (targets a different directory). Implements prompt 01 of the autoprompt/ workflow-infrastructure series; complementary to (not blocking) prompts 02-07.
+
 ## pyautoprompt-path-cleanup
 - issue: none — housekeeping task
 - completed: 2026-04-27
