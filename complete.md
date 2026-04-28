@@ -1,4 +1,12 @@
 
+## autogalaxy-wst-jax-lh-multi
+- issue: https://github.com/PyAutoLabs/autogalaxy_workspace_test/issues/18
+- completed: 2026-04-28
+- workspace-pr: https://github.com/PyAutoLabs/autogalaxy_workspace_test/pull/19
+- repos: autogalaxy_workspace_test
+- umbrella: https://github.com/PyAutoLabs/autogalaxy_workspace_test/issues/5 (task 5/9)
+- notes: Ported 8 multi-band JAX-likelihood scripts from autolens_workspace_test (simulator, lp, mge, mge_group, rectangular, rectangular_mge, delaunay, delaunay_mge) into `scripts/jax_likelihood_functions/multi/`. Each fit script combines per-band `ag.AnalysisImaging` factors via `af.FactorGraphModel` and asserts NumPy/JIT scalar parity over `instance_from_vector → log_likelihood_function` (FactorGraphModel has no `fit_from`). Adapt-regularization variants (rectangular, rectangular_mge, delaunay, delaunay_mge) at rtol=1e-2 per the established imaging/interferometer convention; lp/mge/mge_group at rtol=1e-4. Self-contained simulator (no external fixtures). `delaunay_mge.py` enabled in smoke_tests.txt — JAX 0.7's `pytype_aval_mappings` removal does not bite on the multi path (matches interferometer; only single-dataset imaging delaunay_mge remains commented out). Sonnet-side mishaps caught: (1) initial Path A used JIT-vs-vmap on the same factor_graph(use_jax=True) — a tautology; rewrote all 4 pixelized scripts to do proper NumPy-vs-JIT via a separate factor_graph_np(use_jax=False); (2) first ship subagent committed+pushed but stalled before launching smoke; second subagent picked up cleanly at smoke + PR; (3) smoke runner pathing footgun — absolute python path bypassed cwd-relative subprocess.run inside fit scripts, fixed by wrapping in `(cd "$WS" && env ... python "$script")`. API gotcha: `ag.reg.Adapt` uses `inner_coefficient` not `coefficient`. Worth re-attempting the imaging delaunay_mge on a future task since interferometer and multi both work.
+
 ## autogalaxy-wst-jax-lh-interferometer
 - issue: https://github.com/PyAutoLabs/autogalaxy_workspace_test/issues/16
 - completed: 2026-04-28

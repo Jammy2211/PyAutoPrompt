@@ -49,13 +49,5 @@
 - worktree: ~/Code/PyAutoLabs-wt/merge-results-start-here
 - repos:
 
-## autogalaxy-wst-jax-lh-multi
-- issue: https://github.com/PyAutoLabs/autogalaxy_workspace_test/issues/18
-- session: claude --resume "autogalaxy-wst-jax-lh-multi"
-- status: workspace-dev
-- worktree: ~/Code/PyAutoLabs-wt/autogalaxy-wst-jax-lh-multi
-- repos:
-  - autogalaxy_workspace_test: feature/autogalaxy-wst-jax-lh-multi
-
 
 
