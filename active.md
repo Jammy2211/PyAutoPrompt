@@ -48,10 +48,3 @@
 - worktree: ~/Code/PyAutoLabs-wt/merge-results-start-here
 - repos:
 
-## analysis-interferometer-pytree
-- issue: https://github.com/PyAutoLabs/PyAutoGalaxy/issues/375
-- session: claude --resume "analysis-interferometer-pytree"
-- status: library-dev
-- worktree: ~/Code/PyAutoLabs-wt/analysis-interferometer-pytree
-- repos:
-  - PyAutoGalaxy: feature/analysis-interferometer-pytree
