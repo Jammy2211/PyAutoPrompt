@@ -1,4 +1,11 @@
 
+## dashboard-followup-commands
+- issue: https://github.com/PyAutoLabs/PyAutoPrompt/issues/9
+- completed: 2026-04-28
+- library-pr: https://github.com/PyAutoLabs/PyAutoPrompt/pull/10
+- repos: PyAutoPrompt
+- notes: Re-scoped autoprompt 05 (the heavyweight `/sync` slash command spec). Instead of a separate `pyauto-pull` shell function or full `/sync` skill, extended `scripts/pyauto_status.sh` (~89 added lines) with two additions: (1) `b` flag glyph appended to FLAGS column when current branch ≠ upstream branch component (or upstream=NONE and branch ≠ main) — caught `euclid_strong_lens_modeling_pipeline` immediately as on `fix/extra-galaxies-gui-vis-index`. (2) "Follow-up commands:" section after the Dirty files listing, grouped by Pull (clean+behind+not-ahead → copy-pasteable `git -C <abs-path> pull --ff-only`), Set missing upstream (branch=main + upstream=NONE → `branch --set-upstream-to=origin/main main`), and Investigate manually (one-line note for diverged / behind+dirty / branch-mismatch — no auto-command). Section is suppressed entirely when nothing is actionable, so the clean case stays quiet. Smoke tested all three branches: synthetic `reset --hard HEAD~1` on HowToFit produced correct Pull line that fast-forwarded cleanly; synthetic `branch --unset-upstream` produced correct Set-upstream line that restored tracking. Replaces the rejected pyauto-pull function design — printed commands ARE the action; the user copy-pastes (or selects-all-pastes) what's appropriate. Boring case automated via copy-paste, judgment cases surfaced for manual handling. Autoprompts 04 (source-of-truth doc rule) skipped as redundant — `pyauto-status` at venv activation + prompt 03's history-rewrite guard already cover the failure modes that prompt 04 addressed.
+
 ## history-rewrite-guard
 - issue: https://github.com/PyAutoLabs/PyAutoPrompt/issues/7 (umbrella, closed manually after all 17 PRs merged)
 - completed: 2026-04-27
