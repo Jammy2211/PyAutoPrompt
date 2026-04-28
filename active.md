@@ -47,3 +47,10 @@
 - status: workspace-dev
 - worktree: ~/Code/PyAutoLabs-wt/merge-results-start-here
 - repos:
+
+## pyauto-audit
+- issue: https://github.com/PyAutoLabs/PyAutoPrompt/issues/11
+- session: claude --resume "pyauto-audit"
+- status: library-dev
+- worktree: ~/Code/PyAutoLabs-wt/pyauto-audit
+- repos: PyAutoPrompt
