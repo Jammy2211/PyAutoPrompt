@@ -2,31 +2,29 @@ Once https://github.com/PyAutoLabs/PyAutoLens/issues/480 is fixed (PointSolver
 magnification filter must use `plane_redshift`, not the tracer's last plane),
 revisit `@autolens_workspace/scripts/point_source/features/multiple_sources/`.
 
-When that workspace example was first written (autolens_workspace issue #97),
-the upstream PointSolver bug made it impossible to simulate or fit a configuration
-where the intermediate source itself acts as a deflector for the further source.
-To unblock the multi/factor-graph tutorial, the example was simplified so the
-only deflector is the foreground lens — both source galaxies are point-only at
-different redshifts, no source-plane mass profile.
+The simulator and modeling scripts there are already written in their intended
+"double Einstein cross" form — source_0 (z=1.0) has its own `Isothermal` mass
+profile that lenses source_1 (z=2.0) on top of the foreground lens at z=0.5.
+They were authored under autolens_workspace issue #97 but cannot run end-to-end
+on the current PyAutoLens release because of #480, so both scripts were entered
+into `config/build/no_run.yaml`.
 
-This task restores the original "double Einstein cross" intent now that the
-PointSolver bug is fixed:
+This task closes the loop once #480 lands:
 
-1. Update `simulator.py` so source_0 (z=1.0) regains its `Isothermal` mass profile
-   at (0.02, 0.03) with `einstein_radius=0.2` and a small ellipticity. Source_0
-   should now genuinely lens source_1 in addition to the foreground lens.
-2. Verify the simulator still runs end-to-end with a single tracer
-   `[lens, source_0_with_mass, source_1]` and that `solver.solve(plane_redshift=1.0)`
-   returns >=4 image-plane positions for source_0.
-3. Update `modeling.py` so the model includes source_0's mass:
-     - `source_0 = af.Model(al.Galaxy, redshift=1.0, mass=al.mp.Isothermal, point_0=al.ps.Point)`
-   The lens model dimensionality goes from N=9 to N=14.
-4. Decide whether the `AnalysisFactor` for source_0's dataset should fit using
-   the full multi-plane model or a sub-model excluding source_1. With #480 fixed,
-   the full multi-plane model should fit cleanly and is preferred — both factors
-   share `lens` and `source_0.mass` priors, the factor graph sums log-likelihoods.
-5. Re-run end-to-end with `PYAUTO_TEST_MODE=2` (no `PYAUTO_SMALL_DATASETS`) to
-   confirm the simulator and modeling both work, then regenerate notebooks.
-6. Update the script docstrings and the folder/feature README to mention the
-   lensing-of-lens richness again, and remove any "simplified to work around
-   PyAutoLens #480" comments.
+1. Remove these two entries from `autolens_workspace/config/build/no_run.yaml`:
+   - `point_source/features/multiple_sources/simulator`
+   - `point_source/features/multiple_sources/modeling`
+2. Run `python scripts/point_source/features/multiple_sources/simulator.py`
+   end-to-end (no `PYAUTO_*` overrides) and confirm both `point_dataset_0.json`
+   and `point_dataset_1.json` are written with >=4 positions each.
+3. Run `PYAUTO_TEST_MODE=2 python scripts/point_source/features/multiple_sources/modeling.py`
+   end-to-end and confirm the likelihood evaluation succeeds without the
+   "PointSolver finds 0 positions" failure mode.
+4. Remove the `__Currently Blocked By PyAutoLens #480__` notice from both
+   scripts' module docstrings.
+5. Regenerate notebooks via `/generate_and_merge`.
+
+If the simulator or modeling needs tweaks to match the post-fix solver behaviour
+(e.g. slightly different prior bounds, repositioning source centres), that's an
+acceptable scope expansion — but do not weaken the example back to a single-lens
+configuration.
