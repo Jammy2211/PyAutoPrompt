@@ -1,4 +1,11 @@
 
+## merge-results-start-here
+- issue: https://github.com/PyAutoLabs/autolens_workspace/issues/95
+- completed: 2026-04-28
+- workspace-pr: https://github.com/PyAutoLabs/autolens_workspace/pull/98, https://github.com/PyAutoLabs/autogalaxy_workspace/pull/46
+- repos: autolens_workspace, autogalaxy_workspace
+- notes: Combined `guides/results/start_here.py` (simple JSON/FITS) and `guides/results/aggregator/start_here.py` (full aggregator) into one entry-point tutorial at `guides/results/start_here.py` for both workspaces. Simple loading first with `.exists()` guards on the `<unique_hash>` placeholder so the script runs cleanly before users replace it; aggregator section second, runs a real fit and walks the deeper API. Mirrored the autogalaxy `test_mode_was_on` / `n_like_max=300` conditional into autolens for parity — autolens previously had no such conditional, so manual `PYAUTO_TEST_MODE=1` runs short-circuited to a 1-sample mock; now both workspaces produce 300 samples. `samples.csv` displays as ~1 row in autogalaxy (Nautilus weight filtering keeps only high-weight survivors) but `samples_info.json: total_accepted_samples=300` confirms the search ran for 300 evals; autolens samples.csv shows 301 lines due to a more complex lens model. env_vars.yaml `pattern: "guides/results/"` override that unsets PYAUTO_TEST_MODE and PYAUTO_SKIP_FIT_OUTPUT during smoke runs is preserved and still load-bearing for downstream aggregator siblings. Discovered (out of scope for this PR) that `aggregator/models.py` and `data_fitting.py` etc. expose pre-existing PyAutoGalaxy aggregator bugs in test mode (`fit.value(name=name)[0].header` dereferences None; `_tracer_from` gets `instance=None`) — confirmed reproducible on main. Worth a separate issue if those scripts are ever added to the smoke test list.
+
 ## autogalaxy-wst-jax-lh-multi
 - issue: https://github.com/PyAutoLabs/autogalaxy_workspace_test/issues/18
 - completed: 2026-04-28
