@@ -8,7 +8,8 @@
 ## positions-test-mode-fallback
 - issue: https://github.com/PyAutoLabs/PyAutoLens/issues/477
 - session: claude --resume "positions-test-mode-fallback"
-- status: library-dev
+- status: library-shipped, workspace-pending
+- library-pr: https://github.com/PyAutoLabs/PyAutoLens/pull/479
 - worktree: ~/Code/PyAutoLabs-wt/positions-test-mode-fallback
 - repos:
   - PyAutoLens: feature/positions-test-mode-fallback
