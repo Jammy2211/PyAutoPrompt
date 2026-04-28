@@ -11,6 +11,7 @@
 - status: library-dev
 - worktree: ~/Code/PyAutoLabs-wt/positions-test-mode-fallback
 - repos:
+  - PyAutoLens: feature/positions-test-mode-fallback
 
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183

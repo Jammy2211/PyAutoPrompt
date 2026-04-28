@@ -1,4 +1,6 @@
 
+3 of THESE ARE ACTIVE AND AWAITING A RESUME
+
 workspaces/[point_source_multi.md](workspaces/point_source_multi.md)
 workspaces/[positions_test_mode_bug.md](workspaces/positions_test_mode_bug.md)
 workspaces/[result_start_here.md](workspaces/result_start_here.md)
