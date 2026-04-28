@@ -47,3 +47,10 @@
 - status: workspace-dev
 - worktree: ~/Code/PyAutoLabs-wt/merge-results-start-here
 - repos:
+
+## autoprompt-cleanup
+- issue: https://github.com/PyAutoLabs/PyAutoPrompt/issues/15
+- session: claude --resume "autoprompt-cleanup"
+- status: library-dev
+- worktree: ~/Code/PyAutoLabs-wt/autoprompt-cleanup
+- repos: PyAutoPrompt
