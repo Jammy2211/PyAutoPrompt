@@ -5,14 +5,6 @@
 - worktree: ~/Code/PyAutoLabs-wt/weak-shear-simulator
 - repos:
 
-## truncated-normal-gradient-hessian
-- issue: https://github.com/PyAutoLabs/PyAutoFit/issues/1237
-- session: claude --resume "truncated-normal-gradient-hessian"
-- status: library-dev
-- worktree: ~/Code/PyAutoLabs-wt/truncated-normal-gradient-hessian
-- repos:
-  - PyAutoFit: feature/truncated-normal-gradient-hessian
-
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
 - session: claude --resume "profile-smoke-test-runtime"

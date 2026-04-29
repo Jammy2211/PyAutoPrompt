@@ -1,4 +1,9 @@
 
+## truncated-normal-gradient-hessian
+- issue: https://github.com/PyAutoLabs/PyAutoFit/issues/1237
+- completed: 2026-04-29
+- library-pr: https://github.com/PyAutoLabs/PyAutoFit/pull/1238
+
 ## adapt-images-mesh-grid-lookup
 - issue: https://github.com/PyAutoLabs/autolens_workspace/issues/103
 - completed: 2026-04-29
