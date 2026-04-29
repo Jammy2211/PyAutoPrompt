@@ -158,10 +158,56 @@ if slow_skips or nf_skips:
 # Pointers
 print("Pointers")
 print("-" * 76)
-print(f"  Markdown report:  {run_dir}/report.md")
-print(f"  Run JSON:         {run_dir}/report.json")
+print(f"  Markdown report:  {run_dir}/report.md       {DIM}(pyauto-report){RST}")
+print(f"  Run JSON:         {run_dir}/report.json     {DIM}(pyauto-json){RST}")
 triage = run_dir / "triage.md"
 if triage.exists():
-    print(f"  {GREEN}Triage notes:     {triage}{RST}  (analytical clustering)")
+    print(f"  {GREEN}Triage notes:     {triage}{RST}  {DIM}(pyauto-triage){RST}")
 PY
+}
+
+# _pyauto_run_file <subpath> [run-dir-arg] — resolve a file inside the latest
+# (or supplied) run directory. Used by the pyauto-{report,json,triage} viewers.
+_pyauto_run_file() {
+  local subpath="$1"
+  local run_dir="${2:-$PYAUTO_STATUS_FULL_DEFAULT}"
+
+  if [[ ! -e "$run_dir" ]]; then
+    echo "pyauto: no run found at $run_dir" >&2
+    return 1
+  fi
+  run_dir="$(readlink -f "$run_dir")"
+
+  local target="$run_dir/$subpath"
+  if [[ ! -f "$target" ]]; then
+    echo "pyauto: $target missing" >&2
+    return 1
+  fi
+  printf '%s' "$target"
+}
+
+# pyauto-report [run-dir] — view report.md in the pager.
+pyauto-report() {
+  local f
+  f="$(_pyauto_run_file report.md "$1")" || return 1
+  "${PAGER:-less}" "$f"
+}
+
+# pyauto-json [run-dir] — view report.json. Uses jq for color + paging when
+# available, falls back to plain cat otherwise.
+pyauto-json() {
+  local f
+  f="$(_pyauto_run_file report.json "$1")" || return 1
+  if command -v jq >/dev/null 2>&1; then
+    jq -C . "$f" | "${PAGER:-less}" -R
+  else
+    "${PAGER:-less}" "$f"
+  fi
+}
+
+# pyauto-triage [run-dir] — view triage.md in the pager.
+pyauto-triage() {
+  local f
+  f="$(_pyauto_run_file triage.md "$1")" || return 1
+  "${PAGER:-less}" "$f"
 }
