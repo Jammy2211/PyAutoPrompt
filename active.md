@@ -5,14 +5,6 @@
 - worktree: ~/Code/PyAutoLabs-wt/weak-shear-simulator
 - repos:
 
-## adapt-images-mesh-grid-lookup
-- issue: https://github.com/PyAutoLabs/autolens_workspace/issues/103
-- session: claude --resume "adapt-images-mesh-grid-lookup"
-- status: workspace-dev
-- worktree: ~/Code/PyAutoLabs-wt/adapt-images-mesh-grid-lookup
-- repos:
-  - autolens_workspace: feature/adapt-images-mesh-grid-lookup
-
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
 - session: claude --resume "profile-smoke-test-runtime"
