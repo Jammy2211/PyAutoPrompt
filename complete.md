@@ -1,4 +1,10 @@
 
+## jax-likelihood-poisson-regen
+- completed: 2026-04-29
+- workspace-pr: https://github.com/PyAutoLabs/autolens_workspace_test/pull/64
+- repos: autolens_workspace_test
+- notes: Follow-up to autobuild-release-prep failures. Root cause: PyAutoArray be3a3a2f flipped the sign of `preprocess.poisson_noise_via_data_eps_from` (correct fix; old form mirrored Poisson skew). Because `dataset/` is gitignored, every fresh checkout re-simulates with the post-fix sign and produces noise maps that drift pixelization-driven likelihoods past `rtol=1e-4`; the recorded literals were captured against pre-fix simulator output. Considered converting `assert_allclose(np.array(result), <literal>, rtol=1e-4)` to relational `vmap ≈ NumPy-path` to immunise the suite against future simulator changes — explicitly rejected by user: "I want to keep hardcoded literals" — relational form would lose absolute regression detection on the NumPy path itself. Regenerated 11 literals in autolens_workspace_test (4 imaging-failed + 5 multi-failed + 2 imaging-borderline that drifted past tolerance during verification: delaunay_mge, mge_group). Updated `scripts/CLAUDE.md` testing-philosophy: removed "no hardcoded values" bullet, replaced with documentation that hardcoded literals are intentional regression markers + one-line regeneration recipe. Branch name `feature/jax-relational-baselines` from original plan; actual implementation kept literals — explained in PR body. autogalaxy_workspace_test was already relational throughout (no changes); autofit_workspace_test has no jax_likelihood_functions/ dir; interferometer/ + point_source/ were unaffected by the Poisson sign fix (Gaussian visibility noise / position datasets respectively) and kept their existing literals.
+
 ## truncated-normal-gradient-hessian
 - issue: https://github.com/PyAutoLabs/PyAutoFit/issues/1237
 - completed: 2026-04-29
