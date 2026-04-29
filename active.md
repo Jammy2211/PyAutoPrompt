@@ -6,12 +6,13 @@
 - repos:
 
 ## adapt-images-mesh-grid-lookup
-- issue: https://github.com/PyAutoLabs/PyAutoGalaxy/issues/377
+- issue: https://github.com/PyAutoLabs/autolens_workspace/issues/103
 - session: claude --resume "adapt-images-mesh-grid-lookup"
-- status: library-dev
+- status: workspace-dev
 - worktree: ~/Code/PyAutoLabs-wt/adapt-images-mesh-grid-lookup
 - repos:
-  - PyAutoGalaxy: feature/adapt-images-mesh-grid-lookup
+  - autolens_workspace: feature/adapt-images-mesh-grid-lookup
+  - autolens_workspace_test: feature/adapt-images-mesh-grid-lookup
 
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
