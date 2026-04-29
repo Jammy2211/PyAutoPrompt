@@ -12,7 +12,6 @@
 - worktree: ~/Code/PyAutoLabs-wt/adapt-images-mesh-grid-lookup
 - repos:
   - autolens_workspace: feature/adapt-images-mesh-grid-lookup
-  - autolens_workspace_test: feature/adapt-images-mesh-grid-lookup
 
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
