@@ -1,4 +1,12 @@
 
+## positions-test-mode-fallback
+- issue: https://github.com/PyAutoLabs/PyAutoLens/issues/477
+- completed: 2026-04-29
+- library-pr: https://github.com/PyAutoLabs/PyAutoLens/pull/479
+- workspace-pr: https://github.com/PyAutoLabs/autolens_workspace/pull/102
+- repos: PyAutoLens, autolens_workspace
+- notes: PYAUTO_TEST_MODE safeguard added to `Result.positions_likelihood_from` (substitutes `[(1.0, 0.0), (-1.0, 0.0)]` when resolved positions are empty/NaN/inf — the original `ValueError: zero-size array to reduction operation fmax` from random test-mode mass models). PYAUTO_SMALL_DATASETS short-circuit added to `PointSolver.solve` (returns `[(1.0, 0.0), (0.0, 1.0)]` immediately, skipping the triangle-tile solve), letting the three group simulator scripts (`group/simulator.py`, `multi_gaussian_expansion/simulator.py`, `no_lens_light/simulator.py`) drop the `os.environ.pop("PYAUTO_SMALL_DATASETS")` workaround. Both fallbacks placed at the higher PyAutoLens layer rather than mutating `autoarray`'s `Grid2DIrregular.furthest_distances_to_other_coordinates` primitive — keeps autoarray pure and production fits still surface bad positions loudly. Reduced test footprint to a single unit test per user request (integration catches the rest); behavior documented inline via `Notes` sections on both methods. Smoke verification surfaced an unrelated downstream bug in `PyAutoArray/autoarray/inversion/mesh/border_relocator.py:450` (`'NoneType' object has no attribute 'array'` during inversion mesh build under PYAUTO_TEST_MODE=2) — pre-existing on main, was masked by the original positions crash, worth a separate ticket.
+
 ## merge-results-start-here
 - issue: https://github.com/PyAutoLabs/autolens_workspace/issues/95
 - completed: 2026-04-28
