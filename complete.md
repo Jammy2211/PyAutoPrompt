@@ -1,4 +1,12 @@
 
+## howto-release-window
+- issue: https://github.com/PyAutoLabs/PyAutoBuild/issues/64
+- completed: 2026-04-30
+- merged-prs:
+  - PyAutoLabs/PyAutoBuild#65 (HowTo* repos as first-class members of release window)
+  - Jammy2211/admin_jammy#13 (ensure_workspace_labels.sh helper)
+- notes: Tooling/admin task — no Python API changes. Two new helpers shipped: `admin_jammy/software/ensure_workspace_labels.sh` (idempotent canonical-label sweep across 15 PyAutoLabs repos) and `PyAutoBuild/verify_workspace_versions.sh` (fail-fast guard against version.txt ahead of installed library — blocks release dispatch). `pre_build.sh` invokes both, runs `autogalaxy_workspace_test` (was missing entirely). `release.yml` wires `autogalaxy_workspace_test` into find_scripts/run_scripts (was orphaned — separate-prompt-worthy `autogalaxy_test` had no checkout block, no script_matrix.py arg, no run_scripts configure case). `CLAUDE.md` table now lists all 10 workspace-style repos. Local Claude commands updated (no PR — `~/.claude/commands/` not git-tracked): `start_workspace.md` invokes the label helper as L6/S5; `ship_workspace.md` and `ship_library.md` now verify the `pending-release` label landed via `gh pr view --json labels`, fail-loud if missing. Out-of-scope flagged: `release.yml:410` `autofit` configure branch sets `repository::PyAutoLabs/PyAutoGalaxy` (copy-paste bug); `run_notebooks` configure has no `_test` cases at all. Bug fix during impl: probe path in `ensure_workspace_labels.sh` initially branched on stdout (`gh api --jq` emits "null|" on 404), corrected to branch on exit code.
+
 ## smoke-notebooks
 - issue: https://github.com/PyAutoLabs/autolens_workspace/issues/110
 - completed: 2026-04-30

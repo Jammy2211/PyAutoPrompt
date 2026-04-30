@@ -118,7 +118,17 @@ worktree_add_repo <task-name> autolens_workspace
 
 `worktree_add_repo` is idempotent: if a repo is already a real worktree it no-ops. The feature branch is created from `origin/main` the first time a given workspace repo is attached. All subsequent edits, commits, and script runs MUST happen inside `$WT_ROOT/<workspace_repo>`, never the main checkout.
 
-### L6. Register repos in active.md
+### L6. Ensure pending-release label is canonical
+
+Run the label helper once. It's idempotent (no-ops when nothing has drifted) and bootstraps the label on any repo where it's missing. Doing this *before* `/ship_workspace` runs is what prevents the silent label-apply failure that motivated this guard.
+
+```bash
+bash admin_jammy/software/ensure_workspace_labels.sh
+```
+
+If the helper exits non-zero, stop and surface the failure to the user — `/ship_workspace` will fail anyway when its `gh pr create --label pending-release` rejects.
+
+### L7. Register repos in active.md
 
 Update the task's entry in `PyAutoPrompt/active.md` to add workspace repos and update status. The `worktree:` field is already present from `/start_library` — keep it as-is and just extend the `repos:` list:
 
@@ -145,7 +155,7 @@ source PyAutoPrompt/scripts/prompt_sync.sh
 prompt_sync_push "prompt: register <task-name> workspace repos in active.md"
 ```
 
-### L7. Present "ready to develop" summary
+### L8. Present "ready to develop" summary
 
 ```
 Workspace Development Environment Ready
@@ -236,11 +246,21 @@ source PyAutoPrompt/scripts/prompt_sync.sh
 prompt_sync_push "prompt: register <task-name> standalone-workspace repos in active.md"
 ```
 
-### S5. Explore relevant scripts
+### S5. Ensure pending-release label is canonical
+
+Run the label helper once. It's idempotent (no-ops when nothing has drifted) and bootstraps the label on any repo where it's missing. Doing this *before* `/ship_workspace` runs is what prevents the silent label-apply failure that motivated this guard.
+
+```bash
+bash admin_jammy/software/ensure_workspace_labels.sh
+```
+
+If the helper exits non-zero, stop and surface the failure to the user — `/ship_workspace` will fail anyway when its `gh pr create --label pending-release` rejects.
+
+### S6. Explore relevant scripts
 
 Read the scripts that will be modified or created inside the worktree (e.g. `~/Code/PyAutoLabs-wt/<task-name>/autolens_workspace/scripts/...`). Understand the existing directory structure and naming conventions.
 
-### S6. Present "ready to develop" summary
+### S7. Present "ready to develop" summary
 
 ```
 Workspace Development Environment Ready

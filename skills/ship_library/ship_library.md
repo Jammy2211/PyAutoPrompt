@@ -107,7 +107,7 @@ The subagent's contract (state explicitly in the prompt):
 2. If any test fails, **stop immediately**. Return the failing test names and the tail of the traceback. Do not commit. Do not try to fix.
 3. If the worktree is not on `feature/<task-name>`, **stop and report**. Do not auto-switch branches.
 4. If tests pass: `git -C "$WT_ROOT/<repo>" add -A && git commit -m "<message>" && git push -u origin feature/<task-name>`.
-5. Create the PR with `gh pr create --label "pending-release" --title "<title>" --body "<body>"`, pasting the drafted body verbatim (use a HEREDOC).
+5. Create the PR with `gh pr create --label "pending-release" --title "<title>" --body "<body>"`, pasting the drafted body verbatim (use a HEREDOC). Then **verify the label landed** with `gh pr view <number> --json labels --jq '[.labels[].name]'`. If `pending-release` is not in the output, **stop and report** — the label apply silently failed (usually because the label doesn't exist on the repo). Do NOT continue to step 6 until this is resolved. The fix is to run `bash admin_jammy/software/ensure_workspace_labels.sh` and then re-attach with `gh pr edit <number> --add-label pending-release`.
 6. Return a structured summary: one line per repo with test pass/fail counts, the commit SHA, and the PR URL.
 
 Opus consumes the subagent's return value and proceeds to step 5 (workspace impact analysis). If the subagent reports any failure, stop and report to the user — do not proceed to step 5.
