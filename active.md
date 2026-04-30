@@ -58,4 +58,6 @@
 - status: library-dev
 - worktree: ~/Code/PyAutoLabs-wt/numba-docs-deprioritize
 - repos:
+  - PyAutoLens: feature/numba-docs-deprioritize
+  - PyAutoGalaxy: feature/numba-docs-deprioritize
 
