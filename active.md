@@ -52,3 +52,10 @@
 - worktree: ~/Code/PyAutoLabs-wt/welcome-start-here-fixes
 - repos:
 
+## numba-docs-deprioritize
+- issue: https://github.com/PyAutoLabs/PyAutoLens/issues/482
+- session: claude --resume "numba-docs-deprioritize"
+- status: library-dev
+- worktree: ~/Code/PyAutoLabs-wt/numba-docs-deprioritize
+- repos:
+
