@@ -34,12 +34,4 @@
 - Profile interferometer/modeling.py and other scripts
 - Consider caching cosmology distances per redshift pair
 
-## autobuild-bash-cli
-- issue: https://github.com/PyAutoLabs/PyAutoBuild/issues/67
-- session: claude --resume "autobuild-bash-cli"
-- status: library-dev
-- worktree: ~/Code/PyAutoLabs-wt/autobuild-bash-cli
-- repos:
-  - PyAutoBuild: feature/autobuild-bash-cli
-  - admin_jammy: feature/autobuild-bash-cli
 
