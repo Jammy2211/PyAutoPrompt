@@ -5,6 +5,13 @@
 - worktree: ~/Code/PyAutoLabs-wt/weak-shear-simulator
 - repos:
 
+## env-var-rename
+- issue: https://github.com/PyAutoLabs/autolens_workspace_test/issues/65
+- session: claude --resume "env-var-rename"
+- status: workspace-dev
+- worktree: ~/Code/PyAutoLabs-wt/env-var-rename
+- repos:
+
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
 - session: claude --resume "profile-smoke-test-runtime"
