@@ -40,4 +40,8 @@
 - status: library-dev
 - worktree: ~/Code/PyAutoLabs-wt/rst-to-myst-md
 - repos:
+  - PyAutoFit: feature/rst-to-myst-md
+  - PyAutoGalaxy: feature/rst-to-myst-md
+  - PyAutoLens: feature/rst-to-myst-md
+  - PyAutoArray: feature/rst-to-myst-md
 
