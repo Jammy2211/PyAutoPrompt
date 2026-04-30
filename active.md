@@ -11,6 +11,10 @@
 - status: workspace-dev
 - worktree: ~/Code/PyAutoLabs-wt/env-var-rename
 - repos:
+  - autolens_workspace_test: feature/env-var-rename
+  - autogalaxy_workspace_test: feature/env-var-rename
+  - autofit_workspace_test: feature/env-var-rename
+  - PyAutoBuild: feature/env-var-rename
 
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
