@@ -1,4 +1,11 @@
 
+## group-pixelization-delaunay-fixes
+- issue: none — direct fix for Cluster A failures in group/features/pixelization smoke set
+- completed: 2026-05-01
+- library-pr: https://github.com/PyAutoLabs/PyAutoLens/pull/490
+- workspace-pr: https://github.com/PyAutoLabs/autolens_workspace/pull/116
+- notes: 5 group/features/pixelization scripts failed under the smoke profile (`PYAUTO_TEST_MODE=2 PYAUTO_SKIP_CHECKS=1`). Root cause was two distinct workspace bugs, not a library regression — the user's "one upstream constructor bug" framing was wrong. Bug A (4 scripts: fit, likelihood_function, delaunay, modeling): `Pixelization(mesh=Delaunay(...))` was passed to `FitImaging`/`AnalysisImaging` without an `image_plane_mesh_grid` via `AdaptImages`. Bug B (slam.py): chained `.positions` on `Result.positions_likelihood_from(...)` which returned `None` under `skip_checks()`. Bug A fix is workspace-only (PR #116) — added `Overlay` image-mesh + `AdaptImages` boilerplate matching `imaging/features/pixelization/delaunay.py`, and switched modeling-section regularization from `AdaptSplit` (needs prior-search adapt data) to `ConstantSplit`. Bug B fix is library-only (PR #490) — `positions_likelihood_from` now returns a synthetic `PositionsLH` under `skip_checks() + is_test_mode()` instead of `None`, preserving the workspace API; `slam.py` itself was left unchanged. Workspace PR was gated on library PR. Both merged.
+
 ## jit-visualization-env-overrides
 - issue: none — direct fix for Cluster C in `PyAutoBuild/test_results/runs/2026-04-29T14-48-47Z/triage.md`
 - completed: 2026-05-01
