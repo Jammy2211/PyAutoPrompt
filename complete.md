@@ -1,4 +1,12 @@
 
+## aggregator-quick-fit
+- issue: none — direct fix for Cluster D failures in `PyAutoBuild/test_results/runs/2026-04-29T14-48-47Z/triage.md`
+- completed: 2026-05-02
+- workspace-pr:
+  - PyAutoLabs/autogalaxy_workspace#55
+  - PyAutoLabs/autolens_workspace#118
+- notes: 8 failures across `scripts/guides/results/aggregator/` in both workspaces — 4 timeouts (each example duplicated `search.fit()` uncapped) and 4 NoneType cascades (downstream readers loaded the partial output of the timed-out scripts). Root cause was that `start_here.py` had `n_like_max=300` gated on `test_mode_was_on`, but `env_vars.yaml` unsets `PYAUTO_TEST_MODE` for `guides/results/`, so the cap never fired during release-prep; meanwhile the aggregator scripts (`galaxies_fit.py`, `samples.py`) ran their own uncapped searches. Fix: introduced `scripts/guides/results/_quick_fit.py` (idempotent, `n_like_max=300` always) and routed every aggregator example through the existing auto-trigger pattern (`subprocess.run(_quick_fit.py)` if `output/results_folder/` is missing). `models.py`/`queries.py`/`samples_via_aggregator.py`/`data_fitting.py` had their existing subprocess targets redirected from `start_here.py` to `_quick_fit.py`; `galaxies_fit{,s}.py` and `samples.py` got the guard added at the top plus `n_like_max=300` defensively on their own search; `start_here.py` got its conditional cap dropped (now unconditional). Removed the four stale `no_run.yaml` lines per workspace (`guides/results/start_here`, three `guides/results/examples/*`, `data_fitting` stem). Verified end-to-end: `_quick_fit.py` completes in 14s (autogalaxy) / 33s (autolens), idempotent re-runs in 0.04s, `aggregator/models.py` exits 0 in both workspaces. Pure workspace change, no library touched.
+
 ## group-pixelization-delaunay-fixes
 - issue: none — direct fix for Cluster A failures in group/features/pixelization smoke set
 - completed: 2026-05-01
