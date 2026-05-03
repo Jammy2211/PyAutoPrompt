@@ -1,4 +1,10 @@
 
+## cluster-g-interferometer-pixelization-plot
+- issue: none — direct fix for Cluster G + one Cluster H entry in `PyAutoBuild/test_results/runs/2026-04-29T14-48-47Z/triage.md`
+- completed: 2026-05-03
+- library-pr: https://github.com/PyAutoLabs/PyAutoArray/pull/297
+- notes: 3 release-prep failures (autogalaxy `interferometer/features/pixelization/fit.py`, autolens equivalent, `autolens_workspace_test/scripts/interferometer/visualization.py`) all crashed at `PyAutoArray/autoarray/plot/array.py:199 — h, w = array.shape[:2]` with `ValueError: not enough values to unpack`. Root cause: `subplot_of_mapper` and `subplot_mappings` panel 0 fed `inversion.data_subtracted_dict[mapper]` straight into `plot_array`. For interferometer fits that dict entry is `Visibilities` (1D complex), not `Array2D`. Panels 1-3 already detected `Visibilities` and substituted a 2D image-plane equivalent (`mapped_reconstructed_data_dict`) — panel 0 had no equivalent guard. Fix: when the entry is `Visibilities`, transform to a 2D dirty image via `inversion.transformer.image_from(visibilities=...)` (same call `FitInterferometer.dirty_residual_map` uses at `fit_interferometer.py:203`). Imaging path byte-identical. Also confirmed Cluster H's `autolens_workspace_test/interferometer/visualization.py` failure was the same root cause (visualizer routes through `subplot_of_mapper`). One file, two near-identical edits in `inversion_plots.py`; no workspace changes needed. Verified: 3 originally-failing scripts now exit 0; `autolens_workspace/imaging/features/pixelization/fit.py` (sanity) still exit 0; `pytest test_autoarray/inversion/` 162 passed; full smoke 36 pass / 0 fail (the 6 euclid failures are a pre-existing workspace-version-pin mismatch, fire before any PyAutoArray code runs).
+
 ## cluster-e-missing-simulator-output
 - issue: none — direct fix for Cluster E failures in `PyAutoBuild/test_results/runs/2026-04-29T14-48-47Z/triage.md`
 - completed: 2026-05-03
