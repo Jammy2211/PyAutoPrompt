@@ -1,4 +1,12 @@
 
+## cluster-e-missing-simulator-output
+- issue: none — direct fix for Cluster E failures in `PyAutoBuild/test_results/runs/2026-04-29T14-48-47Z/triage.md`
+- completed: 2026-05-03
+- workspace-pr:
+  - PyAutoLabs/autolens_workspace#119
+  - PyAutoLabs/autogalaxy_workspace#56
+- notes: 5 failures all caused by missing `dataset/*/data.fits` files at script-run time, but two distinct root causes — not one as the triage suggested. Root cause 1 (1 file, 2 failing scripts): `point_source/features/deblending/simulator.py` hardcoded 4 lensed image positions but `PyAutoLens/autolens/point/solver/point_solver.py:90` short-circuits `PointSolver.solve()` to `[(1.0, 0.0), (0.0, 1.0)]` under `PYAUTO_SMALL_DATASETS=1`. Indexing `positions[2]` raised `IndexError`, no `data.fits` was written, and downstream `deblending/modeling.py` then hit `FileNotFoundError`. Fixed by building `point_image_{i}` kwargs from `len(positions)` so the simulator emits valid output in both smoke (2 images) and production (4 images) modes. Root cause 2 (4 files, 3 autolens guides + 1 autogalaxy guide): the build's `run_python.py` iterates `scripts/<dir>/` alphabetically, so `scripts/guides/` runs before `scripts/imaging/` where `dataset/imaging/simple/data.fits` is created. The 3 autolens guides (`data_structures.py`, `modeling/bug_fix.py`, `modeling/chaining.py`) had no auto-simulate snippet at all; the autogalaxy `guides/plot/start_here.py` had a snippet but pointed at `scripts/guides/plot/simulator.py` which writes `sersic_x2/`, not `simple/`. Added/fixed the canonical "if not dataset_path.exists(): subprocess.run([sys.executable, scripts/imaging/simulator.py])" pattern. The bug_fix.py snippet uses `os.path.exists` (not `Path.exists`) to match the script's existing `path.join` style. Verified end-to-end with `PYAUTO_SMALL_DATASETS=1 PYAUTO_TEST_MODE=1 PYAUTO_FAST_PLOTS=1` from a wiped dataset state: all 6 scripts (5 originally failing + the upstream simulator) exit 0; smoke 7/7 autolens, 6/6 autogalaxy. Pure workspace change, no library touched. Cluster E counted 5/48 release-prep failures.
+
 ## aggregator-quick-fit
 - issue: none — direct fix for Cluster D failures in `PyAutoBuild/test_results/runs/2026-04-29T14-48-47Z/triage.md`
 - completed: 2026-05-02
