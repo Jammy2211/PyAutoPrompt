@@ -27,3 +27,24 @@
 - Profile interferometer/modeling.py and other scripts
 - Consider caching cosmology distances per redshift pair
 
+## rst-to-myst-md-pass2
+- issue: none — direct followup to PyAutoFit#1245 (issue closed)
+- session: claude --resume "rst-to-myst-md-pass2"
+- status: library-dev
+- worktree: ~/Code/PyAutoLabs-wt/rst-to-myst-md-pass2
+- repos:
+  - PyAutoConf: feature/rst-to-myst-md-pass2
+  - PyAutoBuild: feature/rst-to-myst-md-pass2
+  - PyAutoArray: feature/rst-to-myst-md-pass2
+  - PyAutoFit: feature/rst-to-myst-md-pass2
+  - PyAutoGalaxy: feature/rst-to-myst-md-pass2
+  - PyAutoLens: feature/rst-to-myst-md-pass2
+  - HowToFit: feature/rst-to-myst-md-pass2
+  - HowToGalaxy: feature/rst-to-myst-md-pass2
+  - HowToLens: feature/rst-to-myst-md-pass2
+- summary: |
+    Convert remaining prose .rst → MyST .md across the PyAuto ecosystem.
+    Includes root README + CITATIONS, config/.../README files, and HowTo*
+    notebooks/scripts READMEs. Keeps docs/api/*.rst (autosummary) and
+    docs/_templates/*.rst (Sphinx Jinja templates) as native RST.
+    Per-repo PR; library-first ordering.
