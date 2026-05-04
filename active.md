@@ -1,10 +1,3 @@
-## weak-shear-simulator
-- issue: https://github.com/PyAutoLabs/PyAutoLens/issues/476
-- session: claude --resume "weak-shear-simulator"
-- status: library-dev
-- worktree: ~/Code/PyAutoLabs-wt/weak-shear-simulator
-- repos:
-
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
 - session: claude --resume "profile-smoke-test-runtime"
