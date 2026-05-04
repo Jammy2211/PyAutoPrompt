@@ -1,11 +1,21 @@
 ## alma-datacube
 - issue: https://github.com/PyAutoLabs/autolens_workspace/issues/120
 - session: claude --resume "alma-datacube"
-- status: workspace-dev
+- status: workspace-dev (steps 1+2 shipped, step 3 pending)
 - worktree: ~/Code/PyAutoLabs-wt/alma-datacube
 - repos:
-  - autolens_workspace: feature/alma-datacube
-  - autolens_workspace_developer: feature/alma-datacube
+  - autolens_workspace: feature/alma-datacube (no commits yet — step 3)
+  - autolens_workspace_developer: merged via PR #46
+- shipped-prs:
+  - https://github.com/PyAutoLabs/autolens_workspace_developer/pull/46 (merged 2026-05-04)
+- summary: |
+    Done: dev workspace shipped (autolens_workspace_developer/datacube/ —
+    4-channel SMA-scale simulator + step-by-step JAX likelihood walkthrough;
+    eager-vs-JIT correctness passes at rtol=1e-4).
+    Next: step 3 — autolens_workspace/scripts/interferometer/features/datacube/
+    {start_here.py, simulator.py, modeling.py} (user-facing tutorial scripts
+    that wrap the same FactorGraph wiring with af.Nautilus). Worktree at
+    ~/Code/PyAutoLabs-wt/alma-datacube stays in place for tomorrow's session.
 
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
