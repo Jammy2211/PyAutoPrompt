@@ -13,5 +13,3 @@ claude --resume "ship-workspace-skills"
 - Make numpy rectangular match jax rectangular
 
 
-
-- Need to build on Leon interaction of how over adaption kills runs to come up with a elegent solution.

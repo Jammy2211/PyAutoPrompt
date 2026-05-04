@@ -1,4 +1,19 @@
 
+## rst-to-myst-md-pass2
+- issue: none — direct followup to PyAutoFit#1245
+- completed: 2026-05-04
+- library-prs:
+  - https://github.com/PyAutoLabs/PyAutoConf/pull/103
+  - https://github.com/PyAutoLabs/PyAutoBuild/pull/82
+  - https://github.com/PyAutoLabs/PyAutoArray/pull/298
+  - https://github.com/PyAutoLabs/PyAutoFit/pull/1249
+  - https://github.com/PyAutoLabs/PyAutoGalaxy/pull/386
+  - https://github.com/PyAutoLabs/PyAutoLens/pull/492
+  - https://github.com/PyAutoLabs/HowToFit/pull/6
+  - https://github.com/PyAutoLabs/HowToGalaxy/pull/5
+  - https://github.com/PyAutoLabs/HowToLens/pull/7
+- notes: Followup to #1245 sweeping the rest of the prose `.rst` across the PyAuto ecosystem (84 files, 9 repos). Converted root `README.rst` and `CITATIONS.rst`, package `config/.../README.rst`, and HowTo* `notebooks/`+`scripts/` chapter READMEs. Lib root READMEs hand-rewritten as plain CommonMark with inline `[![alt](badge)](link)` syntax — `rst-to-myst`'s default output uses MyST `{image}` directives + `{{substitutions}}` which render as literal text on GitHub and PyPI. Side effects: `pyproject.toml` `readme` content-type → `text/markdown` (5 lib repos), `MANIFEST.in` `include README.md`/`CITATIONS.md` (5 lib repos), `PyAutoArray/docs/index.md` switched from `eval-rst` `.. include::` to MyST native `{include}`, `PyAutoGalaxy/PyAutoLens/docs/conf.py` dropped stale `.rst` entries from `exclude_patterns`. HowTo* chapter READMEs had `rst-to-myst`'s escaped-dash continuation pattern (`\- description`) rewritten as proper Markdown list items via a perl one-liner. Workspace prose refs in `docs/general/{configs,workspace}.md` deliberately left as `README.rst` — they point at the workspace repos which are not in scope for this pass. `docs/api/*.rst` and `docs/_templates/*.rst` deliberately kept as native RST (autosummary requirement). Squash-merged library-first.
+
 ## rst-to-myst-md
 - issue: https://github.com/PyAutoLabs/PyAutoFit/issues/1245
 - completed: 2026-05-04
