@@ -1,11 +1,3 @@
-## autogalaxy-wst-model-composition
-- issue: https://github.com/PyAutoLabs/autogalaxy_workspace_test/issues/26
-- session: claude --resume "autogalaxy-wst-model-composition"
-- status: workspace-dev
-- worktree: ~/Code/PyAutoLabs-wt/autogalaxy-wst-model-composition
-- repos:
-  - autogalaxy_workspace_test: feature/autogalaxy-wst-model-composition
-
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
 - session: claude --resume "profile-smoke-test-runtime"
