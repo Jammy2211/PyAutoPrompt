@@ -6,6 +6,13 @@
 - repos:
   - autogalaxy_workspace_test: feature/autogalaxy-wst-jax-grad-imaging
 
+## point-simulator-realistic-errors
+- issue: https://github.com/PyAutoLabs/autolens_workspace/issues/125
+- session: claude --resume "point-simulator-realistic-errors"
+- status: workspace-dev
+- worktree: ~/Code/PyAutoLabs-wt/point-simulator-realistic-errors
+- repos:
+
 ## output-folder-layout-tutorials
 - issue: https://github.com/PyAutoLabs/autolens_workspace/issues/124
 - session: claude --resume "output-folder-layout-tutorials"
