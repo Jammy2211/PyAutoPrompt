@@ -1,18 +1,3 @@
-## datacube-positions-delaunay
-- issue: none — direct followup to PyAutoLabs/autolens_workspace#120 (closed)
-- session: claude --resume "datacube-positions-delaunay"
-- status: workspace-dev
-- worktree: ~/Code/PyAutoLabs-wt/datacube-positions-delaunay
-- repos:
-  - autolens_workspace: feature/datacube-positions-delaunay
-  - autolens_workspace_developer: feature/datacube-positions-delaunay
-- summary: |
-    Mesh swap RectangularUniform → RectangularAdaptDensity in datacube
-    pixelization scripts; new delaunay.py sibling; multiple-image
-    positions + PositionsLH added to all datacube modeling scripts
-    (which fix is essential for pixelized fits to avoid
-    demagnified-source local maxima).
-
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
 - session: claude --resume "profile-smoke-test-runtime"
