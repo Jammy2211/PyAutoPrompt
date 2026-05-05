@@ -9,21 +9,31 @@
 ## alma-datacube
 - issue: https://github.com/PyAutoLabs/autolens_workspace/issues/120
 - session: claude --resume "alma-datacube"
-- status: workspace-dev (steps 1+2 shipped, step 3 pending)
+- status: library-dev (steps 1-3 shipped/PR-open, library viz fix in flight)
 - worktree: ~/Code/PyAutoLabs-wt/alma-datacube
 - repos:
-  - autolens_workspace: feature/alma-datacube (no commits yet — step 3)
+  - PyAutoFit: feature/alma-datacube (AnalysisFactor.visualize_combined fix)
+  - PyAutoLens: feature/alma-datacube (VisualizerInterferometer combined plotter)
+  - autolens_workspace: feature/alma-datacube (PR #122 open — gated on library PRs)
+  - autolens_workspace_test: feature/alma-datacube (visualization dispatch tests)
   - autolens_workspace_developer: merged via PR #46
 - shipped-prs:
   - https://github.com/PyAutoLabs/autolens_workspace_developer/pull/46 (merged 2026-05-04)
+  - https://github.com/PyAutoLabs/autolens_workspace/pull/122 (open, library-gated)
 - summary: |
-    Done: dev workspace shipped (autolens_workspace_developer/datacube/ —
-    4-channel SMA-scale simulator + step-by-step JAX likelihood walkthrough;
-    eager-vs-JIT correctness passes at rtol=1e-4).
-    Next: step 3 — autolens_workspace/scripts/interferometer/features/datacube/
-    {start_here.py, simulator.py, modeling.py} (user-facing tutorial scripts
-    that wrap the same FactorGraph wiring with af.Nautilus). Worktree at
-    ~/Code/PyAutoLabs-wt/alma-datacube stays in place for tomorrow's session.
+    Done: dev workspace shipped (autolens_workspace_developer#46) and
+    user-facing autolens_workspace scripts open as PR #122. While verifying
+    visualization, found that FactorGraph.visualize_combined silently skipped
+    VisualizerImaging.visualize_combined for multi-band fits (and there was no
+    VisualizerInterferometer.visualize_combined at all).
+    Fix: AnalysisFactor.visualize_combined / visualize_before_fit_combined
+    forwarders in PyAutoFit; new subplot_fit_interferometer_combined +
+    PlotterInterferometer.fit_interferometer_combined +
+    VisualizerInterferometer.visualize_combined in PyAutoLens.
+    Verification: scripts/multi/visualization_imaging.py +
+    scripts/multi/visualization_interferometer.py in autolens_workspace_test
+    (both PASS dispatch). Library PRs ship next; workspace + workspace_test
+    PRs follow once libraries merge per the library-first gate.
 
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
