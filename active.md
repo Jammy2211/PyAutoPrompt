@@ -1,3 +1,10 @@
+## autogalaxy-wst-jax-grad-interferometer
+- issue: https://github.com/PyAutoLabs/autogalaxy_workspace_test/issues/30
+- session: claude --resume "autogalaxy-wst-jax-grad-interferometer"
+- status: workspace-dev
+- worktree: ~/Code/PyAutoLabs-wt/autogalaxy-wst-jax-grad-interferometer
+- repos:
+
 ## point-simulator-realistic-errors
 - issue: https://github.com/PyAutoLabs/autolens_workspace/issues/125
 - session: claude --resume "point-simulator-realistic-errors"
