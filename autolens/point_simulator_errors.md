@@ -11,3 +11,5 @@ I suspect the fluxes may be quite unrealistic too.
 
 Can you read the point_source simulator.py script, and do some deep research on what errors should be and then updated
 the script and its docstrings accordingly.
+
+This also includes the cosmology use case in z_projects/concr which should be reduced.

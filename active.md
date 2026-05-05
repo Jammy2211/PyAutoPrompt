@@ -4,6 +4,7 @@
 - status: workspace-dev
 - worktree: ~/Code/PyAutoLabs-wt/autogalaxy-wst-jax-grad-imaging
 - repos:
+  - autogalaxy_workspace_test: feature/autogalaxy-wst-jax-grad-imaging
 
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
