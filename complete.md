@@ -8,6 +8,13 @@
 - repos: autolens_workspace, autolens_workspace_developer
 - notes: Three datacube follow-ups on top of PR #122. (1) Mesh swap RectangularUniform → RectangularAdaptDensity (modeling, start_here, dev likelihood walkthrough). (2) New delaunay.py sibling using `Overlay` image-mesh, `append_with_circle_edge_points` edge zeroing, `ConstantSplit` regularization, with `AdaptImages` paired with the source galaxy. (3) `PointSolver` positions block in simulator.py writes `positions.json`; all four modeling scripts load it and pass `PositionsLH(threshold=0.3)` to every per-channel `AnalysisInterferometer`. PositionsLH is essentially required for pixelized fits — without it the search routinely converges on demagnified-source local maxima.
 
+## autogalaxy-wst-jax-grad-imaging
+- issue: https://github.com/PyAutoLabs/autogalaxy_workspace_test/issues/28
+- completed: 2026-05-05
+- workspace-pr: https://github.com/PyAutoLabs/autogalaxy_workspace_test/pull/29
+- repos: autogalaxy_workspace_test
+- notes: Task 6/9 of the autogalaxy_workspace_test parity epic (#5). Ported autolens `jax_grad/imaging_{lp,mge}.py` to autogalaxy under a new `scripts/jax_grad/imaging/` subfolder; both scripts pass on CI 3.12 (`lp.py` 11.3s, `mge.py` 16.8s). Established subfolder layout convention even though autolens is currently flat — surfaced the retrofit question to the maintainer via PR body. Added `jax_grad/` env_vars override mirroring `jax_likelihood_functions/` (unsets `PYAUTO_SMALL_DATASETS` + `PYAUTO_DISABLE_JAX`). Pytree registration on `autogalaxy/imaging/model/analysis.py` was already in place from task 3.
+
 ## autogalaxy-wst-model-composition
 - issue: https://github.com/PyAutoLabs/autogalaxy_workspace_test/issues/26
 - completed: 2026-05-05

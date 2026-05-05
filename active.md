@@ -1,11 +1,3 @@
-## autogalaxy-wst-jax-grad-imaging
-- issue: https://github.com/PyAutoLabs/autogalaxy_workspace_test/issues/28
-- session: claude --resume "autogalaxy-wst-jax-grad-imaging"
-- status: workspace-dev
-- worktree: ~/Code/PyAutoLabs-wt/autogalaxy-wst-jax-grad-imaging
-- repos:
-  - autogalaxy_workspace_test: feature/autogalaxy-wst-jax-grad-imaging
-
 ## point-simulator-realistic-errors
 - issue: https://github.com/PyAutoLabs/autolens_workspace/issues/125
 - session: claude --resume "point-simulator-realistic-errors"
