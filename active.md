@@ -6,6 +6,13 @@
 - repos:
   - autogalaxy_workspace_test: feature/autogalaxy-wst-jax-grad-imaging
 
+## output-folder-layout-tutorials
+- issue: https://github.com/PyAutoLabs/autolens_workspace/issues/124
+- session: claude --resume "output-folder-layout-tutorials"
+- status: workspace-dev
+- worktree: ~/Code/PyAutoLabs-wt/output-folder-layout-tutorials
+- repos:
+
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
 - session: claude --resume "profile-smoke-test-runtime"
