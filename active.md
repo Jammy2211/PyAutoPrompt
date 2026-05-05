@@ -1,3 +1,10 @@
+## autogalaxy-wst-jax-grad-imaging
+- issue: https://github.com/PyAutoLabs/autogalaxy_workspace_test/issues/28
+- session: claude --resume "autogalaxy-wst-jax-grad-imaging"
+- status: workspace-dev
+- worktree: ~/Code/PyAutoLabs-wt/autogalaxy-wst-jax-grad-imaging
+- repos:
+
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
 - session: claude --resume "profile-smoke-test-runtime"
