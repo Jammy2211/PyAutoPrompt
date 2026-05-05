@@ -13,15 +13,6 @@
 - worktree: ~/Code/PyAutoLabs-wt/point-simulator-realistic-errors
 - repos:
 
-## output-folder-layout-tutorials
-- issue: https://github.com/PyAutoLabs/autolens_workspace/issues/124
-- session: claude --resume "output-folder-layout-tutorials"
-- status: workspace-dev
-- worktree: ~/Code/PyAutoLabs-wt/output-folder-layout-tutorials
-- repos:
-  - autolens_workspace: feature/output-folder-layout-tutorials
-  - autogalaxy_workspace: feature/output-folder-layout-tutorials
-
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
 - session: claude --resume "profile-smoke-test-runtime"
