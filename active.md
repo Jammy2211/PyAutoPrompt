@@ -1,11 +1,3 @@
-## autogalaxy-wst-jax-grad-multi
-- issue: https://github.com/PyAutoLabs/autogalaxy_workspace_test/issues/32
-- session: claude --resume "autogalaxy-wst-jax-grad-multi"
-- status: workspace-dev
-- worktree: ~/Code/PyAutoLabs-wt/autogalaxy-wst-jax-grad-multi
-- repos:
-  - autogalaxy_workspace_test: feature/autogalaxy-wst-jax-grad-multi
-
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
 - session: claude --resume "profile-smoke-test-runtime"
