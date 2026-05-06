@@ -4,17 +4,7 @@
 - status: workspace-dev
 - worktree: ~/Code/PyAutoLabs-wt/autogalaxy-wst-jax-grad-multi
 - repos:
-
-## blackjax-nuts-search
-- issue: https://github.com/rhayes777/PyAutoFit/issues/1255
-- session: claude --resume "blackjax-nuts-search"
-- status: workspace-dev
-- worktree: ~/Code/PyAutoLabs-wt/blackjax-nuts-search
-- library-pr: https://github.com/rhayes777/PyAutoFit/pull/1256 (merged)
-- repos:
-  - PyAutoFit: feature/blackjax-nuts-search
-  - autofit_workspace: feature/blackjax-nuts-search
-  - autofit_workspace_test: feature/blackjax-nuts-search
+  - autogalaxy_workspace_test: feature/autogalaxy-wst-jax-grad-multi
 
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
