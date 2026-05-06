@@ -1,11 +1,3 @@
-## blackjax-nuts-example
-- issue: https://github.com/Jammy2211/autofit_workspace_developer/issues/13
-- session: claude --resume "blackjax-nuts-example"
-- status: workspace-dev
-- worktree: ~/Code/PyAutoLabs-wt/blackjax-nuts-example
-- repos:
-  - autofit_workspace_developer: feature/blackjax-nuts-example
-
 ## autogalaxy-wst-jax-grad-interferometer
 - issue: https://github.com/PyAutoLabs/autogalaxy_workspace_test/issues/30
 - session: claude --resume "autogalaxy-wst-jax-grad-interferometer"
