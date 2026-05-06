@@ -1,3 +1,10 @@
+## autogalaxy-wst-jax-grad-multi
+- issue: https://github.com/PyAutoLabs/autogalaxy_workspace_test/issues/32
+- session: claude --resume "autogalaxy-wst-jax-grad-multi"
+- status: workspace-dev
+- worktree: ~/Code/PyAutoLabs-wt/autogalaxy-wst-jax-grad-multi
+- repos:
+
 ## blackjax-nuts-search
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1255
 - session: claude --resume "blackjax-nuts-search"
