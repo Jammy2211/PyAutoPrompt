@@ -12,6 +12,9 @@
 - status: workspace-dev
 - worktree: ~/Code/PyAutoLabs-wt/point-simulator-realistic-errors
 - repos:
+  - autolens_workspace: feature/point-simulator-realistic-errors
+  - autolens_workspace_test: feature/point-simulator-realistic-errors
+  - autolens_workspace_developer: feature/point-simulator-realistic-errors
 
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
