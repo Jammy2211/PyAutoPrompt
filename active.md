@@ -1,3 +1,10 @@
+## blackjax-nuts-search
+- issue: https://github.com/rhayes777/PyAutoFit/issues/1255
+- session: claude --resume "blackjax-nuts-search"
+- status: library-dev
+- worktree: ~/Code/PyAutoLabs-wt/blackjax-nuts-search
+- repos:
+
 ## autogalaxy-wst-jax-grad-interferometer
 - issue: https://github.com/PyAutoLabs/autogalaxy_workspace_test/issues/30
 - session: claude --resume "autogalaxy-wst-jax-grad-interferometer"
