@@ -66,3 +66,4 @@
 - status: workspace-dev
 - worktree: ~/Code/PyAutoLabs-wt/cluster-viz-prototype
 - repos:
+  - autolens_workspace_test: feature/cluster-viz-prototype
