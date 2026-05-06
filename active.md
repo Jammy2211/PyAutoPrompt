@@ -26,3 +26,10 @@
 - Investigate repeated ray-tracing in subplot panels
 - Profile interferometer/modeling.py and other scripts
 - Consider caching cosmology distances per redshift pair
+
+## psf-oversampling
+- issue: https://github.com/PyAutoLabs/PyAutoArray/issues/299
+- session: claude --resume "psf-oversampling"
+- status: library-dev
+- worktree: ~/Code/PyAutoLabs-wt/psf-oversampling
+- repos:
