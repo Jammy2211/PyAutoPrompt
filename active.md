@@ -63,7 +63,7 @@
 ## use-pathlib
 - issue: https://github.com/PyAutoLabs/PyAutoFit/issues/1257
 - session: claude --resume "use-pathlib"
-- status: library-shipped, workspace-pending
+- status: workspace-dev
 - worktree: ~/Code/PyAutoLabs-wt/use-pathlib
 - library-prs:
     - https://github.com/PyAutoLabs/PyAutoConf/pull/104 (merged)
@@ -71,6 +71,12 @@
     - https://github.com/PyAutoLabs/PyAutoArray/pull/300 (merged)
     - https://github.com/PyAutoLabs/PyAutoGalaxy/pull/388 (merged)
     - https://github.com/PyAutoLabs/PyAutoLens/pull/497 (merged)
+- repos:
+    - autogalaxy_workspace: feature/use-pathlib
+    - autolens_workspace: feature/use-pathlib
+    - autolens_workspace_developer: feature/use-pathlib
+    - autofit_workspace_developer: feature/use-pathlib
+    - euclid_strong_lens_modeling_pipeline: feature/use-pathlib
 - summary: |
     Library refactor shipped. ~99 os.path.* + ~600 bare path.* references
     converted to pathlib.Path across 5 libraries. 3,188 unit tests pass.
