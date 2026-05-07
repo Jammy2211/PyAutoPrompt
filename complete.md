@@ -2,6 +2,7 @@
 ## park-modeling-viz-jit-slow
 - completed: 2026-05-07
 - workspace-pr: https://github.com/PyAutoLabs/autolens_workspace_test/pull/76
+- followup-issue: https://github.com/PyAutoLabs/autolens_workspace_test/issues/77
 - repos: autolens_workspace_test
 - notes: |
     Cluster D of the recent release-prep triage. Three autolens
@@ -15,10 +16,10 @@
     visualization. Parked via standard `# SLOW <YYYY-MM-DD>` convention
     in autolens_workspace_test/config/build/no_run.yaml. Mega-runs
     surface SLOW entries with a loud warning banner so they don't
-    silently rot. **Follow-up needed:** file a perf issue capturing the
-    3.5x autolens-vs-autogalaxy disparity (option c from the triage),
-    repo TBD (autolens_workspace_test or PyAutoLens depending on root
-    cause).
+    silently rot. Follow-up perf issue #77 filed against
+    autolens_workspace_test capturing the 3.5x disparity, investigation
+    pointers (Tracer vs Galaxy, pixelization variants, JAX visualization
+    pipeline) and acceptance criteria for removing the SLOW markers.
 
 ## group-slam-prior-clamp
 - completed: 2026-05-07
