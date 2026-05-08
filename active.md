@@ -4,6 +4,7 @@
 - status: workspace-dev
 - worktree: ~/Code/PyAutoLabs-wt/autolens-interferometer-jax-viz
 - repos:
+  - autolens_workspace_test: feature/autolens-interferometer-jax-viz
 
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
