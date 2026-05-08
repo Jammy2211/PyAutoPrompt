@@ -1,12 +1,13 @@
-## subhalo-redshift-jax-fix
+## subhalo-redshift-jax-regression
 - issue: https://github.com/PyAutoLabs/PyAutoLens/issues/498
 - session: claude (current CLI)
-- status: fix in progress
-- classification: library
-- suggested-branch: feature/subhalo-redshift-jax-fix
-- worktree: ~/Code/PyAutoLabs-wt/subhalo-redshift-jax-fix
-- repos: PyAutoLens
-- repro-pr: https://github.com/PyAutoLabs/autolens_workspace_test/pull/79 (merged d827d1c)
+- status: phase 2b (polarity flip workspace PR)
+- classification: workspace
+- suggested-branch: feature/subhalo-redshift-jax-regression
+- worktree: ~/Code/PyAutoLabs-wt/subhalo-redshift-jax-regression
+- repos: autolens_workspace_test
+- repro-pr: https://github.com/PyAutoLabs/autolens_workspace_test/pull/79 (merged d827d1c — Phase 1)
+- library-pr: https://github.com/PyAutoLabs/PyAutoLens/pull/499 (merged b790632 — Phase 2)
 - summary: |
     Reported on Slack by @qiuhan96. Free-parameter subhalo redshift
     (af.UniformPrior) raises TracerBoolConversionError under JAX. Root
