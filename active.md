@@ -1,39 +1,30 @@
-## cluster-c-point-source-rebaseline
-- session: claude (current CLI)
-- status: shipping
-- classification: workspace
-- suggested-branch: feature/cluster-c-point-source-rebaseline
-- worktree: ~/Code/PyAutoLabs-wt/cluster-c-point-source-rebaseline
-- repos: autolens_workspace_test
-- summary: |
-    Rebaseline JAX point-source likelihood literals after upstream
-    autolens_workspace_test commit 931a381 changed positions_noise_map
-    (0.2 → 0.005, PSF-centroiding precision). Regenerated
-    dataset/point_source/simple/{point_dataset_positions_only,tracer}.json
-    and updated three expected_likelihood literals across
-    image_plane.py (1.313508 → -83.38049778), point.py (same), and
-    source_plane.py (vmap & eager: -199.155… → -331481.26…). All three
-    scripts pass on the new literals.
-
-## subhalo-redshift-jax-repro
+## subhalo-redshift-jax-fix
 - issue: https://github.com/PyAutoLabs/PyAutoLens/issues/498
 - session: claude (current CLI)
-- status: shipping repro PR (fix work to follow on a separate branch)
-- classification: workspace (then library follow-up)
-- suggested-branch: feature/subhalo-redshift-jax-repro (workspace) / feature/subhalo-redshift-jax-fix (library, TBD)
-- worktree: ~/Code/PyAutoLabs-wt/subhalo-redshift-jax-repro
-- repos: autolens_workspace_test, PyAutoLens (later)
+- status: fix phase (reproducer PR merged, library fix next)
+- classification: library
+- suggested-branch: feature/subhalo-redshift-jax-fix
+- repos: PyAutoLens
+- repro-pr: https://github.com/PyAutoLabs/autolens_workspace_test/pull/79 (merged d827d1c)
 - summary: |
     Reported on Slack by @qiuhan96. Free-parameter subhalo redshift
     (af.UniformPrior) raises TracerBoolConversionError under JAX. Root
     cause is Python sorted()/<=/== on traced redshifts inside
     tracer_util.plane_redshifts_from + grid_2d_at_redshift_from.
-    Reproducer added to autolens_workspace_test as
-    scripts/jax_likelihood_functions/imaging/subhalo.py — runs two
-    scenarios (fixed z=0.55 PASS, free UniformPrior FAIL with the
-    expected TracerBoolConversionError). Exits 0 on the expected
-    failure, 1 once the bug is fixed (so the same script becomes the
-    regression test). Workaround for users today: use_jax=False.
+
+    Phase 1 done: reproducer landed in autolens_workspace_test as
+    scripts/jax_likelihood_functions/imaging/subhalo.py (PR #79 merged).
+    Two scenarios — fixed z=0.55 PASS (jit/numpy match within rtol=1e-4),
+    free UniformPrior FAIL with the expected TracerBoolConversionError
+    at tracer_util.py:46 (sorted() trips before the explicit <= at 249).
+
+    Phase 2 (next): implement JAX-friendly reformulation of
+    plane_redshifts_from + grid_2d_at_redshift_from in PyAutoLens.
+    Likely approach: sort the concrete-redshift galaxies once, then
+    splice the traced subhalo redshift in via jnp.searchsorted +
+    jax.lax.switch over candidate insertion positions. Once the fix
+    is up the autolens_workspace_test reproducer flips polarity and
+    becomes the regression test.
 
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
