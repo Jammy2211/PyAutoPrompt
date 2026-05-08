@@ -1,3 +1,33 @@
+## fft-mixed-precision-fix
+- session: claude --resume "fft-mixed-precision-fix"
+- status: library-and-workspace-shipped, awaiting-merge
+- worktree: ~/Code/PyAutoLabs-wt/fft-mixed-precision-fix
+- library-pr: https://github.com/PyAutoLabs/PyAutoArray/pull/302
+- workspace-pr: https://github.com/PyAutoLabs/autogalaxy_workspace_test/pull/38
+- repos:
+  - PyAutoArray: feature/fft-mixed-precision-fix
+  - autogalaxy_workspace_test: feature/fft-mixed-precision-fix
+- notes: |
+    Made use_mixed_precision actually emit complex64 FFT in
+    Convolver.convolved_image_from (light-profile / MGE path). Headline
+    result on RTX 2060: GPU vmap per-call drops 17.4 -> 8.9 ms (49%
+    faster on the production sampler hot path).
+    Convolved_mapping_matrix_from intentionally kept its fp64 kernel
+    multiply -- full fp32 there drifted delaunay_mge regression by 1.9%
+    log-likelihood (K=780 source mesh). Codified that asymmetry in code
+    comments + Settings docstring + new jax_assertion in workspace PR.
+    Library-first merge gate: PR #302 must merge before #38 (workspace
+    test runs against the new fp32 dtype contract).
+    Pre-existing bug noted (out of scope here): autolens_workspace_developer
+    /jax_profiling/jit/imaging/mge.py hardcodes EXPECTED_LOG_LIKELIHOOD_HST
+    = 27379.39 but canonical main now produces 27542.08. Worth re-baselining
+    in a follow-up.
+
+    Follow-up prompt at PyAutoPrompt/autoarray/nnls_gpu_bottleneck.md
+    captures the deferred GPU-NNLS work (jaxnnls is PDIP with MAX_ITER=50;
+    Cholesky fast-path was rejected because empirical positivity hit-rate
+    during sampling is low and lax.cond under vmap evaluates both branches).
+
 ## autolens-interferometer-jax-viz
 - issue: https://github.com/PyAutoLabs/autolens_workspace_test/issues/86
 - session: claude --resume "autolens-interferometer-jax-viz"
