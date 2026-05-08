@@ -1,9 +1,10 @@
 ## subhalo-redshift-jax-fix
 - issue: https://github.com/PyAutoLabs/PyAutoLens/issues/498
 - session: claude (current CLI)
-- status: fix phase (reproducer PR merged, library fix next)
+- status: fix in progress
 - classification: library
 - suggested-branch: feature/subhalo-redshift-jax-fix
+- worktree: ~/Code/PyAutoLabs-wt/subhalo-redshift-jax-fix
 - repos: PyAutoLens
 - repro-pr: https://github.com/PyAutoLabs/autolens_workspace_test/pull/79 (merged d827d1c)
 - summary: |
