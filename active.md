@@ -1,3 +1,10 @@
+## autolens-interferometer-jax-viz
+- issue: https://github.com/PyAutoLabs/autolens_workspace_test/issues/86
+- session: claude --resume "autolens-interferometer-jax-viz"
+- status: workspace-dev
+- worktree: ~/Code/PyAutoLabs-wt/autolens-interferometer-jax-viz
+- repos:
+
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
 - session: claude --resume "profile-smoke-test-runtime"
