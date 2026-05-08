@@ -1,18 +1,3 @@
-## datacube-3d-fits-relocate
-- issue: none — direct followup to PyAutoLabs/autolens_workspace#120
-- session: claude --resume "datacube-3d-fits-relocate"
-- status: workspace-dev
-- worktree: ~/Code/PyAutoLabs-wt/datacube-3d-fits-relocate
-- repos:
-  - autolens_workspace: feature/datacube-3d-fits-relocate
-  - autolens_workspace_developer: feature/datacube-3d-fits-relocate
-- summary: |
-    Hannah's ALMA visibilities are a single 4D FITS (n_pol, n_chan, n_vis, 2),
-    not per-channel folders. Update simulator to also write 3D-FITS cubes;
-    add data_preparation.py with polarisation handling + a 3D-FITS loader
-    function; relocate the JAX likelihood walkthrough from the private
-    autolens_workspace_developer to autolens_workspace so Hannah can read it.
-
 ## viz-jax-pytree-fix
 - issue: https://github.com/PyAutoLabs/autolens_workspace_test/issues/84
 - session: claude --resume "viz-jax-pytree-fix"
