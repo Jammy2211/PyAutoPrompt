@@ -1,12 +1,3 @@
-## viz-jax-pytree-fix
-- issue: https://github.com/PyAutoLabs/autolens_workspace_test/issues/84
-- session: claude --resume "viz-jax-pytree-fix"
-- status: workspace-dev
-- worktree: ~/Code/PyAutoLabs-wt/viz-jax-pytree-fix
-- repos:
-  - autolens_workspace_test: feature/viz-jax-pytree-fix
-  - autogalaxy_workspace_test: feature/viz-jax-pytree-fix
-
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
 - session: claude --resume "profile-smoke-test-runtime"
