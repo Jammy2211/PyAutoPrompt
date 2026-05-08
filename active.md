@@ -1,14 +1,39 @@
-## subhalo-redshift-jax-fix
+## cluster-c-point-source-rebaseline
+- session: claude (current CLI)
+- status: shipping
+- classification: workspace
+- suggested-branch: feature/cluster-c-point-source-rebaseline
+- worktree: ~/Code/PyAutoLabs-wt/cluster-c-point-source-rebaseline
+- repos: autolens_workspace_test
+- summary: |
+    Rebaseline JAX point-source likelihood literals after upstream
+    autolens_workspace_test commit 931a381 changed positions_noise_map
+    (0.2 → 0.005, PSF-centroiding precision). Regenerated
+    dataset/point_source/simple/{point_dataset_positions_only,tracer}.json
+    and updated three expected_likelihood literals across
+    image_plane.py (1.313508 → -83.38049778), point.py (same), and
+    source_plane.py (vmap & eager: -199.155… → -331481.26…). All three
+    scripts pass on the new literals.
+
+## subhalo-redshift-jax-repro
 - issue: https://github.com/PyAutoLabs/PyAutoLens/issues/498
-- status: filed (not yet started)
-- classification: library
-- suggested-branch: feature/subhalo-redshift-jax-fix
-- repos: PyAutoLens
+- session: claude (current CLI)
+- status: shipping repro PR (fix work to follow on a separate branch)
+- classification: workspace (then library follow-up)
+- suggested-branch: feature/subhalo-redshift-jax-repro (workspace) / feature/subhalo-redshift-jax-fix (library, TBD)
+- worktree: ~/Code/PyAutoLabs-wt/subhalo-redshift-jax-repro
+- repos: autolens_workspace_test, PyAutoLens (later)
 - summary: |
     Reported on Slack by @qiuhan96. Free-parameter subhalo redshift
-    (af.UniformPrior) raises TracerBoolConversionError under JAX in
-    tracer_util.grid_2d_at_redshift_from / plane_redshifts_from.
-    Workaround is use_jax=False, which is much slower.
+    (af.UniformPrior) raises TracerBoolConversionError under JAX. Root
+    cause is Python sorted()/<=/== on traced redshifts inside
+    tracer_util.plane_redshifts_from + grid_2d_at_redshift_from.
+    Reproducer added to autolens_workspace_test as
+    scripts/jax_likelihood_functions/imaging/subhalo.py — runs two
+    scenarios (fixed z=0.55 PASS, free UniformPrior FAIL with the
+    expected TracerBoolConversionError). Exits 0 on the expected
+    failure, 1 once the bug is fixed (so the same script becomes the
+    regression test). Workaround for users today: use_jax=False.
 
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
