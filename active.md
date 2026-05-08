@@ -28,24 +28,6 @@
     Cholesky fast-path was rejected because empirical positivity hit-rate
     during sampling is low and lax.cond under vmap evaluates both branches).
 
-## autolens-interferometer-jax-viz
-- issue: https://github.com/PyAutoLabs/autolens_workspace_test/issues/86
-- session: claude --resume "autolens-interferometer-jax-viz"
-- status: library-shipped, workspace-pending
-- worktree: ~/Code/PyAutoLabs-wt/autolens-interferometer-jax-viz
-- library-pr: https://github.com/PyAutoLabs/PyAutoLens/pull/500
-- repos:
-  - PyAutoLens: feature/autolens-interferometer-jax-viz
-  - autolens_workspace_test: feature/autolens-interferometer-jax-viz
-- notes: |
-    Reclassified workspace-dev → library-dev mid-session: workspace scripts
-    surfaced a missing **kwargs passthrough in PyAutoLens
-    AnalysisInterferometer.__init__ (it eats use_jax_for_visualization).
-    Library fix shipped in PR #500 (PyAutoLens). Workspace scripts
-    (visualization_jax.py + modeling_visualization_jit.py + env_vars.yaml
-    split) drafted and verified in the same worktree. Workspace PR ships
-    next via /ship_workspace; library-first merge gate enforces ordering.
-
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
 - session: claude --resume "profile-smoke-test-runtime"
