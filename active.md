@@ -19,6 +19,8 @@
 - status: workspace-dev
 - worktree: ~/Code/PyAutoLabs-wt/viz-jax-pytree-fix
 - repos:
+  - autolens_workspace_test: feature/viz-jax-pytree-fix
+  - autogalaxy_workspace_test: feature/viz-jax-pytree-fix
 
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
