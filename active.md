@@ -13,14 +13,6 @@
     function; relocate the JAX likelihood walkthrough from the private
     autolens_workspace_developer to autolens_workspace so Hannah can read it.
 
-## autogalaxy-viz-dispatch-swap
-- issue: https://github.com/PyAutoLabs/PyAutoGalaxy/issues/389
-- session: claude --resume "autogalaxy-viz-dispatch-swap"
-- status: library-dev
-- worktree: ~/Code/PyAutoLabs-wt/autogalaxy-viz-dispatch-swap
-- repos:
-  - PyAutoGalaxy: feature/autogalaxy-viz-dispatch-swap
-
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
 - session: claude --resume "profile-smoke-test-runtime"
