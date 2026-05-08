@@ -16,6 +16,13 @@ __What to change__
    `fit = analysis.fit_for_visualization(instance=instance)`.
 2. `@PyAutoGalaxy/autogalaxy/imaging/model/visualizer.py:176` — same swap inside the
    `visualize_combined` path that builds per-analysis fits in a multi-analysis scenario.
+3. `@PyAutoGalaxy/autogalaxy/interferometer/model/visualizer.py:81` — same swap.
+   Note: `AnalysisInterferometer` pytree registration shipped in PyAutoGalaxy PR #376
+   (see `complete.md` 2026-04-? entry — `_register_fit_interferometer_pytrees` is now
+   active in `autogalaxy/interferometer/model/analysis.py:165-184`), so dispatching
+   through `fit_for_visualization` is now safe for interferometer. Originally this
+   bullet was deferred — it was added to scope on 2026-05-08 once interferometer
+   pytree registration landed.
 
 `fit_for_visualization` is defined on the autofit base `Analysis`. It dispatches to a
 `jax.jit`-cached wrapper when `use_jax_for_visualization=True` and falls back to plain `fit_from`
@@ -34,13 +41,19 @@ __Verification__
 - `autogalaxy_workspace_test/scripts/imaging/visualization.py` should still pass (NumPy path —
   `fit_for_visualization` falls back to `fit_from` when the flag is off).
 - Run both via `/smoke_test`.
+- For interferometer the equivalent workspace_test scripts don't exist yet — coverage is added
+  by `autogalaxy_workspace_test/jax_viz_dataset_coverage.md` (Phase 1C of the JAX
+  visualization roadmap). Verify the dispatch swap doesn't break existing
+  `autogalaxy_workspace_test/scripts/interferometer/` (NumPy path — should be unchanged).
 
 __Out of scope__
 
 - Production workspace adoption (autogalaxy_workspace scripts opting into
   `use_jax_for_visualization=True`) — defer until Path A from `issued/fit_imaging_pytree.md` lands.
-- `AnalysisInterferometer` / `AnalysisEllipse` / `AnalysisQuantity` — these have no pytree
-  registration at all today; covered by `autogalaxy/fit_pytree_registration_other_datasets.md`.
+- `AnalysisEllipse` / `AnalysisQuantity` — these have no pytree registration today;
+  covered by `autogalaxy/fit_pytree_registration_other_datasets.md` (which is now
+  scoped to ellipse + quantity only — interferometer pytree registration shipped in
+  PR #376).
 
 __Background__
 

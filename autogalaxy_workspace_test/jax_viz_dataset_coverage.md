@@ -20,18 +20,26 @@ quantity fit with `use_jax=True`.
 
 __Blockers — must land first__
 
-This task **cannot start** until both of the following ship:
+State as of 2026-05-08 (post-audit):
 
-1. `PyAutoPrompt/autogalaxy/visualizer_fit_for_visualization_dispatch.md` —
-   wires `use_jax_for_visualization=True` through `ag.AnalysisImaging` (and
-   needs to be extended to the other three analyses as part of the same
-   prompt or a sibling prompt).
-2. `PyAutoPrompt/autogalaxy/fit_pytree_registration_other_datasets.md` —
-   pytree registers `FitInterferometer`, `FitEllipse`, `FitQuantity`.
+- **Interferometer pytree registration is already shipped** (PR #376, see
+  `autogalaxy/interferometer/model/analysis.py:165-184`). No blocker for
+  the interferometer sub-step's JAX support.
+- **Interferometer dispatch swap is still pending** —
+  `PyAutoPrompt/autogalaxy/visualizer_fit_for_visualization_dispatch.md`
+  (Phase 0b, scope extended 2026-05-08 to cover the interferometer
+  visualizer line 81) must land before the interferometer `_jax.py`
+  / `_jit.py` scripts will actually exercise the JIT path. Without it
+  the scripts will silently fall through to the eager NumPy path.
+- **Ellipse and quantity pytree registration is still pending** —
+  `PyAutoPrompt/autogalaxy/fit_pytree_registration_other_datasets.md`
+  (Phase 0c, now scoped to ellipse + quantity only) must land before
+  the ellipse / quantity sub-steps' JAX scripts will run at all.
 
-If either is incomplete when this task begins, the JAX scripts will either
-no-op (no dispatch) or raise (no pytree registration). Verify both have
-landed before starting any sub-step below.
+This task can start the **interferometer NumPy baseline** (sub-step 1's
+`visualization.py`) immediately even with both blockers open, since the
+NumPy path is unaffected. The `_jax.py` and `_jit.py` scripts must wait
+for Phase 0b. The ellipse and quantity sub-steps must wait for Phase 0c.
 
 __Sub-step 1 — Interferometer (3 scripts)__
 

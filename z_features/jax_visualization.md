@@ -19,8 +19,8 @@ These are already issued or pending; they unblock the rest of the roadmap.
 | # | Title | Prompt file | Status |
 |---|-------|-------------|--------|
 | 0a | Path A feasibility study (FitImaging pytree) | `issued/fit_imaging_pytree.md` | issued |
-| 0b | PyAutoGalaxy imaging visualizer dispatch swap | `autogalaxy/visualizer_fit_for_visualization_dispatch.md` | pending |
-| 0c | PyAutoGalaxy interferometer / ellipse / quantity pytree registration | `autogalaxy/fit_pytree_registration_other_datasets.md` | pending |
+| 0b | PyAutoGalaxy imaging + interferometer visualizer dispatch swap | `autogalaxy/visualizer_fit_for_visualization_dispatch.md` | pending — scope extended 2026-05-08 to also cover interferometer (line 81) since interferometer pytree shipped in PR #376 |
+| 0c | PyAutoGalaxy ellipse / quantity pytree registration | `autogalaxy/fit_pytree_registration_other_datasets.md` | pending — scope reduced 2026-05-08 (interferometer shipped in PR #376) |
 
 ## Phase 1 — Workspace_test JAX visualization coverage
 
