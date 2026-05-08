@@ -1,19 +1,3 @@
-## contents-block-bullets
-- issue: https://github.com/PyAutoLabs/autolens_workspace/issues/138
-- session: claude --resume "contents-block-bullets"
-- status: workspace-dev
-- worktree: ~/Code/PyAutoLabs-wt/contents-block-bullets
-- repos:
-  - autolens_workspace: feature/contents-block-bullets
-  - autogalaxy_workspace: feature/contents-block-bullets
-  - autofit_workspace: feature/contents-block-bullets
-  - HowToLens: feature/contents-block-bullets
-  - HowToGalaxy: feature/contents-block-bullets
-  - HowToFit: feature/contents-block-bullets
-  - autolens_workspace_test: feature/contents-block-bullets
-  - autogalaxy_workspace_test: feature/contents-block-bullets
-  - autofit_workspace_test: feature/contents-block-bullets
-
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
 - session: claude --resume "profile-smoke-test-runtime"
