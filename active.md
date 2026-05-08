@@ -1,10 +1,20 @@
 ## autolens-interferometer-jax-viz
 - issue: https://github.com/PyAutoLabs/autolens_workspace_test/issues/86
 - session: claude --resume "autolens-interferometer-jax-viz"
-- status: workspace-dev
+- status: library-dev
 - worktree: ~/Code/PyAutoLabs-wt/autolens-interferometer-jax-viz
 - repos:
+  - PyAutoLens: feature/autolens-interferometer-jax-viz
   - autolens_workspace_test: feature/autolens-interferometer-jax-viz
+- notes: |
+    Reclassified workspace-dev → library-dev mid-session: workspace scripts
+    surfaced a missing **kwargs passthrough in PyAutoLens
+    AnalysisInterferometer.__init__ (it eats use_jax_for_visualization).
+    Library fix: 2-line change in autolens/interferometer/model/analysis.py
+    adding **kwargs to signature + super().__init__() call. Workspace
+    scripts (visualization_jax.py + modeling_visualization_jit.py +
+    env_vars.yaml split) already drafted in the same worktree. Library PR
+    ships first, workspace PR follows via library-first merge gate.
 
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
