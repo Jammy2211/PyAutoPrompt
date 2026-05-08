@@ -4,6 +4,7 @@
 - status: library-dev
 - worktree: ~/Code/PyAutoLabs-wt/autogalaxy-viz-dispatch-swap
 - repos:
+  - PyAutoGalaxy: feature/autogalaxy-viz-dispatch-swap
 
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
