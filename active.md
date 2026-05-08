@@ -1,3 +1,15 @@
+## subhalo-redshift-jax-fix
+- issue: https://github.com/PyAutoLabs/PyAutoLens/issues/498
+- status: filed (not yet started)
+- classification: library
+- suggested-branch: feature/subhalo-redshift-jax-fix
+- repos: PyAutoLens
+- summary: |
+    Reported on Slack by @qiuhan96. Free-parameter subhalo redshift
+    (af.UniformPrior) raises TracerBoolConversionError under JAX in
+    tracer_util.grid_2d_at_redshift_from / plane_redshifts_from.
+    Workaround is use_jax=False, which is much slower.
+
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
 - session: claude --resume "profile-smoke-test-runtime"
