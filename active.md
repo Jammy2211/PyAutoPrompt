@@ -66,4 +66,5 @@
 - status: library-dev
 - worktree: ~/Code/PyAutoLabs-wt/scaling-relation-csv-loader
 - repos:
+  - PyAutoGalaxy: feature/scaling-relation-csv-loader
 
