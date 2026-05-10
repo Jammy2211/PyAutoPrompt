@@ -4,6 +4,7 @@
 - status: workspace-dev
 - worktree: ~/Code/PyAutoLabs-wt/ellipse-jax-likelihood-tests
 - repos:
+  - autogalaxy_workspace_test: feature/ellipse-jax-likelihood-tests
 
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
