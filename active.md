@@ -60,10 +60,3 @@
       8. End-to-end library integration test
       (workspace) extend convolution.py + new convolution_oversampled.py + simulator.py
 
-## scaling-relation-update
-- issue: https://github.com/PyAutoLabs/autolens_workspace/issues/141
-- session: claude --resume "scaling-relation-update"
-- status: workspace-dev
-- worktree: ~/Code/PyAutoLabs-wt/scaling-relation-update
-- repos:
-  - autolens_workspace: feature/scaling-relation-update
