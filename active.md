@@ -1,11 +1,3 @@
-## ellipse-visualization-test
-- issue: https://github.com/PyAutoLabs/autogalaxy_workspace_test/issues/39
-- session: claude --resume "ellipse-visualization-test"
-- status: workspace-dev
-- worktree: ~/Code/PyAutoLabs-wt/ellipse-visualization-test
-- repos:
-  - autogalaxy_workspace_test: feature/ellipse-visualization-test
-
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
 - session: claude --resume "profile-smoke-test-runtime"
