@@ -1,3 +1,10 @@
+## jax-interp-2d
+- issue: https://github.com/PyAutoLabs/PyAutoArray/issues/306
+- session: claude --resume "jax-interp-2d"
+- status: library-dev
+- worktree: ~/Code/PyAutoLabs-wt/jax-interp-2d
+- repos:
+
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
 - session: claude --resume "profile-smoke-test-runtime"

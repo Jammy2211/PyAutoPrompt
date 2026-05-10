@@ -1,6 +1,6 @@
 Make `AnalysisEllipse.log_likelihood_function` JAX-compatible (analogous to `AnalysisImaging`). Decomposed from the original `autogalaxy/ellipse_fitting_jax.md` meta-prompt — see `issued/ellipse_fitting_jax.md` for the source brief.
 
-ellipse/[4_jax_interp_2d.md](../ellipse/4_jax_interp_2d.md)
+issued/[4_jax_interp_2d.md](../issued/4_jax_interp_2d.md) (in flight — `jax-interp-2d`, PyAutoArray#306)
 ellipse/[5_ellipse_xp.md](../ellipse/5_ellipse_xp.md)
 ellipse/[6_fit_ellipse_masked_jax.md](../ellipse/6_fit_ellipse_masked_jax.md)
 ellipse/[7_analysis_ellipse_jax.md](../ellipse/7_analysis_ellipse_jax.md)
