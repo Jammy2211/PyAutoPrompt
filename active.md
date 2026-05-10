@@ -68,3 +68,10 @@
       8. End-to-end library integration test
       (workspace) extend convolution.py + new convolution_oversampled.py + simulator.py
 
+## autogalaxy-extras-mge-option
+- issue: https://github.com/PyAutoLabs/autogalaxy_workspace/issues/65
+- session: claude --resume "autogalaxy-extras-mge-option"
+- status: workspace-dev
+- worktree: ~/Code/PyAutoLabs-wt/autogalaxy-extras-mge-option
+- repos:
+
