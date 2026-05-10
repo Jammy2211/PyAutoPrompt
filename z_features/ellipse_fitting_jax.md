@@ -1,6 +1,6 @@
 Make `AnalysisEllipse.log_likelihood_function` JAX-compatible (analogous to `AnalysisImaging`). Decomposed from the original `autogalaxy/ellipse_fitting_jax.md` meta-prompt — see `issued/ellipse_fitting_jax.md` for the source brief.
 
-ellipse/[3_unit_tests_masked_loop.md](../ellipse/3_unit_tests_masked_loop.md)
+issued/[3_unit_tests_masked_loop.md](../issued/3_unit_tests_masked_loop.md) (in flight — `ellipse-fit-masked-loop-tests`, PyAutoGalaxy#394)
 ellipse/[4_jax_interp_2d.md](../ellipse/4_jax_interp_2d.md)
 ellipse/[5_ellipse_xp.md](../ellipse/5_ellipse_xp.md)
 ellipse/[6_fit_ellipse_masked_jax.md](../ellipse/6_fit_ellipse_masked_jax.md)
