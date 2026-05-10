@@ -1,4 +1,9 @@
 
+## ellipse-fit-masked-loop-tests
+- issue: https://github.com/PyAutoLabs/PyAutoGalaxy/issues/394
+- completed: 2026-05-10
+- library-pr: https://github.com/PyAutoLabs/PyAutoGalaxy/pull/395
+
 ## ellipse-jax-likelihood-tests
 - issue: https://github.com/PyAutoLabs/autogalaxy_workspace_test/issues/41
 - completed: 2026-05-10

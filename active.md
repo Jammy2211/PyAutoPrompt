@@ -1,11 +1,3 @@
-## ellipse-fit-masked-loop-tests
-- issue: https://github.com/PyAutoLabs/PyAutoGalaxy/issues/394
-- session: claude --resume "ellipse-fit-masked-loop-tests"
-- status: library-dev
-- worktree: ~/Code/PyAutoLabs-wt/ellipse-fit-masked-loop-tests
-- repos:
-  - PyAutoGalaxy: feature/ellipse-fit-masked-loop-tests
-
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
 - session: claude --resume "profile-smoke-test-runtime"
