@@ -38,7 +38,7 @@ hpc_a100_mp.{json,png}
 comparison.{json,png}
 ```
 
-Each `<config>.json` carries: per-step JIT timings for the 8 likelihood steps (ray-trace, mapping matrix, blurred mapping matrix, data vector, curvature, NNLS, mapped reconstructed image, chi-squared), full-pipeline single-JIT time, vmap batch=3 time, log-likelihood values from eager/JIT/vmap, device info, and static memory analysis.
+Each `<config>.json` carries: per-step JIT timings (the step structure is likelihood-specific — MGE has 8 steps, pixelization has 11, others may vary), full-pipeline single-JIT time, vmap batch=3 time, log-likelihood values from eager/JIT/vmap, device info, and static memory analysis.
 
 `comparison.{json,png}` is the aggregated cross-config view (log-scale grouped bar chart by step, table of full pipeline + vmap + log-likelihood per config).
 
@@ -55,6 +55,24 @@ Each `<config>.json` carries: per-step JIT timings for the 8 likelihood steps (r
 4. **Canonical reference exists**: confirm `autolens_workspace_developer/jax_profiling/jit/<dataset_type>/<likelihood_type>.py` exists. The new profiling script is a simplified, argparse-driven version of this canonical reference.
 
 ## Steps
+
+### 0. Read existing profile results for context
+
+**Before scaffolding or running anything**, read the `comparison.json` files for any already-profiled likelihoods in the same `<dataset_type>` family:
+
+```bash
+ls autolens_workspace_developer/jax_profiling/results/jit/<dataset_type>/*/comparison.json 2>/dev/null
+```
+
+For each one found, extract: per-config `full_pipeline_per_call`, per-config `vmap_per_call`, and the dominant 1–2 steps per device class. A small inline `python3 -c "import json; d = json.load(open(path)); ..."` works fine — no need for a dedicated script.
+
+This is **not optional**. The prior-art context is what lets you:
+
+- **Predict where the new run should land.** If MGE on A100 is 5.7 ms and the new likelihood is structurally similar, you should expect O(5–20 ms) on A100 — anything else is a red flag worth re-running before reporting.
+- **Anticipate which steps dominate on which hardware**, so you can frame the PR's "Key findings" section against existing precedent rather than discovering it cold. E.g. for the imaging family: F construction collapses 200× from CPU → A100, NNLS reconstruction is the next-most-expensive step on A100, vmap helps for non-iterative likelihoods (MGE) but not iterative ones (pixelization NNLS).
+- **Give the user mid-run context updates** that are interpretable against existing data instead of standalone numbers ("212 ms RTX 2060" is meaningless on its own; "212 ms — 4.9× slower than MGE on the same hardware, consistent with the larger 784×784 F matrix" is interpretable).
+
+Summarize the prior-art findings to the user in 4–6 lines as part of the plan, before they approve scaffolding. If the new likelihood is the *first* one in its `<dataset_type>` family, say so explicitly and skip this step.
 
 ### 1. Identify the likelihood and check existing tooling
 
@@ -261,5 +279,6 @@ Move the active.md entry to complete.md and `prompt_sync_push` per the standard 
 
 ## Reference precedent
 
-- `mge-profiling-a100` (autolens_workspace_developer #56, merged 2026-05-09) is the first run of this workflow. See its PR body and `complete.md` entry for the full numerical story.
-- The skill leans on `z_projects/profiling/scripts/mge_profile.py` and `mge_aggregate.py` as the canonical implementations. They live at https://github.com/PyAutoLabs/z_projects (no remote, local-only) and were committed as commit `781cb76` on local main.
+- `mge-profiling-a100` (autolens_workspace_developer #56, merged 2026-05-09) — first run of this workflow. 8-step MGE pipeline; A100 fp64 = 5.7 ms; vmap gives ~2× speedup; F + Mapping matrix dominate on every device class.
+- `pixelization-profiling-a100` (autolens_workspace_developer #57, opened 2026-05-10) — RectangularAdaptDensity source. 11-step pipeline; A100 fp64 = 9.7 ms (1.7× slower than MGE on A100, but 4.9× slower than MGE on RTX 2060 — A100 closes the gap because dense F construction collapses 200× there). vmap does NOT help (NNLS is serial). Bottleneck shifts from F (consumer GPU) to NNLS reconstruction (A100, 70% of step total).
+- The skill leans on `z_projects/profiling/scripts/mge_profile.py` / `pixelization_profile.py` and their aggregators as the canonical implementations. They live at https://github.com/PyAutoLabs/z_projects (no remote, local-only).
