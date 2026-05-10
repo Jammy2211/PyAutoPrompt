@@ -74,4 +74,5 @@
 - status: workspace-dev
 - worktree: ~/Code/PyAutoLabs-wt/autogalaxy-extras-mge-option
 - repos:
+  - autogalaxy_workspace: feature/autogalaxy-extras-mge-option
 
