@@ -4,6 +4,7 @@
 - status: library-dev
 - worktree: ~/Code/PyAutoLabs-wt/ellipse-fit-masked-loop-tests
 - repos:
+  - PyAutoGalaxy: feature/ellipse-fit-masked-loop-tests
 
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
