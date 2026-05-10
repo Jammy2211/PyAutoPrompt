@@ -63,10 +63,11 @@
 ## scaling-relation-csv-loader
 - issue: https://github.com/PyAutoLabs/PyAutoGalaxy/issues/392
 - session: claude --resume "scaling-relation-csv-loader"
-- status: library-shipped, workspace-pending
+- status: workspace-dev
 - worktree: ~/Code/PyAutoLabs-wt/scaling-relation-csv-loader
 - library-pr: https://github.com/PyAutoLabs/PyAutoGalaxy/pull/393, https://github.com/PyAutoLabs/PyAutoLens/pull/502
 - repos:
   - PyAutoGalaxy: feature/scaling-relation-csv-loader
   - PyAutoLens: feature/scaling-relation-csv-loader
+  - autolens_workspace: feature/scaling-relation-csv-loader
 
