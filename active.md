@@ -66,3 +66,4 @@
 - status: workspace-dev
 - worktree: ~/Code/PyAutoLabs-wt/scaling-relation-update
 - repos:
+  - autolens_workspace: feature/scaling-relation-update
