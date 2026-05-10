@@ -1,11 +1,3 @@
-## ellipse-jax-likelihood-tests
-- issue: https://github.com/PyAutoLabs/autogalaxy_workspace_test/issues/41
-- session: claude --resume "ellipse-jax-likelihood-tests"
-- status: workspace-dev
-- worktree: ~/Code/PyAutoLabs-wt/ellipse-jax-likelihood-tests
-- repos:
-  - autogalaxy_workspace_test: feature/ellipse-jax-likelihood-tests
-
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
 - session: claude --resume "profile-smoke-test-runtime"
