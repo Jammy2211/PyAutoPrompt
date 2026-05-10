@@ -60,3 +60,10 @@
       8. End-to-end library integration test
       (workspace) extend convolution.py + new convolution_oversampled.py + simulator.py
 
+## scaling-relation-csv-loader
+- issue: https://github.com/PyAutoLabs/PyAutoGalaxy/issues/392
+- session: claude --resume "scaling-relation-csv-loader"
+- status: library-dev
+- worktree: ~/Code/PyAutoLabs-wt/scaling-relation-csv-loader
+- repos:
+
