@@ -4,6 +4,7 @@
 - status: workspace-dev
 - worktree: ~/Code/PyAutoLabs-wt/ellipse-visualization-test
 - repos:
+  - autogalaxy_workspace_test: feature/ellipse-visualization-test
 
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
