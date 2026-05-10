@@ -1,4 +1,19 @@
 
+## scaling-relation-csv-loader
+- issue: https://github.com/PyAutoLabs/PyAutoGalaxy/issues/392
+- completed: 2026-05-10
+- library-pr: https://github.com/PyAutoLabs/PyAutoGalaxy/pull/393, https://github.com/PyAutoLabs/PyAutoLens/pull/502
+- workspace-pr: https://github.com/PyAutoLabs/autolens_workspace/pull/143
+- repos: PyAutoGalaxy, PyAutoLens, autolens_workspace
+- notes: |
+    Added autogalaxy.galaxy.galaxy_table (GalaxyTable dataclass + from_csv/to_csv
+    helpers wrapping autoconf.csvable). Re-exported through autolens. Both
+    scaling_relation simulators emit extra_galaxies.csv + scaling_galaxies.csv
+    next to centre JSONs; both modeling.py files show CSV (Option A, default)
+    AND JSON+hardcoded list (Option B, commented) side by side so users see the
+    choice. modeling_for_luminosities.py writes scaling_galaxies.csv directly
+    so the chain into modeling.py needs no manual paste.
+
 ## scaling-relation-update
 - issue: https://github.com/PyAutoLabs/autolens_workspace/issues/141
 - completed: 2026-05-10
