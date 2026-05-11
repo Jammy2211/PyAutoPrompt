@@ -11,6 +11,7 @@
 - status: library-dev
 - worktree: ~/Code/PyAutoLabs-wt/nnls-vmap-speedup
 - repos:
+  - PyAutoArray: feature/nnls-vmap-speedup
 
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
