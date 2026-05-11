@@ -1,11 +1,3 @@
-## delaunay-jax-find-simplex
-- issue: N/A (follow-up from PyAutoArray#307; tracked locally via plan file)
-- session: claude --resume "delaunay-jax-find-simplex"
-- status: library-dev
-- worktree: ~/Code/PyAutoLabs-wt/delaunay-jax-find-simplex
-- repos:
-  - PyAutoArray: feature/delaunay-jax-find-simplex
-
 ## jax-interp-2d
 - issue: https://github.com/PyAutoLabs/PyAutoArray/issues/306
 - session: claude --resume "jax-interp-2d"
