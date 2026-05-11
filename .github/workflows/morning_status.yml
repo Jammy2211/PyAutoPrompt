@@ -1,0 +1,159 @@
+name: morning-status
+
+on:
+  schedule:
+    # GitHub Actions cron is UTC-only. UK clocks shift twice a year, so we
+    # schedule at both 05:00 UTC (06:00 BST in summer) and 06:00 UTC (06:00
+    # GMT in winter) and gate execution on the actual UK 06:00 hour.
+    - cron: "0 5 * * *"
+    - cron: "0 6 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  morning-status:
+    runs-on: ubuntu-latest
+    env:
+      REPOS: >-
+        PyAutoLabs/PyAutoConf
+        PyAutoLabs/PyAutoFit
+        PyAutoLabs/PyAutoArray
+        PyAutoLabs/PyAutoGalaxy
+        PyAutoLabs/PyAutoLens
+        PyAutoLabs/autofit_workspace
+        PyAutoLabs/autogalaxy_workspace
+        PyAutoLabs/autolens_workspace
+    steps:
+      - name: Skip if not 06:00 UK time
+        id: tz
+        run: |
+          uk_hour=$(TZ=Europe/London date +%H)
+          if [ "$uk_hour" != "06" ] && [ "${{ github.event_name }}" != "workflow_dispatch" ]; then
+            echo "Skipping: UK hour is $uk_hour, not 06" >&2
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Fetch merged PRs from the last 24h
+        if: steps.tz.outputs.skip != 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          since=$(date -u -d '24 hours ago' --iso-8601=seconds)
+          until=$(date -u --iso-8601=seconds)
+          uk_date=$(TZ=Europe/London date '+%Y-%m-%d (%a)')
+
+          # Build pr_activity.json by collecting per-repo arrays into a
+          # single combined array, then assembling the final envelope.
+          tmp=$(mktemp -d)
+          : > "$tmp/all.jsonl"
+
+          for repo in $REPOS; do
+            gh pr list --repo "$repo" --state merged \
+                --search "merged:>=$since" \
+                --json number,title,url,author,mergedAt,body \
+                --limit 50 \
+              | jq --arg repo "$repo" -c '.[] | . + {repo: $repo}' \
+              >> "$tmp/all.jsonl"
+          done
+
+          jq -s --arg since "$since" --arg until "$until" --arg uk_date "$uk_date" \
+            '{since: $since, until: $until, uk_date: $uk_date, prs: .}' \
+            "$tmp/all.jsonl" > pr_activity.json
+
+          echo "--- pr_activity.json ---"
+          jq '{since, until, uk_date, count: (.prs | length)}' pr_activity.json
+
+      - name: Summarise activity with Claude
+        if: steps.tz.outputs.skip != 'true'
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            Read `pr_activity.json` in this directory. It has shape:
+
+              { "since": "<ISO-UTC>",
+                "until": "<ISO-UTC>",
+                "uk_date": "YYYY-MM-DD (Mon)",
+                "prs": [ { "repo": "PyAutoLabs/<name>",
+                           "number": <int>, "title": "...",
+                           "url": "...", "author": {...},
+                           "mergedAt": "<ISO-UTC>", "body": "..." }, ... ] }
+
+            Audience: end users of PyAutoLens, PyAutoGalaxy, PyAutoFit
+            (working astronomers, not the dev team). Tone: friendly,
+            plain language, science-user-facing — explain *what changed
+            for them*, not the implementation details.
+
+            Skip these PR types entirely (do not mention them at all):
+              - "bump version", "release X.Y.Z", "post-release"
+              - pure formatting / black / pre-commit chores
+              - typo fixes (unless in user-visible docs)
+              - dependabot / dependency-bump-only PRs
+              - CI / workflow tweaks
+              - README badge updates
+
+            For each remaining PR, derive a one-line user-facing
+            description from `title` + first paragraph of `body`. Group
+            by repo. Drop the `PyAutoLabs/` prefix in the displayed name.
+
+            Then write `slack_payload.json` in the repo root, with this
+            exact shape:
+
+              {
+                "text": "Daily PyAuto update — <uk_date>",
+                "blocks": [
+                  { "type": "header",
+                    "text": { "type": "plain_text",
+                              "text": "Daily PyAuto update — <uk_date>" } },
+                  { "type": "section",
+                    "text": { "type": "mrkdwn",
+                              "text": "<intro line>" } },
+                  { "type": "section",
+                    "text": { "type": "mrkdwn",
+                              "text": "*<repo>*\n• <user-facing line> (<<url>|#<num>>)\n…" } }
+                ]
+              }
+
+            (Add one section block per repo that has merges. Omit any
+            repo with zero remaining merges after the skip-list.)
+
+            If `prs` is empty (or every PR was filtered out by the
+            skip-list above), produce ONLY:
+
+              {
+                "text": "Daily PyAuto update — <uk_date>",
+                "blocks": [
+                  { "type": "header",
+                    "text": { "type": "plain_text",
+                              "text": "Daily PyAuto update — <uk_date>" } },
+                  { "type": "section",
+                    "text": { "type": "mrkdwn",
+                              "text": "Quiet day — no user-facing changes shipped in the last 24 hours." } }
+                ]
+              }
+
+            Intro line on a non-quiet day should be a single sentence
+            naming the count and which packages had updates, e.g.
+            "<n> change(s) shipped today across PyAutoLens and
+            autolens_workspace."
+
+            Do not POST anything yourself, do not commit, do not modify
+            any other file.
+
+      - name: POST to Slack
+        if: steps.tz.outputs.skip != 'true'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: |
+          if [ ! -s slack_payload.json ]; then
+            echo "::error::slack_payload.json missing or empty"
+            exit 1
+          fi
+          curl -sS -X POST \
+               -H "Content-Type: application/json" \
+               --data @slack_payload.json \
+               --fail-with-body \
+               "$SLACK_WEBHOOK_URL"

@@ -5,6 +5,13 @@
 - worktree: ~/Code/PyAutoLabs-wt/jax-interp-2d
 - repos:
 
+## nnls-vmap-speedup
+- issue: https://github.com/PyAutoLabs/PyAutoArray/issues/307
+- session: claude --resume "nnls-vmap-speedup"
+- status: library-dev
+- worktree: ~/Code/PyAutoLabs-wt/nnls-vmap-speedup
+- repos:
+
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
 - session: claude --resume "profile-smoke-test-runtime"

@@ -1,5 +1,17 @@
 ## Speed up NNLS on consumer GPUs by hacking jaxnnls itself
 
+> **SUPERSEDED BY** `nnls_vmap_optimization.md` (2026-05-11).
+>
+> This prompt's framing is single-JIT-on-GPU at MGE-only K=40 scale.
+> PR #60 (autolens_workspace_developer) measured production-fiducial
+> setup (K~1285, MGE-60 lens, both rect + Delaunay sources, under vmap)
+> and found that **vmap is the production-relevant regime, not single-JIT**,
+> and that NNLS-under-vmap is the wall (8.8× Delaunay regress on A100).
+> The 5-lever structure below is still valid as "how to attack"; the
+> updated framing in `nnls_vmap_optimization.md` covers "what to attack
+> first" + the per-step vmap evidence + the full HPC runbook.
+
+
 This is a follow-up to the FFT precision / mixed-precision audit work
 (see `autolens_workspace_developer/jax_profiling/jit/imaging/mge.py`). After
 fixing the FFT bugs, the remaining single-JIT bottleneck on GPU for the
