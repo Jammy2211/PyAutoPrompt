@@ -76,4 +76,5 @@
 - status: library-dev
 - worktree: ~/Code/PyAutoLabs-wt/nfw-jax-port
 - repos:
+  - PyAutoGalaxy: feature/nfw-jax-port
 
