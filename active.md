@@ -4,6 +4,7 @@
 - status: library-dev
 - worktree: ~/Code/PyAutoLabs-wt/fit-ellipse-jax
 - repos:
+  - PyAutoGalaxy: feature/fit-ellipse-jax
 
 ## jax-dataset-model
 - issue: https://github.com/PyAutoLabs/autolens_workspace_test/issues/93
