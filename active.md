@@ -27,6 +27,7 @@
 - status: library-dev
 - worktree: ~/Code/PyAutoLabs-wt/priors-jax-native
 - repos:
+  - PyAutoFit: feature/priors-jax-native
 
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
