@@ -1,3 +1,10 @@
+## fit-ellipse-jax
+- issue: https://github.com/PyAutoLabs/PyAutoGalaxy/issues/409
+- session: claude --resume "fit-ellipse-jax"
+- status: library-dev
+- worktree: ~/Code/PyAutoLabs-wt/fit-ellipse-jax
+- repos:
+
 ## jax-dataset-model
 - issue: https://github.com/PyAutoLabs/autolens_workspace_test/issues/93
 - session: claude --resume "jax-dataset-model"

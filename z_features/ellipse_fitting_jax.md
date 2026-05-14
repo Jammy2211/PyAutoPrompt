@@ -1,6 +1,6 @@
 Make `AnalysisEllipse.log_likelihood_function` JAX-compatible (analogous to `AnalysisImaging`). Decomposed from the original `autogalaxy/ellipse_fitting_jax.md` meta-prompt — see `issued/ellipse_fitting_jax.md` for the source brief.
 
-ellipse/[6_fit_ellipse_masked_jax.md](../ellipse/6_fit_ellipse_masked_jax.md)
+issued/[6_fit_ellipse_masked_jax.md](../issued/6_fit_ellipse_masked_jax.md) (in flight — `fit-ellipse-jax`, PyAutoGalaxy#409)
 ellipse/[7_analysis_ellipse_jax.md](../ellipse/7_analysis_ellipse_jax.md)
 
 see also: PyAutoFit `Drawer` search currently does not pass `use_jax_jit=True` to `Fitness` (see `@PyAutoFit/autofit/non_linear/search/mle/drawer/search.py:105` and `@PyAutoFit/autofit/non_linear/fitness.py:121-129`). Independent of this feature — needs a separate prompt under `autofit/` once prompt 7 lands.
