@@ -16,14 +16,6 @@
     matrix, regularization matrix (ConstantSplit), reconstruction, log
     evidence. Prereq for the future jit/datacube/delaunay.py profiler.
 
-## fit-ellipse-jax
-- issue: https://github.com/PyAutoLabs/PyAutoGalaxy/issues/409
-- session: claude --resume "fit-ellipse-jax"
-- status: library-dev
-- worktree: ~/Code/PyAutoLabs-wt/fit-ellipse-jax
-- repos:
-  - PyAutoGalaxy: feature/fit-ellipse-jax
-
 ## priors-jax-native
 - issue: https://github.com/PyAutoLabs/PyAutoFit/issues/1262
 - session: claude --resume "priors-jax-native"
