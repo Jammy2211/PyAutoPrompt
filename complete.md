@@ -1,4 +1,12 @@
 
+## datacube-likelihood-walkthrough
+- issue: none — direct followup to autolens_workspace#120
+- completed: 2026-05-14
+- workspace-prs:
+  - https://github.com/PyAutoLabs/autolens_workspace/pull/149
+- repos: autolens_workspace
+- notes: Rewrite datacube/likelihood_function.py from a JIT-correctness test (PART A Setup → PART B Eager NumPy → PART C JIT → PART D Correctness) into a pedagogical pixelization-likelihood walkthrough in the style of imaging/features/multi_gaussian_expansion/likelihood_function.py — cross-reference shared sections back to interferometer/features/pixelization/likelihood_function.py and give full prose treatment only to the cube-specific bits (list of Interferometer objects, per-channel inversion construction, per-channel transformed_mapping_matrix from each channel's distinct uv_wavelengths, sparse-operator memory pressure multiplied by N channels, the deferred shared-`Lᵀ W̃ L` optimisation, and the headline `Across All Channels` section that loops the per-channel calculation and sums to produce the cube log-evidence). Cross-check against summed FitInterferometer.log_evidence agrees at ~5e-4 (matching the residual the pixelization reference exhibits — comes from source-code fast paths the manual walkthrough deliberately doesn't reproduce). The dropped JAX-JIT correctness assertion moves to the planned autolens_workspace_test/scripts/jax_likelihood_functions/datacube/ folder (follow-up).
+
 ## datacube-centre-and-4d
 - issue: none — direct followup to autolens_workspace#120
 - completed: 2026-05-14
