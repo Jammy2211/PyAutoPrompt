@@ -60,3 +60,11 @@
       8. End-to-end library integration test
       (workspace) extend convolution.py + new convolution_oversampled.py + simulator.py
 
+## nfw-mcr-ludlow-jit
+- issue: (none — extension of the subhalo JAX regression script; references PyAutoGalaxy #397/#403 and PyAutoLens #498)
+- session: claude --resume "nfw-mcr-ludlow-jit"
+- status: workspace-dev
+- worktree: ~/Code/PyAutoLabs-wt/nfw-mcr-ludlow-jit
+- repos:
+  - autolens_workspace_test: feature/nfw-mcr-ludlow-jit
+
