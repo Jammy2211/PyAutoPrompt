@@ -1,11 +1,12 @@
 ## point-source-jax-viz
 - issue: https://github.com/PyAutoLabs/autolens_workspace_test/issues/90
 - session: claude --resume "point-source-jax-viz"
-- status: library-shipped, workspace-pending
+- status: workspace-dev
 - worktree: ~/Code/PyAutoLabs-wt/point-source-jax-viz
 - library-pr: https://github.com/PyAutoLabs/PyAutoLens/pull/506
 - repos:
   - PyAutoLens: feature/point-source-jax-viz
+  - autolens_workspace_test: feature/point-source-jax-viz
 
 ## jax-interp-2d
 - issue: https://github.com/PyAutoLabs/PyAutoArray/issues/306
