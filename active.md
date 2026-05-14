@@ -60,12 +60,3 @@
       8. End-to-end library integration test
       (workspace) extend convolution.py + new convolution_oversampled.py + simulator.py
 
-## interferometer-nufftax-updates
-- issue: https://github.com/PyAutoLabs/autolens_workspace/issues/146
-- session: claude --resume "interferometer-nufftax-updates"
-- status: workspace-dev
-- worktree: ~/Code/PyAutoLabs-wt/interferometer-nufftax-updates
-- repos:
-  - autolens_workspace: feature/interferometer-nufftax-updates
-  - autogalaxy_workspace: feature/interferometer-nufftax-updates
-
