@@ -1,3 +1,27 @@
+## disable-model-graph
+- issue: none — ad-hoc cleanup
+- session: claude --resume "disable-model-graph"
+- status: library-shipped, workspace-pending
+- worktree: ~/Code/PyAutoLabs-wt/disable-model-graph
+- library-pr: https://github.com/PyAutoLabs/PyAutoFit/pull/1264
+- repos:
+  - PyAutoFit: feature/disable-model-graph
+- summary: |
+    Gate `model.graph` output in fit folders behind a new
+    `output.model_graph` config key (default `false`). Fixes the bug
+    where an empty `model.graph` was written for every non-graphical
+    fit because the file was opened before `model.graph_info` raised
+    AttributeError. Metadata file left alone — it's the sentinel
+    Aggregator.from_directory() uses to detect search output dirs.
+
+    Workspace follow-up: each workspace ships its own config/output.yaml
+    with `default: true` and no `model_graph` key, so workspace users
+    still see the file written. Add `model_graph: false` to:
+      - autofit_workspace/config/output.yaml
+      - autogalaxy_workspace/config/output.yaml
+      - autolens_workspace/config/output.yaml
+      - autolens_workspace_test/config/output.yaml
+
 ## jit-datacube-delaunay
 - issue: none — Phase 3 of the datacube roadmap (followup to autolens_workspace#120)
 - session: claude --resume "jit-datacube-delaunay"
