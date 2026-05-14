@@ -27,6 +27,12 @@
 - status: library-dev
 - worktree: ~/Code/PyAutoLabs-wt/url-check
 - repos:
+  - admin_jammy: feature/url-check
+  - PyAutoConf: feature/url-check
+  - PyAutoFit: feature/url-check
+  - PyAutoArray: feature/url-check
+  - PyAutoGalaxy: feature/url-check
+  - PyAutoLens: feature/url-check
 - summary: |
     Cross-repo doc URL audit and cleanup. Build a Python URL-checker in
     admin_jammy/software/url_check/ that scans every PyAuto repo, dedupes
