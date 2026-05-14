@@ -1,3 +1,26 @@
+## url-check
+- issue: https://github.com/PyAutoLabs/PyAutoLens/issues/508
+- session: claude --resume "url-check"
+- status: library-dev
+- worktree: ~/Code/PyAutoLabs-wt/url-check
+- repos:
+- summary: |
+    Cross-repo doc URL audit and cleanup. Build a Python URL-checker in
+    admin_jammy/software/url_check/ that scans every PyAuto repo, dedupes
+    URLs, and validates them (HEAD/GET, with Colab URLs verified via the
+    underlying raw.githubusercontent.com mapping). Then fix the broken
+    URLs surfaced — known patterns: hhttps typo (2 sites), Jammy2211/
+    workspace → PyAutoLabs/ rename (~113 sites), /blob/release/ → /blob/
+    main/ — plus any case-by-case dead links the audit flags.
+
+    Affected repos: admin_jammy (tool), PyAutoConf, PyAutoFit, PyAutoArray,
+    PyAutoGalaxy, PyAutoLens, HowToFit, HowToGalaxy, HowToLens,
+    autofit_workspace, autogalaxy_workspace, autolens_workspace.
+
+    Conflict override: PyAutoFit and PyAutoGalaxy are claimed by
+    priors-jax-native and fit-ellipse-jax respectively; user cleared
+    parallel work since this task is doc-only and the others touch source.
+
 ## priors-jax-native
 - issue: https://github.com/PyAutoLabs/PyAutoFit/issues/1262
 - session: claude --resume "priors-jax-native"
