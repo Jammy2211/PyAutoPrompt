@@ -1,11 +1,15 @@
 ## disable-model-graph
 - issue: none — ad-hoc cleanup
 - session: claude --resume "disable-model-graph"
-- status: library-shipped, workspace-pending
+- status: workspace-dev
 - worktree: ~/Code/PyAutoLabs-wt/disable-model-graph
 - library-pr: https://github.com/PyAutoLabs/PyAutoFit/pull/1264
 - repos:
   - PyAutoFit: feature/disable-model-graph
+  - autofit_workspace: feature/disable-model-graph
+  - autogalaxy_workspace: feature/disable-model-graph
+  - autolens_workspace: feature/disable-model-graph
+  - autolens_workspace_test: feature/disable-model-graph
 - summary: |
     Gate `model.graph` output in fit folders behind a new
     `output.model_graph` config key (default `false`). Fixes the bug
