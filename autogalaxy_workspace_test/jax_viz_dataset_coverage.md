@@ -66,29 +66,14 @@ Add under `scripts/interferometer/`:
 - `modeling_visualization_jit.py` — caching probe + live Nautilus.
   Mirror the imaging analogue.
 
-__Sub-step 2 — Ellipse (2 scripts)__
+__Sub-step 2 + 3 — Ellipse + Quantity — OUT OF SCOPE (deferred)__
 
-Add under `scripts/ellipse/`:
-
-- `visualization.py` — NumPy baseline. The ellipse fit is simpler than
-  imaging (no inversion, no PSF) so the script is shorter. Use a
-  pre-canned ellipse dataset; if none exists, simulate a small one via
-  `ag.Ellipse(...)` directly inside the script.
-- `visualization_jax.py` — `use_jax=True, use_jax_for_visualization=True`.
-  No `modeling_visualization_jit.py` required for this dataset type unless
-  ellipse fits already use Nautilus quick-update visualization in the
-  product — verify by reading `@PyAutoGalaxy/autogalaxy/ellipse/model/`.
-
-__Sub-step 3 — Quantity (2 scripts)__
-
-Add under `scripts/quantity/`:
-
-- `visualization.py` — NumPy baseline. Quantity fits compute residuals on
-  derived quantities (`convergence_2d`, `deflections_yx_2d`,
-  `potential_2d`). Use the simplest case — convergence — for the script.
-- `visualization_jax.py` — `use_jax=True, use_jax_for_visualization=True`.
-  Same Nautilus-skip rule as ellipse: no `_jit.py` unless quantity fits
-  use quick-update in the product.
+Per the scope narrowing above, ellipse and quantity JAX coverage is deferred
+to a follow-up prompt that ships **after** the Phase 0c visualizer-dispatch
+follow-ups land. The NumPy ellipse baseline at
+`scripts/ellipse/visualization.py` already exists and is unchanged by this
+task. Quantity has no NumPy baseline yet either — that arrives with the
+follow-up.
 
 __Constraints__
 
@@ -102,12 +87,11 @@ __Constraints__
 
 __Verification__
 
-- All new scripts pass when run directly.
-- `/smoke_test autogalaxy_workspace_test interferometer/visualization.py interferometer/visualization_jax.py interferometer/modeling_visualization_jit.py ellipse/visualization.py ellipse/visualization_jax.py quantity/visualization.py quantity/visualization_jax.py` — pass.
-- Existing `autogalaxy_workspace_test/scripts/imaging/*` scripts continue
-  to pass.
-- The cached call in `interferometer/modeling_visualization_jit.py` is
-  significantly faster than the first call.
+- All three new scripts pass when run directly with JAX enabled.
+- Existing `autogalaxy_workspace_test/scripts/imaging/*` scripts continue to pass.
+- The cached call in `interferometer/modeling_visualization_jit.py` is significantly faster than the first call.
+- `modeling_visualization_jit.py` includes the explicit `rmtree(output/<path>/<name>/)` before the Nautilus call (lesson from PR #87) so reruns don't silently resume from cached samples.
+- `visualization_jax.py` uses `enable_pytrees()` + `register_model(model)` from the start; no `try/except` wrapper (lessons from PR #85).
 
 __Out of scope__
 
