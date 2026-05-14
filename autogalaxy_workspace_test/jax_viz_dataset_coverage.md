@@ -18,28 +18,39 @@ so flipping the `use_jax_for_visualization` default in Phase 2 would risk
 silent breakage for any user who runs an interferometer, ellipse, or
 quantity fit with `use_jax=True`.
 
-__Blockers — must land first__
+__Blockers — status as of 2026-05-14__
 
-State as of 2026-05-08 (post-audit):
+All library prerequisites are now green for the **interferometer** sub-step:
 
-- **Interferometer pytree registration is already shipped** (PR #376, see
-  `autogalaxy/interferometer/model/analysis.py:165-184`). No blocker for
-  the interferometer sub-step's JAX support.
-- **Interferometer dispatch swap is still pending** —
-  `PyAutoPrompt/autogalaxy/visualizer_fit_for_visualization_dispatch.md`
-  (Phase 0b, scope extended 2026-05-08 to cover the interferometer
-  visualizer line 81) must land before the interferometer `_jax.py`
-  / `_jit.py` scripts will actually exercise the JIT path. Without it
-  the scripts will silently fall through to the eager NumPy path.
-- **Ellipse and quantity pytree registration is still pending** —
-  `PyAutoPrompt/autogalaxy/fit_pytree_registration_other_datasets.md`
-  (Phase 0c, now scoped to ellipse + quantity only) must land before
-  the ellipse / quantity sub-steps' JAX scripts will run at all.
+- Interferometer pytree registration — shipped in PR #376 ✓
+- Interferometer dispatch swap (visualizer → `fit_for_visualization`) — shipped in PyAutoGalaxy #390 ✓ (Phase 0b)
+- `ag.AnalysisInterferometer.__init__` `**kwargs` passthrough — shipped in PR #399 ✓
 
-This task can start the **interferometer NumPy baseline** (sub-step 1's
-`visualization.py`) immediately even with both blockers open, since the
-NumPy path is unaffected. The `_jax.py` and `_jit.py` scripts must wait
-for Phase 0b. The ellipse and quantity sub-steps must wait for Phase 0c.
+**Ellipse + quantity are blocked, but not by what the original prompt said.**
+Phase 0c shipped (PR #401) registering `FitEllipse` + `FitQuantity` pytrees and
+adding `**kwargs` passthrough on both analyses. However, that work surfaced a
+deeper issue: **both visualizers bypass `analysis.fit_for_visualization`
+entirely**:
+
+- `VisualizerEllipse.visualize` calls `analysis.fit_list_from(instance)`
+  (returns a `List[FitEllipse]`, not a single fit).
+- `VisualizerQuantity.visualize` calls `analysis.fit_quantity_for_instance(instance)`
+  (singular but custom-named).
+
+So `use_jax_for_visualization=True` is a no-op for these two analyses despite
+the pytree registration. Until the **two visualizer-dispatch follow-ups**
+deferred from Phase 0c ship — small for quantity (`fit_from` alias), needs
+design for ellipse (list-return contract) — the ellipse + quantity JAX scripts
+would silently fall through to the eager path and provide false confidence.
+
+__Scope narrowing — this task ships interferometer only__
+
+Original scope covered all three remaining autogalaxy dataset types. Per the
+Phase 0c discovery above, this task is **narrowed to interferometer only**.
+Ellipse and quantity coverage moves to a follow-up that ships **after** the
+visualizer dispatch fixes for those analyses. Their NumPy baselines are out of
+scope here too — the existing `scripts/ellipse/visualization.py` (NumPy) is
+sufficient until the JAX side is wireable end-to-end.
 
 __Sub-step 1 — Interferometer (3 scripts)__
 

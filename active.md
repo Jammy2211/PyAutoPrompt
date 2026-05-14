@@ -60,14 +60,6 @@
       8. End-to-end library integration test
       (workspace) extend convolution.py + new convolution_oversampled.py + simulator.py
 
-## nfw-jax-port
-- issue: https://github.com/PyAutoLabs/PyAutoGalaxy/issues/397
-- session: claude --resume "nfw-jax-port"
-- status: library-dev
-- worktree: ~/Code/PyAutoLabs-wt/nfw-jax-port
-- repos:
-  - PyAutoGalaxy: feature/nfw-jax-port
-
 ## interferometer-nufftax-updates
 - issue: https://github.com/PyAutoLabs/autolens_workspace/issues/146
 - session: claude --resume "interferometer-nufftax-updates"
