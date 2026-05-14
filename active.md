@@ -4,6 +4,8 @@
 - status: library-dev
 - worktree: ~/Code/PyAutoLabs-wt/jax-interp-2d
 - repos:
+  - PyAutoArray: feature/jax-interp-2d
+  - PyAutoGalaxy: feature/jax-interp-2d
 
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
