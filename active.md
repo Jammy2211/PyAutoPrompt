@@ -1,3 +1,10 @@
+## analysis-ellipse-jax
+- issue: https://github.com/PyAutoLabs/PyAutoGalaxy/issues/411
+- session: claude --resume "analysis-ellipse-jax"
+- status: library-dev
+- worktree: ~/Code/PyAutoLabs-wt/analysis-ellipse-jax
+- repos:
+
 ## url-check
 - issue: https://github.com/PyAutoLabs/PyAutoLens/issues/508
 - session: claude --resume "url-check"
