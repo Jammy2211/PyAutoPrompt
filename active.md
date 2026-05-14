@@ -1,3 +1,10 @@
+## jax-dataset-model
+- issue: https://github.com/PyAutoLabs/autolens_workspace_test/issues/93
+- session: claude --resume "jax-dataset-model"
+- status: workspace-dev
+- worktree: ~/Code/PyAutoLabs-wt/jax-dataset-model
+- repos:
+
 ## ellipse-xp
 - issue: https://github.com/PyAutoLabs/PyAutoGalaxy/issues/407
 - session: claude --resume "ellipse-xp"
