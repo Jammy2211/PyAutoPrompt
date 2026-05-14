@@ -26,22 +26,6 @@
       - autolens_workspace/config/output.yaml
       - autolens_workspace_test/config/output.yaml
 
-## jit-datacube-delaunay
-- issue: none — Phase 3 of the datacube roadmap (followup to autolens_workspace#120)
-- session: claude --resume "jit-datacube-delaunay"
-- status: workspace-dev (dev workspace)
-- worktree: ~/Code/PyAutoLabs-wt/jit-datacube-delaunay
-- repos:
-  - autolens_workspace_developer: feature/jit-datacube-delaunay
-- summary: |
-    Add jax_profiling/jit/datacube/delaunay.py — mirrors the upgraded
-    interferometer/delaunay.py with a per-channel loop. Channel-invariant
-    block (ray-trace × 2, regularization) timed once; channel-variant
-    block (inversion setup incl. NUFFT, data vector, curvature, NNLS,
-    log evidence) timed × 4 channels. Quantifies how much the deferred
-    shared-L^T W~ L optimisation will save by exposing the
-    channel-invariant vs channel-variant split directly.
-
 ## analysis-ellipse-jax
 - issue: https://github.com/PyAutoLabs/PyAutoGalaxy/issues/411
 - session: claude --resume "analysis-ellipse-jax"

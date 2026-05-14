@@ -1,4 +1,12 @@
 
+## jit-datacube-delaunay
+- issue: none — Phase 3 of the datacube roadmap (followup to autolens_workspace#120)
+- completed: 2026-05-14
+- workspace-prs:
+  - https://github.com/PyAutoLabs/autolens_workspace_developer/pull/62
+- repos: autolens_workspace_developer
+- notes: Phase 3. Add jax_profiling/jit/datacube/delaunay.py — mirrors the upgraded interferometer/delaunay.py with a per-channel loop and the channel-invariant / channel-variant taxonomy made explicit. 3 shared steps (ray-trace data, ray-trace mesh, regularization matrix) computed once for the whole cube; 5 per-channel steps (inversion setup incl. NUFFT, data vector D, curvature matrix F, NNLS reconstruction, log evidence) computed once per channel and reported as N × per-call. Cube total reported alongside full-pipeline cube JIT and a shared-Lᵀ W̃ L savings estimate ((N-1) × curvature_matrix). For the SMA × 4 channels preset: step-by-step total 1.164s, full-pipeline cube JIT 1.425s, shared-Lᵀ W̃ L savings est. 0.060s. Cube reuses the SMA interferometer dataset 4× (identical channels — timing not science); regression assertion against EXPECTED_LOG_EVIDENCE_CUBE_SMA = 4 × -3167.5258928840763 passes for both eager and full-pipeline JIT. Per-step cube log_evidence matches summed FitInterferometer.log_evidence at rtol=1e-4. vmap skipped (cube batching axis is "datasets" not "parameters"). Phase 4 (autolens_workspace_test/scripts/jax_likelihood_functions/datacube/{rectangular,delaunay}.py — JIT regression scripts) is the next step.
+
 ## jit-interferometer-stepwise
 - issue: none — direct followup to autolens_workspace#120
 - completed: 2026-05-14
