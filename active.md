@@ -74,4 +74,6 @@
 - status: workspace-dev
 - worktree: ~/Code/PyAutoLabs-wt/interferometer-nufftax-updates
 - repos:
+  - autolens_workspace: feature/interferometer-nufftax-updates
+  - autogalaxy_workspace: feature/interferometer-nufftax-updates
 
