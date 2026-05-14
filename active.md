@@ -1,3 +1,21 @@
+## jit-interferometer-stepwise
+- issue: none — direct followup to PyAutoLabs/autolens_workspace#120
+- session: claude --resume "jit-interferometer-stepwise"
+- status: workspace-dev (dev workspace)
+- worktree: ~/Code/PyAutoLabs-wt/jit-interferometer-stepwise
+- repos:
+  - autolens_workspace_developer: feature/jit-interferometer-stepwise
+- summary: |
+    Phase 2 of the datacube roadmap. Upgrade
+    autolens_workspace_developer/jax_profiling/jit/interferometer/delaunay.py
+    (~626 lines) to step-by-step parity with the imaging sibling
+    jax_profiling/jit/imaging/delaunay.py (~1195 lines) by inserting
+    a per-step JIT profiling section. 11 named steps: ray-trace (data,
+    mesh), border relocation, Delaunay triangulation + mapper, mapping
+    matrix, transformed mapping matrix (NUFFT), data vector, curvature
+    matrix, regularization matrix (ConstantSplit), reconstruction, log
+    evidence. Prereq for the future jit/datacube/delaunay.py profiler.
+
 ## fit-ellipse-jax
 - issue: https://github.com/PyAutoLabs/PyAutoGalaxy/issues/409
 - session: claude --resume "fit-ellipse-jax"
@@ -13,6 +31,7 @@
 - worktree: ~/Code/PyAutoLabs-wt/priors-jax-native
 - repos:
   - PyAutoFit: feature/priors-jax-native
+  - autofit_workspace_test: feature/priors-jax-native
 
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
