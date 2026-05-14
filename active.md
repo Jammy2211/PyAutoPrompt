@@ -1,3 +1,18 @@
+## datacube-likelihood-walkthrough
+- issue: none — direct followup to PyAutoLabs/autolens_workspace#120
+- session: claude --resume "datacube-likelihood-walkthrough"
+- status: workspace-dev
+- worktree: ~/Code/PyAutoLabs-wt/datacube-likelihood-walkthrough
+- repos:
+  - autolens_workspace: feature/datacube-likelihood-walkthrough
+- summary: |
+    Rewrite datacube/likelihood_function.py from a JIT-correctness test
+    into a user-facing pedagogical pixelization-likelihood walkthrough
+    in the style of imaging/features/multi_gaussian_expansion/likelihood_function.py
+    (cross-reference shared sections, full prose only for cube-specific
+    bits: list of Interferometer, per-channel inversion, summed cube
+    log-evidence, sparse-operator memory note).
+
 ## fit-ellipse-jax
 - issue: https://github.com/PyAutoLabs/PyAutoGalaxy/issues/409
 - session: claude --resume "fit-ellipse-jax"
