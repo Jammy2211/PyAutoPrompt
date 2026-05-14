@@ -4,6 +4,8 @@
 - status: workspace-dev
 - worktree: ~/Code/PyAutoLabs-wt/jax-dataset-model
 - repos:
+  - autolens_workspace_test: feature/jax-dataset-model
+  - autogalaxy_workspace_test: feature/jax-dataset-model
 
 ## ellipse-xp
 - issue: https://github.com/PyAutoLabs/PyAutoGalaxy/issues/407
