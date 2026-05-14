@@ -1,3 +1,17 @@
+## datacube-centre-and-4d
+- issue: none — direct followup to PyAutoLabs/autolens_workspace#120
+- session: claude --resume "datacube-centre-and-4d"
+- status: workspace-dev
+- worktree: ~/Code/PyAutoLabs-wt/datacube-centre-and-4d
+- repos:
+  - autolens_workspace: feature/datacube-centre-and-4d
+- summary: |
+    Make the datacube simulator more realistic (source centre shifts
+    linearly across channels) and add the CASA-like 4D-FITS layout
+    (n_pol, n_chan, n_vis, 2) alongside the per-channel folders and
+    3D cube. Update data_preparation.py to load the simulator's real
+    4D output instead of synthetic random arrays.
+
 ## fit-ellipse-jax
 - issue: https://github.com/PyAutoLabs/PyAutoGalaxy/issues/409
 - session: claude --resume "fit-ellipse-jax"
