@@ -20,15 +20,6 @@
 - repos:
   - PyAutoGalaxy: feature/fit-ellipse-jax
 
-## jax-dataset-model
-- issue: https://github.com/PyAutoLabs/autolens_workspace_test/issues/93
-- session: claude --resume "jax-dataset-model"
-- status: workspace-dev
-- worktree: ~/Code/PyAutoLabs-wt/jax-dataset-model
-- repos:
-  - autolens_workspace_test: feature/jax-dataset-model
-  - autogalaxy_workspace_test: feature/jax-dataset-model
-
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
 - session: claude --resume "profile-smoke-test-runtime"

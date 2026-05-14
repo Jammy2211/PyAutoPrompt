@@ -1,4 +1,10 @@
 
+## jax-dataset-model
+- issue: https://github.com/PyAutoLabs/autolens_workspace_test/issues/93
+- completed: 2026-05-14
+- workspace-pr: https://github.com/PyAutoLabs/autolens_workspace_test/pull/94
+- workspace-pr: https://github.com/PyAutoLabs/autogalaxy_workspace_test/pull/47
+
 ## ellipse-xp
 - issue: https://github.com/PyAutoLabs/PyAutoGalaxy/issues/407
 - completed: 2026-05-14
