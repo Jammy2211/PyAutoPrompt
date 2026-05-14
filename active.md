@@ -7,14 +7,6 @@
   - autolens_workspace_test: feature/jax-dataset-model
   - autogalaxy_workspace_test: feature/jax-dataset-model
 
-## ellipse-xp
-- issue: https://github.com/PyAutoLabs/PyAutoGalaxy/issues/407
-- session: claude --resume "ellipse-xp"
-- status: library-dev
-- worktree: ~/Code/PyAutoLabs-wt/ellipse-xp
-- repos:
-  - PyAutoGalaxy: feature/ellipse-xp
-
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
 - session: claude --resume "profile-smoke-test-runtime"
