@@ -68,3 +68,10 @@
 - repos:
   - PyAutoGalaxy: feature/nfw-jax-port
 
+## interferometer-nufftax-updates
+- issue: https://github.com/PyAutoLabs/autolens_workspace/issues/146
+- session: claude --resume "interferometer-nufftax-updates"
+- status: workspace-dev
+- worktree: ~/Code/PyAutoLabs-wt/interferometer-nufftax-updates
+- repos:
+
