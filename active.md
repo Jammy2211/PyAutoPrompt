@@ -4,6 +4,7 @@
 - status: library-dev
 - worktree: ~/Code/PyAutoLabs-wt/ellipse-xp
 - repos:
+  - PyAutoGalaxy: feature/ellipse-xp
 
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
