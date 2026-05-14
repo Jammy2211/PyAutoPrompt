@@ -6,6 +6,13 @@
 - repos:
   - PyAutoGalaxy: feature/fit-ellipse-jax
 
+## priors-jax-native
+- issue: https://github.com/PyAutoLabs/PyAutoFit/issues/1262
+- session: claude --resume "priors-jax-native"
+- status: library-dev
+- worktree: ~/Code/PyAutoLabs-wt/priors-jax-native
+- repos:
+
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
 - session: claude --resume "profile-smoke-test-runtime"
