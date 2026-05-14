@@ -4,6 +4,7 @@
 - status: library-dev
 - worktree: ~/Code/PyAutoLabs-wt/point-source-jax-viz
 - repos:
+  - PyAutoLens: feature/point-source-jax-viz
 
 ## jax-interp-2d
 - issue: https://github.com/PyAutoLabs/PyAutoArray/issues/306
