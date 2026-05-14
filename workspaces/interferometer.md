@@ -45,6 +45,9 @@ The search therefore uses a `Constant` regularization (not adaptive) as there is
 We can now re add SOURCE LP PIPELINE 1 (see imaging slam.py for example) as the light profile fitting is now fast again
 thanks to the NUFFT.
 
+This means that we will NEED TO SWAP FROM TransformerNUFFT for source_lp to TransformerDFT with sparse operator
+for source pix onwards!!! 
+
 Do a scan of both interferometer packages (autolens_workspace and autogalaxy_workspace), update all this context
 which says its slow which is no longer true, high up in start_here.py detail and describe nufftax pointing
 to its github and giving it credit and generally flesh out the interferomeer packages in light of this update.

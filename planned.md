@@ -7,3 +7,12 @@
 - affected-repos:
   - PyAutoLens
   - autolens_workspace
+
+## nfw-jax-port
+- issue: https://github.com/PyAutoLabs/PyAutoGalaxy/issues/397
+- planned: 2026-05-14
+- classification: library (research / feasibility — A-first prototype)
+- suggested-branch: feature/nfw-jax-port
+- blocked-by: jax-interp-2d (using PyAutoGalaxy via ~/Code/PyAutoLabs-wt/jax-interp-2d)
+- affected-repos:
+  - PyAutoGalaxy
