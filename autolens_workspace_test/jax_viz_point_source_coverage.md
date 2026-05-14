@@ -16,6 +16,26 @@ That same blocker applies to the visualizer — the source-plane fit cannot
 yet round-trip through `jax.jit` cleanly. The task therefore proceeds in
 **three sub-steps** with the JIT path gated behind a feasibility check.
 
+__Library prerequisite — `AnalysisPoint.__init__` `**kwargs` passthrough__
+
+Discovered while shipping Phase 1A (PyAutoLens PR #500): the same
+`**kwargs` passthrough gap that blocked `al.AnalysisInterferometer` from
+accepting `use_jax_for_visualization=True` also exists on
+`al.AnalysisPoint.__init__` (see
+`@PyAutoLens/autolens/point/model/analysis.py:37-88` — explicit signature,
+no `**kwargs`). This task is now a **Both** task: the small library fix
+must ship first, then the workspace_test scripts.
+
+Library fix (mirrors PR #500 pattern):
+
+1. Add `**kwargs,` to the parameter list of
+   `@PyAutoLens/autolens/point/model/analysis.py` `AnalysisPoint.__init__`.
+2. Forward `**kwargs` to `super().__init__(cosmology=cosmology, use_jax=use_jax, **kwargs)`.
+3. Verify `pytest test_autolens/point/` passes (and broader sweep if affordable).
+
+Closes the `TypeError: got an unexpected keyword argument 'use_jax_for_visualization'`
+that the workspace scripts in sub-steps 2 and 3 would otherwise hit.
+
 __Why this matters__
 
 This is **Phase 1B** of `z_features/jax_visualization.md`. Point-source is
@@ -47,8 +67,10 @@ Add `scripts/point_source/visualization_jax.py`:
   (image-plane chi-squared — the variant that **does** JIT, per the
   `point_source/image_plane.py` likelihood-functions script).
 - `analysis = al.AnalysisPoint(dataset=dataset, use_jax=True,
-  use_jax_for_visualization=True, ...)` — confirm the actual analysis
-  class name from PyAutoLens.
+  use_jax_for_visualization=True, ...)` — depends on the library fix above.
+- **Lessons from PR #85 (Phase 0d)**: include `enable_pytrees()` +
+  `register_model(model)` at module level. **Do NOT wrap the visualize call
+  in `try`/`except`** — let failures surface loudly.
 - Assert `subplot_fit.png` (or equivalent) lands on disk and the fit was
   JAX-backed.
 
@@ -61,6 +83,11 @@ Add `scripts/point_source/modeling_visualization_jit.py`:
 - Use the image-plane chi-squared variant only (source-plane is currently
   JIT-blocked).
 - Short `n_like_max` and `n_live=50` for runtime.
+- **Lesson from PR #87 (Phase 1A)**: explicitly `rmtree(output/<path_prefix>/<name>/)`
+  before the Nautilus call. Without it, reruns silently resume from cached
+  `samples.csv` — Nautilus skips live sampling, the JIT wrapper is never
+  installed on the analysis instance, and the `_jitted_fit_from is not None`
+  assertion at the bottom raises `AttributeError`. Force a fresh run.
 
 __Source-plane variant — feasibility gate__
 
@@ -104,10 +131,9 @@ __Out of scope__
 - Source-plane chi-squared JIT — gated behind the feasibility check; if it
   still fails, becomes its own follow-up prompt.
 - Production `autolens_workspace` adoption.
-- Any change to PyAutoLens point-source code itself; if the visualizer
-  isn't correctly dispatched through `fit_for_visualization`, that is a
-  PyAutoLens bug to fix in a separate prompt — flag and stop, don't fix
-  here.
+- Any change to PyAutoLens point-source code itself **beyond the documented
+  `**kwargs` passthrough fix above**. If the visualizer isn't correctly
+  dispatched through `fit_for_visualization`, that's a separate bug.
 
 __Reference__
 
