@@ -1,16 +1,3 @@
-## ag-ellipse-quantity-pytree
-- issue: https://github.com/PyAutoLabs/PyAutoGalaxy/issues/400
-- session: claude --resume "ag-ellipse-quantity-pytree"
-- status: library-dev
-- worktree: ~/Code/PyAutoLabs-wt/ag-ellipse-quantity-pytree
-- repos:
-  - PyAutoGalaxy: feature/ag-ellipse-quantity-pytree
-- notes: |
-    Phase 0c of jax_visualization roadmap. Parallel-safe with in-flight
-    nfw-jax-port (PyAutoGalaxy mass profiles) — file-disjoint
-    (ellipse/quantity vs mass profiles). User-cleared file-level safety.
-    Worktree-conflict guard bypassed for this reason.
-
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
 - session: claude --resume "profile-smoke-test-runtime"
