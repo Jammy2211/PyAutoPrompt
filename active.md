@@ -1,15 +1,3 @@
-## ag-interferometer-jax-viz
-- issue: https://github.com/PyAutoLabs/autogalaxy_workspace_test/issues/43
-- session: claude --resume "ag-interferometer-jax-viz"
-- status: workspace-dev
-- worktree: ~/Code/PyAutoLabs-wt/ag-interferometer-jax-viz
-- repos:
-  - autogalaxy_workspace_test: feature/ag-interferometer-jax-viz
-- notes: |
-    Phase 1C of jax_visualization roadmap, scope narrowed to interferometer
-    only. Ellipse + quantity JAX coverage deferred until dispatch follow-ups
-    from Phase 0c land.
-
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
 - session: claude --resume "profile-smoke-test-runtime"
