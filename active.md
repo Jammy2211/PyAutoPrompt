@@ -1,3 +1,30 @@
+## url-check-ci
+- issue: https://github.com/PyAutoLabs/PyAutoBuild/issues/87
+- session: claude --resume "url-check-ci"
+- status: library-dev
+- worktree: ~/Code/PyAutoLabs-wt/url-check-ci
+- repos:
+  - PyAutoBuild: feature/url-check-ci
+  - PyAutoConf: feature/url-check-ci
+  - PyAutoFit: feature/url-check-ci
+  - PyAutoArray: feature/url-check-ci
+  - PyAutoGalaxy: feature/url-check-ci
+  - PyAutoLens: feature/url-check-ci
+  - HowToFit: feature/url-check-ci
+  - HowToGalaxy: feature/url-check-ci
+  - HowToLens: feature/url-check-ci
+  - autofit_workspace: feature/url-check-ci
+  - autogalaxy_workspace: feature/url-check-ci
+  - autolens_workspace: feature/url-check-ci
+- summary: |
+    Follow-up to url-check (PyAutoLens#508). Wire the live HTTP URL audit
+    into PyAutoBuild as a weekly-cron CI job with per-repo allowlists.
+    Each repo gets .url_check_allowlist.txt seeded from the current 104
+    broken URLs; cron run opens/updates [url-check] tracking issues when
+    NEW broken URLs appear. Also extend the existing offline regex guard
+    (autobuild/url_check.sh) with ~15 new bad patterns surfaced by the
+    audit, and add the broken-URL status to the pyauto-status skill.
+
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
 - session: claude --resume "profile-smoke-test-runtime"
