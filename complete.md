@@ -1,4 +1,13 @@
 
+## unpark-ellipse-scripts
+- issue: https://github.com/PyAutoLabs/autogalaxy_workspace/issues/72
+- completed: 2026-05-15
+- library-pr: https://github.com/PyAutoLabs/PyAutoFit/pull/1270
+- workspace-prs:
+  - autogalaxy_workspace: https://github.com/PyAutoLabs/autogalaxy_workspace/pull/73
+  - PyAutoBuild: https://github.com/PyAutoLabs/PyAutoBuild/pull/89
+- notes: Reactivated the five `scripts/ellipse/*` example scripts in autogalaxy_workspace, parked since 2026-04-24 pending the ellipse JAX refactor (PyAutoGalaxy #408/#410/#412). All five pass under PYAUTO_TEST_MODE=2; removed the NEEDS_FIX entries from `autogalaxy_workspace/config/build/no_run.yaml` and the paired `ellipse/database` fallback from `PyAutoBuild/autobuild/config/no_run.yaml`. Scope expanded mid-task — `database.py` surfaced two unrelated bugs that were also fixed: (a) two leftover `path.exists(...) / os.remove(...)` calls from the prior os.path→pathlib refactor (the `path` import was removed but two call sites missed), replaced with pathlib idiom in the workspace PR; (b) a `Drawer.__init__` round-trip crash in PyAutoFit when the aggregator scrapes a saved Drawer search.json (the saved JSON carries `number_of_cores` at the top level, which collided with the hardcoded `super().__init__(number_of_cores=1, **kwargs)`). Fix in library PR: `kwargs.pop("number_of_cores", None)` before forwarding to super; Drawer is single-core only by design so the saved value is always 1. Regression test `test__dict_round_trip_with_number_of_cores` added in test_drawer.py; full PyAutoFit suite 1243/1243 passes. Follow-ups worth their own issues: (i) `autogalaxy_workspace/smoke_tests.txt` still has `# ellipse/modeling.py` disabled with a comment citing PyAutoFit#1179 — may be stale now that the JAX refactor + Drawer fix are in; (ii) `smoke (3.13)` CI is failing on main (and on this PR — but pre-existing): interferometer/start_here.py + interferometer/simulator.ipynb fail with `FileNotFoundError` from `setup_notebook` workspace-root lookup in a `/tmp/smoke_regen_*` cwd. smoke (3.12) passes.
+
 ## log-prior-sign-convention
 - issue: https://github.com/PyAutoLabs/PyAutoFit/issues/1266
 - completed: 2026-05-15
