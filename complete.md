@@ -1,4 +1,12 @@
 
+## priors-jax-native
+- issue: https://github.com/PyAutoLabs/PyAutoFit/issues/1262
+- completed: 2026-05-14
+- library-pr: https://github.com/PyAutoLabs/PyAutoFit/pull/1263
+- workspace-prs:
+  - https://github.com/PyAutoLabs/autofit_workspace_test/pull/26
+- notes: Phase 0 of the `nss_first_class_sampler` roadmap. Added `xp=np` kwarg threading to `Prior.value_for`, `Prior.log_prior_from_value`, `Model.vector_from_unit_vector`, `NormalMessage.value_for`, and `TruncatedNormalMessage.value_for`. Each of the 5 concrete `Prior` subclasses gained a closed-form JAX `value_for` override (bypasses the scipy-backed message stack — cleaner trace, smaller surface). NumPy paths are byte-equivalent — `xp=np` defaults preserve all existing callers (Nautilus, Dynesty, Emcee, Zeus, EP). `NormalMessage.value_for` cleaned up: replaced legacy `isinstance(unit, np.ndarray)` runtime sniff with explicit `xp` dispatch. 1242/1242 PyAutoFit tests pass; 24 new JAX parity assertions in `autofit_workspace_test/scripts/jax_assertions/priors_xp_dispatch.py` (library policy: no JAX in unit tests, cross-xp checks live in workspace_test). Smoke: 44/44 across autofit/autogalaxy/autolens/autolens_test/HowToLens. Followups worth their own issues: (a) `LogUniformPrior.log_prior_from_value` body returns `1.0/value` instead of `-log(value)` — left untouched here to avoid MCMC regressions, (b) graphical declarative `VisualizerExample.visualize_combined()` signature mismatch (pre-existing on `main`, broke several graphical/EP integration scripts), (c) euclid workspace version pin `2026.5.8.2` lags library `2026.5.14.2` blocking euclid smoke. Phase 1 (`af.NSS` wrapper at `autofit/nss_search_wrapper.md`) is now unblocked.
+
 ## disable-model-graph
 - issue: none — ad-hoc cleanup
 - completed: 2026-05-15

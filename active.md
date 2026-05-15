@@ -1,3 +1,19 @@
+## jax-likelihood-datacube
+- issue: none — Phase 4 of the datacube roadmap (followup to autolens_workspace#120)
+- session: claude --resume "jax-likelihood-datacube"
+- status: workspace-dev (workspace_test)
+- worktree: ~/Code/PyAutoLabs-wt/jax-likelihood-datacube
+- repos:
+  - autolens_workspace_test: feature/jax-likelihood-datacube
+- summary: |
+    Add autolens_workspace_test/scripts/jax_likelihood_functions/datacube/
+    with rectangular.py + delaunay.py — end-to-end JIT-correctness
+    regression scripts for the cube likelihood path. Mirrors the existing
+    interferometer/{rectangular,delaunay}.py scripts but with N=4 channel
+    FactorGraph wiring (multi/delaunay.py is the structural analogue).
+    Final phase of the datacube roadmap; closes the regression net the
+    Phase 1 rewrite punted to this folder.
+
 ## analysis-ellipse-jax
 - issue: https://github.com/PyAutoLabs/PyAutoGalaxy/issues/411
 - session: claude --resume "analysis-ellipse-jax"
@@ -41,15 +57,6 @@
     Conflict override: PyAutoFit and PyAutoGalaxy are claimed by
     priors-jax-native and fit-ellipse-jax respectively; user cleared
     parallel work since this task is doc-only and the others touch source.
-
-## priors-jax-native
-- issue: https://github.com/PyAutoLabs/PyAutoFit/issues/1262
-- session: claude --resume "priors-jax-native"
-- status: library-dev
-- worktree: ~/Code/PyAutoLabs-wt/priors-jax-native
-- repos:
-  - PyAutoFit: feature/priors-jax-native
-  - autofit_workspace_test: feature/priors-jax-native
 
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
