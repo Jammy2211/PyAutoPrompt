@@ -29,8 +29,9 @@
 ## analysis-ellipse-jax
 - issue: https://github.com/PyAutoLabs/PyAutoGalaxy/issues/411
 - session: claude --resume "analysis-ellipse-jax"
-- status: library-dev
+- status: library-shipped, workspace-pending
 - worktree: ~/Code/PyAutoLabs-wt/analysis-ellipse-jax
+- library-pr: https://github.com/PyAutoLabs/PyAutoGalaxy/pull/412
 - repos:
   - PyAutoGalaxy: feature/analysis-ellipse-jax
 - conflict-override: |
