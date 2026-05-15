@@ -1,8 +1,9 @@
 ## unpark-ellipse-scripts
 - issue: https://github.com/PyAutoLabs/autogalaxy_workspace/issues/72
 - session: claude --resume "unpark-ellipse-scripts"
-- status: library-dev
+- status: library-shipped, workspace-pending
 - worktree: ~/Code/PyAutoLabs-wt/unpark-ellipse-scripts
+- library-pr: https://github.com/PyAutoLabs/PyAutoFit/pull/1270
 - repos:
   - PyAutoFit: feature/unpark-ellipse-scripts
   - autogalaxy_workspace: feature/unpark-ellipse-scripts
