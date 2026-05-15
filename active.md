@@ -1,19 +1,3 @@
-## jax-likelihood-datacube
-- issue: none — Phase 4 of the datacube roadmap (followup to autolens_workspace#120)
-- session: claude --resume "jax-likelihood-datacube"
-- status: workspace-dev (workspace_test)
-- worktree: ~/Code/PyAutoLabs-wt/jax-likelihood-datacube
-- repos:
-  - autolens_workspace_test: feature/jax-likelihood-datacube
-- summary: |
-    Add autolens_workspace_test/scripts/jax_likelihood_functions/datacube/
-    with rectangular.py + delaunay.py — end-to-end JIT-correctness
-    regression scripts for the cube likelihood path. Mirrors the existing
-    interferometer/{rectangular,delaunay}.py scripts but with N=4 channel
-    FactorGraph wiring (multi/delaunay.py is the structural analogue).
-    Final phase of the datacube roadmap; closes the regression net the
-    Phase 1 rewrite punted to this folder.
-
 ## analysis-ellipse-jax
 - issue: https://github.com/PyAutoLabs/PyAutoGalaxy/issues/411
 - session: claude --resume "analysis-ellipse-jax"
@@ -32,22 +16,17 @@
 ## url-check
 - issue: https://github.com/PyAutoLabs/PyAutoLens/issues/508
 - session: claude --resume "url-check"
-- status: library-shipped, workspace-pending
-- worktree: ~/Code/PyAutoLabs-wt/url-check
-- library-prs:
+- status: library-merged, workspace-pending
+- worktree: (library worktree removed; new worktree to be created by /start_workspace)
+- library-prs-merged:
   - admin_jammy: https://github.com/Jammy2211/admin_jammy/pull/21
   - PyAutoConf:  https://github.com/PyAutoLabs/PyAutoConf/pull/105
   - PyAutoFit:   https://github.com/PyAutoLabs/PyAutoFit/pull/1265
   - PyAutoArray: https://github.com/PyAutoLabs/PyAutoArray/pull/309
   - PyAutoGalaxy: https://github.com/PyAutoLabs/PyAutoGalaxy/pull/413
   - PyAutoLens:  https://github.com/PyAutoLabs/PyAutoLens/pull/509
-- repos:
-  - admin_jammy: feature/url-check
-  - PyAutoConf: feature/url-check
-  - PyAutoFit: feature/url-check
-  - PyAutoArray: feature/url-check
-  - PyAutoGalaxy: feature/url-check
-  - PyAutoLens: feature/url-check
+- repos: (pending — workspace phase will claim HowToFit, HowToGalaxy, HowToLens,
+    autofit_workspace, autogalaxy_workspace, autolens_workspace)
 - summary: |
     Cross-repo doc URL audit and cleanup. Build a Python URL-checker in
     admin_jammy/software/url_check/ that scans every PyAuto repo, dedupes
