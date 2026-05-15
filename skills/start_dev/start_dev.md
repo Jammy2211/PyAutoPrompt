@@ -12,6 +12,7 @@ The path is relative to `PyAutoPrompt/`. Examples:
 - `/start_dev autofit/logging.md`
 - `/start_dev autoarray/psf_oversampling.md`
 - `/start_dev autolens/dark_matter_sight_lines.md`
+- `/start_dev z_features/<epic>.md` — audit-only mode (see Step 1b). Checks linked sub-prompts and archives the tracker to `z_features/complete/` if everything is shipped. Does **not** create an issue.
 
 ## Steps
 
@@ -28,6 +29,51 @@ Both of these resolve to `autogalaxy/adapt_images_pytree_fix.md`:
 - `autogalaxy/[adapt_images_pytree_fix.md](autogalaxy/adapt_images_pytree_fix.md)`
 
 Read the file at `PyAutoPrompt/<normalized-argument>`. If the file doesn't exist, report the error and list available prompt files in that subdirectory.
+
+### 1b. z_features tracker detection (audit-only branch)
+
+If the normalized path starts with `z_features/`, do **not** treat the file as an issueable prompt — z_features files are umbrella trackers for multi-task epics; their sub-prompts get issued individually under `autofit/`, `autogalaxy/`, etc. Run the audit flow below and **skip steps 2–12 entirely**.
+
+**a. Parse the tracker for sub-prompt references.** Scan the file for:
+- Markdown links: `[label](relative/path.md)` — take the path inside the parens.
+- Bare relative paths: `<subdir>/<name>.md` where `<subdir>` is one of the known PyAutoPrompt subdirs (`autoconf/`, `autofit/`, `autoarray/`, `autogalaxy/`, `autolens/`, `autofit_workspace/`, `autogalaxy_workspace/`, `autolens_workspace/`, `autolens_workspace_test/`, `autogalaxy_workspace_test/`, `euclid_strong_lens_modeling_pipeline/`, `howtolens/`, `howtogalaxy/`, `admin_jammy/`, etc.).
+
+Dedupe; resolve any `../` segments relative to the tracker's own directory. Skip references that point inside `z_features/` itself (self-references / sibling trackers).
+
+**b. Determine status for each sub-prompt.** For each referenced path:
+- File exists at `PyAutoPrompt/<referenced-path>` → **not yet issued**.
+- File exists at `PyAutoPrompt/issued/<basename>` → **issued**; derive task-name candidates from the filename stem (with `_`→`-`) and from any `## <task-name>` headings inside the tracker body, then grep `PyAutoPrompt/complete.md` for `^## <candidate>$`. Match → **shipped** (record the matching heading and any adjacent PR URL). No match → **in flight**.
+- File not found at either location → **unknown** (link rot — warn).
+
+**c. Report.** Print a table with one row per referenced sub-prompt:
+
+```
+| Sub-prompt | Status | Notes |
+|------------|--------|-------|
+| autogalaxy/foo.md | shipped | matched `autogalaxy-wst-foo` in complete.md, PR #123 |
+| autogalaxy/bar.md | not yet issued | still in autogalaxy/ |
+```
+
+Follow with a one-line summary: `N shipped / M in flight / K not yet issued / U unknown`.
+
+**d. Decide.**
+
+- **Any non-shipped entries** (in flight, not yet issued, or unknown): stop. List the remaining work and tell the user what's outstanding. Do **NOT** move the tracker. Do **NOT** run `prompt_sync_push`.
+- **All shipped**: before moving anything, verify PyAutoPrompt is on `main` and otherwise clean (same guard as Step 12 — `prompt_sync_push` does `git add -A` and never switches branches). If clean, show the proposed archive command and ask the user for explicit confirmation:
+
+  ```bash
+  mkdir -p PyAutoPrompt/z_features/complete
+  mv PyAutoPrompt/z_features/<filename> PyAutoPrompt/z_features/complete/<filename>
+  ```
+
+  After the user confirms, run the move, then push:
+
+  ```bash
+  source PyAutoPrompt/scripts/prompt_sync.sh
+  prompt_sync_push "prompt: archive completed z_features tracker — <stem>"
+  ```
+
+Print a one-line "archived" confirmation and stop. Do **NOT** proceed to step 2 — z_features paths never reach the issue-creation flow.
 
 ### 2. Identify target repositories
 
