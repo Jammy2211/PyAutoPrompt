@@ -1,4 +1,16 @@
 
+## disable-model-graph
+- issue: none — ad-hoc cleanup
+- completed: 2026-05-15
+- library-pr: https://github.com/PyAutoLabs/PyAutoFit/pull/1264
+- workspace-prs:
+  - https://github.com/PyAutoLabs/autofit_workspace/pull/56
+  - https://github.com/PyAutoLabs/autogalaxy_workspace/pull/69
+  - https://github.com/PyAutoLabs/autolens_workspace/pull/150
+  - https://github.com/PyAutoLabs/autolens_workspace_test/pull/95
+- followup-issue: https://github.com/PyAutoLabs/autolens_workspace/issues/151 (pre-existing smoke (3.13) CI failures — nufftax import + setup_notebook tempdir lookup; surfaced while merging this task's workspace PRs)
+- notes: Gated `model.graph` output in fit folders behind a new `output.model_graph` config key (default `false`). Library change in PyAutoFit: replaced the `try/except AttributeError` block in `_save_model_info` with `if should_output("model_graph") and hasattr(model, "graph_info"):` — fixes the bug where an empty `model.graph` was created for every non-graphical fit because the file was opened before `model.graph_info` raised. Workspace change: added `model_graph: false` to each workspace's `config/output.yaml` so the workspace's `default: true` doesn't fall through. Metadata file left alone — investigation showed it's the sentinel `Aggregator.from_directory()` uses to detect search output directories and `SearchOutput` parses its key=value lines into attributes. 1242/1242 library tests pass; 30/30 local smoke tests pass across all 4 workspaces. CI smoke (3.13) on autogalaxy_workspace and autolens_workspace failed with pre-existing infrastructure errors (verified same failures on `main` predating this PR), tracked in workspace issue #151.
+
 ## jit-datacube-delaunay
 - issue: none — Phase 3 of the datacube roadmap (followup to autolens_workspace#120)
 - completed: 2026-05-14
