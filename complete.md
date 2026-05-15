@@ -1,4 +1,22 @@
 
+## url-check-ci
+- issue: https://github.com/PyAutoLabs/PyAutoBuild/issues/87
+- completed: 2026-05-15
+- tool-pr: https://github.com/PyAutoLabs/PyAutoBuild/pull/88
+- consumer-prs:
+  - https://github.com/PyAutoLabs/PyAutoConf/pull/106
+  - https://github.com/PyAutoLabs/PyAutoFit/pull/1268
+  - https://github.com/PyAutoLabs/PyAutoArray/pull/310
+  - https://github.com/PyAutoLabs/PyAutoGalaxy/pull/415
+  - https://github.com/PyAutoLabs/PyAutoLens/pull/510
+  - https://github.com/PyAutoLabs/HowToFit/pull/8
+  - https://github.com/PyAutoLabs/HowToGalaxy/pull/8
+  - https://github.com/PyAutoLabs/HowToLens/pull/11
+  - https://github.com/PyAutoLabs/autofit_workspace/pull/58
+  - https://github.com/PyAutoLabs/autogalaxy_workspace/pull/71
+  - https://github.com/PyAutoLabs/autolens_workspace/pull/153
+- notes: Follow-up to url-check (PyAutoLens#508). Wires the live HTTP URL audit into PyAutoBuild as a weekly-cron CI job, plus extends the offline regex guard with ~15 new patterns surfaced by the original audit (hhttps, joshspeagle/nautilus, rhayes777/PyAutoBuild, sphinx /en/main, bokeh + numfocus CoC paths, tree/release, etc.). New tool: PyAutoBuild/autobuild/url_check_live.py (port of admin_jammy/software/url_check/url_check.py with --allowlist, --strict, --format markdown-issue flags; fixes the symlink-canonical bug from the earlier wave). Wrapper PyAutoBuild/autobuild/url_check_live.sh. Each of 11 consumer repos: .url_check_allowlist.txt at repo root pre-seeded with the current broken URLs (PyAutoConf 2, PyAutoFit 12, PyAutoArray 0, PyAutoGalaxy 11, PyAutoLens 22, HowToFit 11, HowToGalaxy 31, HowToLens 9, autofit_workspace 4, autogalaxy_workspace 7, autolens_workspace 18 — 127 total), plus extended .github/workflows/url_check.yml with the existing url_check_patterns job + new url_check_live job that runs Mon 04:00 UTC. Live job opens/comments on a [url-check] New broken URLs detected issue when non-allowlisted breakage appears; auto-closes the issue on a clean run. pyauto-status skill updated to surface those tracking issues. Two parser bugs caught during smoke-testing and fixed before ship: allowlist parser truncated URLs at the first '#' (URL fragment), and the allowlist file itself was being scanned for URLs and reflected as locations. Both fixed via whitespace-preceded '#' for comments and an explicit SCAN_EXCLUDE_BASENAMES.
+
 ## visualize-combined-quick-update-kwarg
 - issue: none — followup to priors-jax-native (#1262); deferred Bug B at #1266
 - completed: 2026-05-15
