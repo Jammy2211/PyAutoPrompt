@@ -1,11 +1,28 @@
 ## unpark-ellipse-scripts
 - issue: https://github.com/PyAutoLabs/autogalaxy_workspace/issues/72
 - session: claude --resume "unpark-ellipse-scripts"
-- status: workspace-dev
+- status: library-dev
 - worktree: ~/Code/PyAutoLabs-wt/unpark-ellipse-scripts
 - repos:
+  - PyAutoFit: feature/unpark-ellipse-scripts
   - autogalaxy_workspace: feature/unpark-ellipse-scripts
   - PyAutoBuild: feature/unpark-ellipse-scripts
+- summary: |
+    Unpark the five `ellipse/*` example scripts in autogalaxy_workspace
+    after the JAX refactor (PyAutoGalaxy #408/#410/#412 merged 2026-05-14).
+    All five pass under PYAUTO_TEST_MODE=2 once two unrelated bugs are
+    fixed: (a) `database.py` had leftover `path.exists(...)` calls from
+    the os.path→pathlib refactor on two lines, and (b) `Drawer.__init__`
+    in PyAutoFit raised "got multiple values for keyword argument
+    'number_of_cores'" when reconstructing a saved Drawer via `from_dict`
+    (saved search.json carries number_of_cores at the top level, which
+    collided with the hardcoded `super().__init__(number_of_cores=1, **kwargs)`).
+    Fix: `kwargs.pop("number_of_cores", None)` before forwarding to super.
+    Regression test added in test_drawer.py.
+
+    Scope now: PyAutoFit library PR (Drawer fix + regression test) ships
+    first; autogalaxy_workspace + PyAutoBuild workspace PRs (no_run.yaml
+    cleanup + database.py pathlib patch) follow.
 
 ## log-prior-sign-convention
 - issue: https://github.com/PyAutoLabs/PyAutoFit/issues/1266
