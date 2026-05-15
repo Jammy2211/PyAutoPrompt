@@ -1,3 +1,10 @@
+## unpark-ellipse-scripts
+- issue: https://github.com/PyAutoLabs/autogalaxy_workspace/issues/72
+- session: claude --resume "unpark-ellipse-scripts"
+- status: workspace-dev
+- worktree: ~/Code/PyAutoLabs-wt/unpark-ellipse-scripts
+- repos:
+
 ## log-prior-sign-convention
 - issue: https://github.com/PyAutoLabs/PyAutoFit/issues/1266
 - session: claude --resume "log-prior-sign-convention"
