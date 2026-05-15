@@ -1,8 +1,21 @@
 ## url-check-ci
 - issue: https://github.com/PyAutoLabs/PyAutoBuild/issues/87
 - session: claude --resume "url-check-ci"
-- status: library-dev
+- status: prs-open
 - worktree: ~/Code/PyAutoLabs-wt/url-check-ci
+- prs:
+  - PyAutoBuild:         https://github.com/PyAutoLabs/PyAutoBuild/pull/88
+  - PyAutoConf:          https://github.com/PyAutoLabs/PyAutoConf/pull/106
+  - PyAutoFit:           https://github.com/PyAutoLabs/PyAutoFit/pull/1268
+  - PyAutoArray:         https://github.com/PyAutoLabs/PyAutoArray/pull/310
+  - PyAutoGalaxy:        https://github.com/PyAutoLabs/PyAutoGalaxy/pull/415
+  - PyAutoLens:          https://github.com/PyAutoLabs/PyAutoLens/pull/510
+  - HowToFit:            https://github.com/PyAutoLabs/HowToFit/pull/8
+  - HowToGalaxy:         https://github.com/PyAutoLabs/HowToGalaxy/pull/8
+  - HowToLens:           https://github.com/PyAutoLabs/HowToLens/pull/11
+  - autofit_workspace:   https://github.com/PyAutoLabs/autofit_workspace/pull/58
+  - autogalaxy_workspace: https://github.com/PyAutoLabs/autogalaxy_workspace/pull/71
+  - autolens_workspace:  https://github.com/PyAutoLabs/autolens_workspace/pull/153
 - repos:
   - PyAutoBuild: feature/url-check-ci
   - PyAutoConf: feature/url-check-ci
