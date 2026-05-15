@@ -1,3 +1,36 @@
+## log-prior-sign-convention
+- issue: https://github.com/PyAutoLabs/PyAutoFit/issues/1266
+- session: claude --resume "log-prior-sign-convention"
+- status: library-dev
+- worktree: ~/Code/PyAutoLabs-wt/log-prior-sign-convention
+- repos:
+  - PyAutoFit: feature/log-prior-sign-convention
+  - autofit_workspace_test: feature/log-prior-sign-convention
+- summary: |
+    Fix the sign-convention bug in `Prior.log_prior_from_value` (#1266).
+    Today NormalMessage / LogGaussianPrior / TruncatedNormalMessage return cost form
+    (positive for low-density); LogUniformPrior returns 1/value (Jacobian gradient,
+    not a log at all). Fitness._call's `figure_of_merit = log_likelihood + sum(log_priors)`
+    expects density form, so Emcee/Zeus/MLE-Drawer/LBFGS/BFGS posteriors are biased
+    on every non-uniform prior — empirically confirmed by controlled experiments
+    (Emcee samples diverge to 10^146, LBFGS converges to 8e143, both should give
+    mean≈5 for a flat-likelihood + GaussianPrior(5,1) fit).
+
+    Fix: density convention at the Prior layer. Sign-flip NormalMessage and
+    LogGaussianPrior quadratics; replace LogUniformPrior body with -log(value).
+    UniformPrior and TruncatedNormalMessage already correct (0.0 and density-form
+    respectively). No Fitness changes. Update 3 test pins in test_prior.py.
+
+    Workspace_test: promote /tmp/{emcee,lbfgs}_prior_bias_check.py to
+    scripts/prior_correctness/ as permanent regression gates. Update parity
+    assertions in scripts/jax_assertions/priors_xp_dispatch.py for the
+    Gaussian-family + LogUniform new values.
+
+    Migration warning: cached Emcee/Zeus/MLE-Drawer/LBFGS samples.csv with
+    non-uniform priors are biased and should be re-run. Dynesty/Nautilus chains
+    unaffected (priors via prior_transform); only their stored log_prior column
+    is wrong-signed and auto-recovers on next log_prior_list_from_vector call.
+
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
 - session: claude --resume "profile-smoke-test-runtime"
