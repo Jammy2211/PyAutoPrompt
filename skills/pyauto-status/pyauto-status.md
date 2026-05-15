@@ -135,6 +135,30 @@ PyAutoConf, PyAutoGalaxy, PyAutoLens, autofit_workspace,
 autogalaxy_workspace, autolens_workspace_test
 ```
 
+### 3a. URL Check Status
+
+For each PyAuto repo (PyAutoConf, PyAutoFit, PyAutoArray, PyAutoGalaxy, PyAutoLens, HowToFit, HowToGalaxy, HowToLens, autofit_workspace, autogalaxy_workspace, autolens_workspace), query the weekly URL-check cron's tracking issue via the GitHub API. The cron runs Monday 04:00 UTC and opens (or appends to) an issue titled `[url-check] New broken URLs detected` whenever a new broken URL appears that isn't in the repo's `.url_check_allowlist.txt`.
+
+```bash
+gh issue list --repo PyAutoLabs/<repo> \
+  --search '"[url-check]" in:title' --state open \
+  --json number,title,updatedAt
+```
+
+Display a section like:
+
+```
+URL Check Status (weekly cron, allowlisted breakage excluded)
+=============================================================
+PyAutoLens          → ⚠ #517 "New broken URLs detected"  (updated 2 days ago)
+PyAutoFit           → ✓ clean
+PyAutoGalaxy        → ✓ clean
+HowToLens           → ⚠ #41  "New broken URLs detected"  (updated 1 day ago)
+... (omit any repo with no open tracking issue OR show as "✓ clean")
+```
+
+The tool that drives this is `PyAutoBuild/autobuild/url_check_live.py`; the per-repo allowlist of accepted breakage sits at `.url_check_allowlist.txt` in each consumer repo. If a repo shows ⚠, opening the linked issue gives the list of new broken URLs and their file:line locations — either fix the references in-repo, or append the URL to the allowlist if it's an external/accepted dead link.
+
 ### 4. Re-check planned tasks
 
 For each task in `planned.md`, check whether its `blocked-by` conflict still exists:
