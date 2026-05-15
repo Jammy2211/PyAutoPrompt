@@ -32,8 +32,15 @@
 ## url-check
 - issue: https://github.com/PyAutoLabs/PyAutoLens/issues/508
 - session: claude --resume "url-check"
-- status: library-dev
+- status: library-shipped, workspace-pending
 - worktree: ~/Code/PyAutoLabs-wt/url-check
+- library-prs:
+  - admin_jammy: https://github.com/Jammy2211/admin_jammy/pull/21
+  - PyAutoConf:  https://github.com/PyAutoLabs/PyAutoConf/pull/105
+  - PyAutoFit:   https://github.com/PyAutoLabs/PyAutoFit/pull/1265
+  - PyAutoArray: https://github.com/PyAutoLabs/PyAutoArray/pull/309
+  - PyAutoGalaxy: https://github.com/PyAutoLabs/PyAutoGalaxy/pull/413
+  - PyAutoLens:  https://github.com/PyAutoLabs/PyAutoLens/pull/509
 - repos:
   - admin_jammy: feature/url-check
   - PyAutoConf: feature/url-check
