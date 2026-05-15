@@ -1,18 +1,3 @@
-## analysis-ellipse-jax
-- issue: https://github.com/PyAutoLabs/PyAutoGalaxy/issues/411
-- session: claude --resume "analysis-ellipse-jax"
-- status: workspace-dev
-- worktree: ~/Code/PyAutoLabs-wt/analysis-ellipse-jax
-- library-pr: https://github.com/PyAutoLabs/PyAutoGalaxy/pull/412
-- repos:
-  - PyAutoGalaxy: feature/analysis-ellipse-jax
-  - autogalaxy_workspace_test: feature/analysis-ellipse-jax
-- conflict-override: |
-    url-check also holds PyAutoGalaxy via feature/url-check, but it's doc-only
-    (URL string fixups across all PyAuto repos). This task touches ellipse/
-    source files (model/analysis.py, fit_ellipse.py, analysis/jax_pytrees.py)
-    — disjoint diffs. Parallel work explicitly cleared by user 2026-05-14.
-
 ## url-check
 - issue: https://github.com/PyAutoLabs/PyAutoLens/issues/508
 - session: claude --resume "url-check"
