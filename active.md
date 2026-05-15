@@ -4,6 +4,8 @@
 - status: workspace-dev
 - worktree: ~/Code/PyAutoLabs-wt/unpark-ellipse-scripts
 - repos:
+  - autogalaxy_workspace: feature/unpark-ellipse-scripts
+  - PyAutoBuild: feature/unpark-ellipse-scripts
 
 ## log-prior-sign-convention
 - issue: https://github.com/PyAutoLabs/PyAutoFit/issues/1266
