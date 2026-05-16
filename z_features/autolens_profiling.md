@@ -1,7 +1,7 @@
 # autolens_profiling — New Repository Roadmap
 
 This z_feature tracks the creation of a new dedicated GitHub repository,
-`Jammy2211/autolens_profiling`, that consolidates all profiling work for
+`PyAutoLabs/autolens_profiling`, that consolidates all profiling work for
 PyAutoLens currently scattered across `autolens_workspace_developer`.
 
 **Scope of the new repo:**
@@ -38,7 +38,7 @@ The original motivating prose is preserved at the bottom under
 
 ## Phase 0 — Repo bootstrap
 
-Create the empty `Jammy2211/autolens_profiling` repo on GitHub, scaffold the
+Create the empty `PyAutoLabs/autolens_profiling` repo on GitHub, scaffold the
 top-level files (README with vision/JAX-gradient note, LICENSE, .gitignore,
 folder layout for `likelihood/` / `simulators/` / `searches/` / `results/`),
 and check out a local clone next to the other PyAutoLabs repos.

@@ -1,16 +1,16 @@
 Phase 0 of the `autolens_profiling` z_feature
 (see `z_features/autolens_profiling.md` for the full roadmap).
 
-Create a new GitHub repository `Jammy2211/autolens_profiling` and scaffold it
+Create a new GitHub repository `PyAutoLabs/autolens_profiling` and scaffold it
 so the later mirror phases (likelihood JIT, simulators, searches) have a clean
 place to drop content.
 
 What this task should produce on first commit:
 
-- Empty public repo on GitHub (`Jammy2211/autolens_profiling`), description
+- Empty public repo on GitHub (`PyAutoLabs/autolens_profiling`), description
   line along the lines of "Profiling and run-time tracking for PyAutoLens
   likelihood functions, simulators, and samplers across CPU, laptop GPU, and
-  HPC GPU." Match the style of other Jammy2211 repos.
+  HPC GPU." Match the style of other PyAutoLabs repos.
 - Local checkout at `/home/jammy/Code/PyAutoLabs/autolens_profiling/` so
   later /start_library calls can pick it up.
 - Top-level `README.md` with:
@@ -19,14 +19,16 @@ What this task should produce on first commit:
     `searches/`, `results/` directories (some will still be empty stubs at
     this phase — that's fine).
   - A clear "JAX gradients are out of scope for now — see
-    `autolens_workspace_developer/jax_profiling/gradient/`" callout.
-  - A "Related repos" section linking back to `autolens_workspace_developer`
-    (source-of-truth during the migration) and `autolens_colab_profiling`
-    (sibling repo, Colab-specific scope).
+    `PyAutoLabs/autolens_workspace_developer/jax_profiling/gradient/`" callout.
+  - A "Related repos" section linking to `PyAutoLabs/PyAutoLens`,
+    `PyAutoLabs/autolens_workspace`, `PyAutoLabs/autolens_workspace_developer`
+    (source-of-truth during the migration), and the sibling
+    `Jammy2211/autolens_colab_profiling` (Colab-specific scope, not yet
+    migrated to PyAutoLabs).
   - A short "How to read this repo" guide that points readers at the
     versioned `results/*_v<version>.{json,png}` pattern that the existing
     `_developer` results folder already uses.
-- `LICENSE` matching the other Jammy2211 repos (almost certainly MIT — check
+- `LICENSE` matching the other PyAutoLabs repos (almost certainly MIT — check
   PyAutoLens to confirm and copy).
 - `.gitignore` mirrored from `autolens_workspace_developer/.gitignore` with
   any obvious additions (e.g. `results/**/*.tmp`, profiler trace files).
@@ -46,7 +48,8 @@ Pre-existing context the implementer should look at first:
 - `autolens_workspace_developer/CLAUDE.md` — describes the JIT profiling
   conventions (`.array` extraction, `xp` parameter) that the new repo's
   scripts will follow once Phase 1 starts.
-- Other Jammy2211 repo READMEs for tone / structure parity.
+- Other PyAutoLabs repo READMEs for tone / structure parity (e.g.
+  `PyAutoLabs/PyAutoLens`, `PyAutoLabs/autolens_workspace`).
 
 Out of scope for this task: any actual profiling scripts, any CI, any
 result tables beyond placeholders. Those land in Phases 1–5.

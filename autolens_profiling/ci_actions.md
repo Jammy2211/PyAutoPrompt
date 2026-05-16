@@ -14,7 +14,7 @@ fast (<5 minutes).
 Things to check:
 
 - Python syntax + basic linting (`ruff check` is the obvious choice,
-  matching other Jammy2211 repos — confirm by looking at how
+  matching other PyAutoLabs repos — confirm by looking at how
   `PyAutoLens/.github/workflows/` is set up and copy the same config).
 - `black` / `ruff format --check` formatting parity.
 - Markdown link-rot check on all `README.md` files (use `lychee` or

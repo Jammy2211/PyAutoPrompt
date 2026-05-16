@@ -2,7 +2,7 @@ Phase 4 of the `autolens_profiling` z_feature
 (see `z_features/autolens_profiling.md` for the full roadmap).
 
 Build the public-facing READMEs (top-level + per-section) so that anyone
-landing on `https://github.com/Jammy2211/autolens_profiling` immediately
+landing on `https://github.com/PyAutoLabs/autolens_profiling` immediately
 sees the latest run-times framed by *astronomy instrument* (HST, Euclid,
 JWST, etc.) rather than just pixel counts or grid sizes. This is the
 deliverable the user has been most explicit about: "Framing it in terms
