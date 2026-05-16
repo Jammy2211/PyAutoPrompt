@@ -4,6 +4,15 @@
 - status: workspace-dev
 - worktree: ~/Code/PyAutoLabs-wt/interferometer-linear-light-profiles
 - repos:
+  - autolens_workspace: feature/interferometer-linear-light-profiles
+  - autogalaxy_workspace: feature/interferometer-linear-light-profiles
+- note: |
+    File-level coexistence cleared on autolens_workspace alongside
+    group-mass-stellar-dark — this task writes only to
+    scripts/interferometer/features/linear_light_profiles/, that one
+    writes only to scripts/group/features/advanced/mass_stellar_dark/.
+    Same precedent as knn-barycentric + ag-interferometer-kwargs on
+    autolens_workspace_test.
 
 ## viz-subprocess-feasibility
 - issue: https://github.com/PyAutoLabs/PyAutoFit/issues/1279
