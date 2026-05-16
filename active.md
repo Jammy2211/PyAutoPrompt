@@ -1,3 +1,30 @@
+## jax-phase3-adoption
+- session: claude --resume "jax-phase3-adoption"
+- status: workspace-dev
+- worktree: ~/Code/PyAutoLabs-wt/jax-phase3-adoption
+- repos:
+  - autolens_workspace: feature/jax-phase3-adoption
+  - autogalaxy_workspace: feature/jax-phase3-adoption
+  - autofit_workspace: feature/jax-phase3-adoption
+- summary: |
+    Phase 3 of z_features/jax_visualization.md (now archived). Sweep
+    adoption of `use_jax=True` across ~30 tutorial scripts in the three
+    production workspaces, filling gaps in pixelization/MGE/group/
+    advanced-feature modeling.py and chaining.py files, plus the
+    slam-vs-modeling consistency mismatches surfaced by the 2026-05-16
+    audit. Phase 2 baked viz into `use_jax=True`, so a single explicit
+    flag is now sufficient — no `use_jax_for_visualization=True` calls
+    added.
+
+    Skip list (intentional opt-outs): cpu_fast_modeling.py,
+    autogalaxy/ellipse/modeling.py, advanced/expectation_propagation.py +
+    hierarchical.py (FactorGraphModel), autofit/searches/mle.py (LBFGS),
+    simulators, fit.py/likelihood_function.py demos, aggregator scripts.
+
+    Worktree-safe: no library worktree claimed. group-double-einstein-ring
+    (PR #157) already shipped use_jax=True on its rewritten modeling.py,
+    so that file dropped from scope; companion chaining.py kept.
+
 ## jit-regression-drift
 - issue: https://github.com/PyAutoLabs/autolens_workspace_developer/issues/67
 - session: claude --resume "jit-regression-drift"
