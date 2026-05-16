@@ -113,4 +113,5 @@
 - worktree: ~/Code/PyAutoLabs-wt/use-jax-for-vis-default
 - repos:
   - PyAutoFit: feature/use-jax-for-vis-default
+  - autofit_workspace_test: feature/use-jax-for-vis-default
 
