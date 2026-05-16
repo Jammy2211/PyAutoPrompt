@@ -36,16 +36,18 @@ the new repo's README under "Related repos" but not folded in.
 The original motivating prose is preserved at the bottom under
 **Background — original framing**.
 
-## Phase 0 — Repo bootstrap
+## Phase 0 — Repo bootstrap ✓ shipped
 
 Create the empty `PyAutoLabs/autolens_profiling` repo on GitHub, scaffold the
 top-level files (README with vision/JAX-gradient note, LICENSE, .gitignore,
 folder layout for `likelihood/` / `simulators/` / `searches/` / `results/`),
 and check out a local clone next to the other PyAutoLabs repos.
 
+Shipped 2026-05-16 — repo live at https://github.com/PyAutoLabs/autolens_profiling.
+
 | # | Title | Prompt file | Depends on |
 |---|-------|-------------|------------|
-| 0 | Create repo + scaffolding | `autolens_profiling/bootstrap.md` | — |
+| 0 ✓ | Create repo + scaffolding | `autolens_profiling/bootstrap.md` | — |
 
 ## Phase 1 — Likelihood JIT profiling mirror
 

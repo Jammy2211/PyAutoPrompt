@@ -82,18 +82,3 @@
       7. Inversion mapping audit + assertion (mapping.py / abstract.py)
       8. End-to-end library integration test
       (workspace) extend convolution.py + new convolution_oversampled.py + simulator.py
-
-## autolens-profiling-bootstrap
-- issue: https://github.com/PyAutoLabs/PyAutoLens/issues/513
-- session: claude --resume "autolens-profiling-bootstrap"
-- status: library-dev
-- worktree: /home/jammy/Code/PyAutoLabs/autolens_profiling
-- repos:
-- note: |
-    Unusual task — creates a brand-new GitHub repo `PyAutoLabs/autolens_profiling`
-    rather than branching an existing one. No worktree, no feature branch, no PR:
-    initial scaffolding commits directly to `main` of the new repo.
-    DO NOT run `/start_library` for this task — see the issue body for the
-    one-shot bootstrap recipe. Phase 0 of the z_features roadmap at
-    `PyAutoPrompt/z_features/autolens_profiling.md`. Future phases (1–5) will
-    file their own issues on `PyAutoLabs/autolens_profiling` once it exists.

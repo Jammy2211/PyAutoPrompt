@@ -1,4 +1,20 @@
 
+## autolens-profiling-bootstrap
+- issue: https://github.com/PyAutoLabs/PyAutoLens/issues/513
+- completed: 2026-05-16
+- new-repo: https://github.com/PyAutoLabs/autolens_profiling
+- initial-commit: 0087d6a
+- summary: |
+    Phase 0 of autolens_profiling z_feature. Created the empty public repo
+    PyAutoLabs/autolens_profiling, scaffolded README.md (vision/scope, JAX
+    gradient out-of-scope note, related repos, how-to-read guide, roadmap),
+    LICENSE (MIT), .gitignore (mirrored from autolens_workspace_developer +
+    profiler/cache additions), and folder skeleton (likelihood/, simulators/,
+    searches/, results/) each with a placeholder README pointing at the
+    phase that will populate it. No profiling code moved — that lands in
+    Phases 1–3. No PR: initial scaffolding committed directly to main of
+    the new repo.
+
 ## nss-checkpointing-and-visualization
 - issue: https://github.com/PyAutoLabs/PyAutoFit/issues/1273
 - completed: 2026-05-16
