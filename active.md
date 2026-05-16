@@ -105,3 +105,11 @@
       7. Inversion mapping audit + assertion (mapping.py / abstract.py)
       8. End-to-end library integration test
       (workspace) extend convolution.py + new convolution_oversampled.py + simulator.py
+
+## use-jax-for-vis-default
+- issue: https://github.com/PyAutoLabs/PyAutoFit/issues/1275
+- session: claude --resume "use-jax-for-vis-default"
+- status: library-dev
+- worktree: ~/Code/PyAutoLabs-wt/use-jax-for-vis-default
+- repos:
+
