@@ -1,6 +1,5 @@
 
 workspaces/[interferometer.md](../workspaces/interferometer.md)
-workspaces/[interferometer_no_lens_light.md](../workspaces/interferometer_no_lens_light.md)
 workspaces/[interferometer_linear_light_profiles.md](../workspaces/interferometer_linear_light_profiles.md)
 workspaces/[interferometer_multi_gaussian_expansion.md](../workspaces/interferometer_multi_gaussian_expansion.md)
 workspaces/[interferometer_extra_galaxies.md](../workspaces/interferometer_extra_galaxies.md)
