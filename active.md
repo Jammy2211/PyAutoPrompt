@@ -123,3 +123,4 @@
 - status: library-dev
 - worktree: ~/Code/PyAutoLabs-wt/rectangular-adapt-cdf
 - repos:
+  - PyAutoArray: feature/rectangular-adapt-cdf
