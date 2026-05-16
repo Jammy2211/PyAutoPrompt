@@ -1,7 +1,8 @@
 ## fix-interferometer-sparse-curvature
 - issue: https://github.com/Jammy2211/PyAutoArray/issues/314
 - session: claude --resume "fix-interferometer-sparse-curvature"
-- status: library-dev
+- status: library-shipped, workspace-pending
+- library-pr: https://github.com/PyAutoLabs/PyAutoArray/pull/316
 - worktree: ~/Code/PyAutoLabs-wt/fix-interferometer-sparse-curvature
 - repos:
   - PyAutoArray: feature/fix-interferometer-sparse-curvature
