@@ -1,3 +1,35 @@
+## nautilus-mirror
+- issue: https://github.com/PyAutoLabs/autolens_profiling/issues/5
+- session: claude --resume "nautilus-mirror"
+- status: workspace-dev
+- worktree: ~/Code/PyAutoLabs-wt/nautilus-mirror
+- repos:
+- note: |
+    Phase 3 of the autolens_profiling z_feature (tracker:
+    PyAutoPrompt/z_features/autolens_profiling.md). Stands up
+    autolens_profiling/searches/ with Nautilus-only profiling (4 files,
+    ~20K), mirrored from _developer/searches_minimal/. Designs the folder
+    layout so other samplers (Dynesty, Emcee, BlackJAX, NumPyro, PocoMC,
+    NSS, LBFGS) can slot in cleanly under their own follow-up prompts.
+
+    Folder layout: searches/{_setup,_metrics}.py + searches/nautilus/{simple,jax}.py
+    + 2 READMEs.
+
+    Phase 2 (simulators-mirror, issue #4) is queued but NOT yet started.
+    Both touch disjoint dirs (simulators/ vs searches/), so they CAN run
+    in parallel if needed. worktree_check_conflict currently treats two
+    tasks claiming the same repo as a conflict regardless of file scope,
+    so decide at execution time whether to serialise or use two worktrees.
+
+    Apply F1 lesson: copy from worktree's clean origin/main of _developer,
+    NOT the canonical.
+
+    Manual worktree setup (autolens_profiling has no /start_workspace fit):
+      source admin_jammy/software/worktree.sh
+      worktree_create nautilus-mirror autolens_profiling
+      cd ~/Code/PyAutoLabs-wt/nautilus-mirror/autolens_profiling
+      git checkout -b feature/nautilus-mirror
+
 ## simulators-mirror
 - issue: https://github.com/PyAutoLabs/autolens_profiling/issues/4
 - session: claude --resume "simulators-mirror"
