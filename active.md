@@ -34,6 +34,7 @@
 - status: workspace-dev
 - worktree: ~/Code/PyAutoLabs-wt/nss-tutorial-dispatch
 - repos:
+  - autofit_workspace: feature/nss-tutorial-dispatch
 - summary: |
     Phase 5 of nss_first_class_sampler — workspace capstone. Add an
     "Search: NSS" section to autofit_workspace/scripts/searches/nest.py so
