@@ -1,19 +1,3 @@
-## interferometer-linear-light-profiles
-- issue: https://github.com/PyAutoLabs/autolens_workspace/issues/162
-- session: claude --resume "interferometer-linear-light-profiles"
-- status: workspace-dev
-- worktree: ~/Code/PyAutoLabs-wt/interferometer-linear-light-profiles
-- repos:
-  - autolens_workspace: feature/interferometer-linear-light-profiles
-  - autogalaxy_workspace: feature/interferometer-linear-light-profiles
-- note: |
-    File-level coexistence cleared on autolens_workspace alongside
-    group-mass-stellar-dark — this task writes only to
-    scripts/interferometer/features/linear_light_profiles/, that one
-    writes only to scripts/group/features/advanced/mass_stellar_dark/.
-    Same precedent as knn-barycentric + ag-interferometer-kwargs on
-    autolens_workspace_test.
-
 ## viz-subprocess-feasibility
 - issue: https://github.com/PyAutoLabs/PyAutoFit/issues/1279
 - session: claude --resume "viz-subprocess-feasibility"
@@ -70,27 +54,6 @@
 - Investigate repeated ray-tracing in subplot panels
 - Profile interferometer/modeling.py and other scripts
 - Consider caching cosmology distances per redshift pair
-
-## group-mass-stellar-dark
-- issue: https://github.com/PyAutoLabs/autolens_workspace/issues/158
-- session: claude --resume "group-mass-stellar-dark"
-- status: workspace-dev
-- worktree: ~/Code/PyAutoLabs-wt/group-mass-stellar-dark
-- repos:
-  - autolens_workspace: feature/group-mass-stellar-dark
-- note: |
-    Unblocked from planned.md on 2026-05-16 once jax-phase3-adoption
-    shipped and released autolens_workspace. Original issue + plan
-    were drafted in the earlier /start_dev run; prompt file already
-    moved to issued/group_mass_stellar_dark.md.
-
-    Two-stage task per the prompt:
-      1. Improve and pad out the imaging
-         scripts/imaging/advanced/features/mass_stellar_dark/ example.
-      2. Adapt to group context at
-         scripts/group/features/advanced/mass_stellar_dark/ — each main
-         lens and extra galaxy gets stellar (M/L-tied) + dark (e.g. NFW)
-         components for mass-to-light analysis across the group.
 
 ## psf-oversampling
 - issue: https://github.com/PyAutoLabs/PyAutoArray/issues/299
