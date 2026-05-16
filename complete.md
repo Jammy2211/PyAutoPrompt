@@ -1,4 +1,51 @@
 
+## instrument-dashboard
+- issue: https://github.com/PyAutoLabs/autolens_profiling/issues/6
+- completed: 2026-05-16
+- repo-pr: https://github.com/PyAutoLabs/autolens_profiling/pull/10
+- merge-commit: 2bd7fad
+- summary: |
+    Phase 4 of the autolens_profiling z_feature. Built the public-facing
+    instrument-framed dashboard infrastructure that auto-generates the
+    headline run-times tables in every section README from versioned
+    artifacts under results/.
+
+    What landed:
+    - scripts/build_readme.py (270 LOC) — scans results/**/*_summary_v*.json,
+      parses (section, sub-folder, script, instrument, version) tuples,
+      picks latest version per axis via PEP 440-ish dotted sort, regenerates
+      markdown tables between <!-- BEGIN auto-table:NAME --> / <!-- END --> sentinels.
+      `--check` mode for CI gate.
+    - 7 sentinel region types wired: headline (top-level), likelihood-
+      {imaging,interferometer,point_source,datacube}, simulators,
+      searches-nautilus.
+    - All 7 target READMEs gained sentinel-tagged auto-table regions
+      (replacing the "populated by Phase 4" placeholder tables from
+      Phases 1-3). Surrounding hand-written prose preserved.
+    - Top-level README: new "Latest run-times" section + Roadmap refreshed
+      to show Phases 0-4 shipped + new "Future enhancements" subsection
+      listing 6 deferred extras (regression-watch indicator, version-history
+      PNGs, plotly timeline, flamegraphs, hardware-tier columns, archive policy).
+
+    Design decisions resolved:
+    - CPU/GPU split: single column for now (CPU only — every current
+      artifact is implicitly CPU). Hardware-tier columns added as a
+      Future enhancements entry; renderer change is small once artifacts
+      gain a hardware label.
+    - Versioning: keep all versions in results/, render latest. Archive
+      to results/archive/ is a Future enhancements entry.
+    - "Cool extras": ALL deferred to Future enhancements rather than
+      landing any in this PR. The dashboard infrastructure is more
+      valuable to ship first, and each extra is independently scoped.
+
+    Today every auto-table renders "No data yet — run X to populate"
+    because results/ is gitignored per Phase 1's design. Phase 5's CI
+    workflow will commit artifacts on release; manual runs work too.
+
+    Smoke: py_compile PASSED; first run populates 7 placeholders; second
+    --check run exits 0 confirming idempotence; surrounding prose
+    untouched.
+
 ## mesh-geometry-picklable
 - issue: https://github.com/PyAutoLabs/PyAutoArray/issues/320
 - completed: 2026-05-16

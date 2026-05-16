@@ -53,39 +53,6 @@
       cd ~/Code/PyAutoLabs-wt/ci-actions/autolens_profiling
       git checkout -b feature/ci-actions
 
-## instrument-dashboard
-- issue: https://github.com/PyAutoLabs/autolens_profiling/issues/6
-- session: claude --resume "instrument-dashboard"
-- status: workspace-dev
-- worktree: ~/Code/PyAutoLabs-wt/instrument-dashboard
-- repos:
-- note: |
-    Phase 4 of the autolens_profiling z_feature (tracker:
-    PyAutoPrompt/z_features/autolens_profiling.md). Builds the public-
-    facing READMEs framed by astronomy instrument (HST, Euclid, JWST,
-    ALMA, …) — the user's explicitly most-wanted deliverable.
-
-    Adds scripts/build_readme.py that scans results/**/*_summary_v*.json,
-    picks the latest per axis, regenerates markdown tables in every
-    relevant README between sentinel comments. Idempotent.
-
-    Depends on Phase 1 (shipped) + Phase 2 (in flight, #4). Best to wait
-    until Phase 2 ships before starting so the dashboard has results to
-    populate; Phase 3 (Nautilus, #5) is independent of the skeleton but
-    rounds out section coverage.
-
-    Open implementer decisions to make in scope:
-      - CPU/laptop-GPU/HPC-GPU split: 3 cols per cell vs 3 stacked sub-tables
-      - Versioning: keep last 6 minor releases? archive older?
-      - "Cool extras" the user asked about — pick 1-2 to land
-        (regression-watch badge, plotly timeline, flamegraphs).
-
-    /start_workspace doesn't fit autolens_profiling. Manual worktree:
-      source admin_jammy/software/worktree.sh
-      worktree_create instrument-dashboard autolens_profiling
-      cd ~/Code/PyAutoLabs-wt/instrument-dashboard/autolens_profiling
-      git checkout -b feature/instrument-dashboard
-
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
 - session: claude --resume "profile-smoke-test-runtime"

@@ -93,7 +93,7 @@ Phase 1 convention so Phase 4's dashboard can pick the artifacts up.
 |---|-------|-------------|------------|
 | 3 ✓ | Mirror Nautilus profiling, design for sampler expansion | `autolens_profiling/searches_nautilus_mirror.md` | Phase 0 |
 
-## Phase 4 — Instrument-framed README dashboard
+## Phase 4 — Instrument-framed README dashboard ✓ shipped
 
 Build the public-facing READMEs (top-level + per-section) so that anyone
 landing on GitHub immediately sees the latest run-times framed by astronomy
@@ -101,9 +101,16 @@ instrument (HST, Euclid, JWST, …) rather than just pixel counts. Auto-generate
 the tables from the JSON summaries under `results/` so the numbers stay in
 sync with whatever Phase 1–3 produced.
 
+Shipped 2026-05-16 via https://github.com/PyAutoLabs/autolens_profiling/pull/10.
+`scripts/build_readme.py` provides idempotent table generation with a
+`--check` mode for CI; 7 sentinel region types are wired today. All 6
+"cool extras" deferred to a Future enhancements section in the top-level
+README rather than landing inline (no result artifacts exist yet to feed
+them).
+
 | # | Title | Prompt file | Depends on |
 |---|-------|-------------|------------|
-| 4 | Top-level + per-section README dashboard with instrument framing | `autolens_profiling/instrument_readme_dashboard.md` | Phases 1, 2 |
+| 4 ✓ | Top-level + per-section README dashboard with instrument framing | `autolens_profiling/instrument_readme_dashboard.md` | Phases 1, 2 |
 
 ## Phase 5 — CI / GitHub Actions
 
