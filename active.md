@@ -63,7 +63,8 @@
 ## use-jax-for-vis-default
 - issue: https://github.com/PyAutoLabs/PyAutoFit/issues/1275
 - session: claude --resume "use-jax-for-vis-default"
-- status: library-dev
+- status: library-shipped, workspace-pending
+- library-pr: https://github.com/PyAutoLabs/PyAutoFit/pull/1278
 - worktree: ~/Code/PyAutoLabs-wt/use-jax-for-vis-default
 - repos:
   - PyAutoFit: feature/use-jax-for-vis-default
