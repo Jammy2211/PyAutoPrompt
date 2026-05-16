@@ -1,4 +1,49 @@
 
+## nss-search-wrapper
+- issue: https://github.com/PyAutoLabs/PyAutoFit/issues/1271
+- completed: 2026-05-16
+- library-prs:
+  - PyAutoFit: https://github.com/PyAutoLabs/PyAutoFit/pull/1272
+  - autolens_workspace_developer: https://github.com/PyAutoLabs/autolens_workspace_developer/pull/64
+- notes: |
+    Phase 1 of nss_first_class_sampler roadmap. `af.NSS(...)` lands as a
+    drop-in `NonLinearSearch` mirroring `af.Nautilus(...)`. New module
+    PyAutoFit/autofit/non_linear/search/nest/nss/ with `NSS(AbstractNest)`,
+    `NSSamples(SamplesNest)`, and an `_NSSInternal` post-run state holder.
+    JAX-traceable `log_likelihood` and `prior_logprob` closures built inline
+    using Phase 0's `xp=jnp` plumbing (#1262 + #1269). Optional-import guard
+    keeps `import autofit` working without `nss` installed; instantiation
+    raises a clear `ImportError` pointing at the Phase 4 install path.
+
+    Validation: pytest test_autofit 1252 passed/1 skipped (1242 baseline + 10
+    new NSS tests). Fast 2D Gaussian end-to-end wiring smoke
+    (autolens_workspace_developer/searches_minimal/nss_first_class_gaussian.py)
+    completes in 10 sec wall on CPU — ESS 94/95, weighted posterior recovers
+    prior means under flat likelihood, samples.csv written through Paths,
+    Result.max_log_likelihood_instance round-trips. Heavy HST MGE smoke
+    (nss_first_class.py) demonstrated wiring works (1000+ dead points,
+    monotonic logZ progression) but is HPC-GPU-only for full numerical-parity
+    runs.
+
+    Real bug caught during validation: initial `_fit` returned None for the
+    `fitness` slot but AbstractNest.perform_update calls `fitness.batch_size`
+    for latent-sample generation. Fixed by returning a
+    `Fitness(model, analysis, paths, fom_is_log_likelihood=True, batch_size=1)`
+    even though af.NSS doesn't use Fitness for sampling — required by the
+    post-fit API contract.
+
+    Phases 2-5 status:
+    - Phase 2 (checkpointing): stubbed — `iterations_per_quick_update`
+      accepted with no-op log, state.json warns instead of resuming
+    - Phase 3 (on-the-fly viz): stubbed (same kwarg)
+    - Phase 4 (`pip install autofit[nss]` extra): not yet
+    - Phase 5 (workspace tutorial scripts): not yet — autolens_workspace/
+      searches/nss.py + autogalaxy/autofit cookbook entries land after Phase 4
+
+    Follow-ups: JIT persistent cache (each cold fit eats ~25-30 s while_loop
+    compile), and proper Sonnet-style workspace tutorial scripts once
+    Phase 4 lands.
+
 ## fix-interferometer-sparse-curvature
 - completed: 2026-05-16
 - issue: https://github.com/Jammy2211/PyAutoArray/issues/314
