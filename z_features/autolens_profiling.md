@@ -49,7 +49,7 @@ Shipped 2026-05-16 — repo live at https://github.com/PyAutoLabs/autolens_profi
 |---|-------|-------------|------------|
 | 0 ✓ | Create repo + scaffolding | `autolens_profiling/bootstrap.md` | — |
 
-## Phase 1 — Likelihood JIT profiling mirror
+## Phase 1 — Likelihood JIT profiling mirror ✓ shipped
 
 Mirror `autolens_workspace_developer/jax_profiling/jit/{imaging,interferometer,point_source,datacube}/*`
 into `autolens_profiling/likelihood/`, preserving the step-by-step profile
@@ -57,9 +57,13 @@ narrative each script already prints. Each subfolder gets a README that
 explains what is being profiled, surfaces the latest results table, and links
 to the underlying JSON / PNG summaries under `results/`.
 
+Shipped 2026-05-16 via https://github.com/PyAutoLabs/autolens_profiling/pull/2.
+Surfaced a regression-constant drift in two scripts — tracked as a follow-up
+below.
+
 | # | Title | Prompt file | Depends on |
 |---|-------|-------------|------------|
-| 1 | Mirror JIT likelihood profiling scripts + per-section READMEs | `autolens_profiling/likelihood_jit_mirror.md` | Phase 0 |
+| 1 ✓ | Mirror JIT likelihood profiling scripts + per-section READMEs | `autolens_profiling/likelihood_jit_mirror.md` | Phase 0 |
 
 ## Phase 2 — Simulators profiling mirror
 
@@ -105,6 +109,15 @@ cost, and whether to use self-hosted runners are decisions for the sub-prompt.
 | # | Title | Prompt file | Depends on |
 |---|-------|-------------|------------|
 | 5 | GitHub Actions for lint + profile re-runs + README refresh | `autolens_profiling/ci_actions.md` | Phase 0 (refinement after Phase 4) |
+
+## Follow-ups (surfaced by earlier phases)
+
+Side issues that didn't fit inside any single migration phase but should
+ship before this z_feature is considered closed.
+
+| # | Title | Prompt file | Origin |
+|---|-------|-------------|--------|
+| F1 | Triage drifted `EXPECTED_LOG_LIKELIHOOD_*` regression constants in `_developer/jax_profiling/jit/{imaging/mge.py,point_source/image_plane.py}` (and refresh the mirrored copies) | `autolens_workspace_developer/jit_regression_constant_drift.md` | Surfaced by Phase 1 smoke on 2026-05-16 — imaging/mge drifted +0.6%, point_source/image_plane drifted ~5000× with a sign change (likely real behaviour change in PointSolver / FitPositionsImagePairAll). |
 
 ## Background — original framing
 
