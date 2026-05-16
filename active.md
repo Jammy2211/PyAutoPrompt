@@ -1,3 +1,10 @@
+## interferometer-linear-light-profiles
+- issue: https://github.com/PyAutoLabs/autolens_workspace/issues/162
+- session: claude --resume "interferometer-linear-light-profiles"
+- status: workspace-dev
+- worktree: ~/Code/PyAutoLabs-wt/interferometer-linear-light-profiles
+- repos:
+
 ## viz-subprocess-feasibility
 - issue: https://github.com/PyAutoLabs/PyAutoFit/issues/1279
 - session: claude --resume "viz-subprocess-feasibility"
