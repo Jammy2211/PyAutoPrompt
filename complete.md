@@ -86,7 +86,8 @@
     speedup, modest but the only realistic JAX-native lever now that the
     wildcard is gone.
 
-## instrument-dashboard
+## instrument-readme-dashboard
+- task-alias: instrument-dashboard  (matches active.md / worktree name during execution; full filename-stem slug here so the z_features audit picks this up as shipped)
 - issue: https://github.com/PyAutoLabs/autolens_profiling/issues/6
 - completed: 2026-05-16
 - repo-pr: https://github.com/PyAutoLabs/autolens_profiling/pull/10
@@ -230,7 +231,8 @@
     of _developer (NOT the canonical, which is dirty with ~36
     modified files).
 
-## nautilus-mirror
+## searches-nautilus-mirror
+- task-alias: nautilus-mirror  (matches active.md / worktree name during execution; full filename-stem slug here so the z_features audit picks this up as shipped)
 - issue: https://github.com/PyAutoLabs/autolens_profiling/issues/5
 - completed: 2026-05-16
 - repo-pr: https://github.com/PyAutoLabs/autolens_profiling/pull/8
@@ -524,7 +526,8 @@
     tutorial scripts — autolens_workspace/searches/nss.py +
     autogalaxy/autofit cookbook entries).
 
-## autolens-profiling-bootstrap
+## bootstrap
+- task-alias: autolens-profiling-bootstrap  (matches active.md / worktree name during execution; full filename-stem slug here so the z_features audit picks this up as shipped — the filename `bootstrap.md` lives under `autolens_profiling/`, hence the bare slug)
 - issue: https://github.com/PyAutoLabs/PyAutoLens/issues/513
 - completed: 2026-05-16
 - new-repo: https://github.com/PyAutoLabs/autolens_profiling
