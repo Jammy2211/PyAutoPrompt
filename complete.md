@@ -1,4 +1,41 @@
 
+## nautilus-mirror
+- issue: https://github.com/PyAutoLabs/autolens_profiling/issues/5
+- completed: 2026-05-16
+- repo-pr: https://github.com/PyAutoLabs/autolens_profiling/pull/8
+- merge-commit: cd95359
+- summary: |
+    Phase 3 of the autolens_profiling z_feature. Stood up
+    autolens_profiling/searches/ with Nautilus-only profiling (4 files
+    mirrored from _developer/searches_minimal/, ~20K source + 2 READMEs).
+    Designed the folder layout so 7 other sampler families (Dynesty,
+    Emcee, BlackJAX, NumPyro, PocoMC, NSS, LBFGS) can slot in cleanly
+    under their own follow-up prompts.
+
+    Files mirrored:
+      _setup.py             -> searches/_setup.py
+      _metrics.py           -> searches/_metrics.py
+      nautilus_simple.py    -> searches/nautilus/simple.py
+      nautilus_jax.py       -> searches/nautilus/jax.py
+
+    Key rewrites:
+    - _setup.py dataset path: Path("jax_profiling")/"dataset"/... -> Path("dataset")/...
+    - should_simulate subprocess block -> clean FileNotFoundError (Phase 1 pattern)
+    - Nautilus imports: from searches_minimal._{setup,metrics} -> from searches._{setup,metrics}
+    - Added sys.path injection so scripts work invariant to cwd/invocation
+    - Output upgraded: .txt-to-output/ -> versioned JSON+PNG to
+      results/searches/nautilus/<script>_summary_v<al.__version__>.{json,png}
+      (matches Phase 1 convention so Phase 4 dashboard can pick them up)
+
+    Smoke: py_compile + import resolution PASSED. Full runtime smoke
+    (n_live=200) skipped intentionally — takes 30+ min on CPU and
+    Phase 5's AUTOLENS_PROFILING_SMOKE=1 short-circuit will make this
+    cheap forever. Static checks + matching the Phase 1/2 pattern gave
+    sufficient confidence to ship.
+
+    F1 lesson applied: copies came from worktree's clean origin/main
+    of _developer, NOT the canonical.
+
 ## jax-phase3-adoption
 - issue: none — direct follow-up to use-jax-for-vis-default / PyAutoFit #1278
 - completed: 2026-05-16

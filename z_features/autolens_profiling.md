@@ -76,16 +76,20 @@ placeholder and link to the upstream issue.
 |---|-------|-------------|------------|
 | 2 | Mirror simulator profiling scripts + run-time tracking | `autolens_profiling/simulators_mirror.md` | Phase 0 |
 
-## Phase 3 — Searches profiling (Nautilus first pass)
+## Phase 3 — Searches profiling (Nautilus first pass) ✓ shipped
 
 Stand up `autolens_profiling/searches/` with profiling for the Nautilus
 sampler only, mirrored from `autolens_workspace_developer/searches_minimal/`.
 Design the folder layout so that other samplers (Dynesty, Emcee, BlackJAX,
 NumPyro, NSS, LBFGS, PocoMC) can be slotted in later under their own prompts.
 
+Shipped 2026-05-16 via https://github.com/PyAutoLabs/autolens_profiling/pull/8.
+Output upgraded from freeform `.txt` to versioned JSON+PNG matching the
+Phase 1 convention so Phase 4's dashboard can pick the artifacts up.
+
 | # | Title | Prompt file | Depends on |
 |---|-------|-------------|------------|
-| 3 | Mirror Nautilus profiling, design for sampler expansion | `autolens_profiling/searches_nautilus_mirror.md` | Phase 0 |
+| 3 ✓ | Mirror Nautilus profiling, design for sampler expansion | `autolens_profiling/searches_nautilus_mirror.md` | Phase 0 |
 
 ## Phase 4 — Instrument-framed README dashboard
 
