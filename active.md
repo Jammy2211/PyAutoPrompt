@@ -4,6 +4,8 @@
 - status: library-dev
 - worktree: ~/Code/PyAutoLabs-wt/fix-interferometer-sparse-curvature
 - repos:
+  - PyAutoArray: feature/fix-interferometer-sparse-curvature
+  - autolens_workspace_test: feature/fix-interferometer-sparse-curvature
 - summary: |
     Replace the NotImplementedError guard at
     InversionInterferometerSparse.curvature_matrix_diag (PR #315) with a real
