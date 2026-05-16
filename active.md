@@ -191,3 +191,11 @@
   - autolens_workspace_developer: feature/knn-barycentric
   - autolens_workspace_test: feature/knn-barycentric
 
+## al-assistant-style
+- issue: https://github.com/PyAutoLabs/autolens_workspace/issues/160
+- session: claude --resume "al-assistant-style"
+- status: workspace-dev
+- worktree: ~/Code/PyAutoLabs-wt/al-assistant-style
+- overlap: shares autolens_workspace with jax-phase3-adoption — different files (skills/ vs JAX adoption), user accepted overlap risk
+- repos:
+
