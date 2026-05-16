@@ -1,6 +1,117 @@
 # Deep research: Can we speed up Delaunay in PyAutoArray?
 
-**Bottom line up front**: yes, by 2-5× without changing the science.
+## UPDATE 2026-05-16 — status of the alternatives
+
+The picture has narrowed sharply since this doc was written. Two of the
+candidate levers have been resolved, and the practical recommendation is
+now option **A**, despite its modest measured speedup (~1.2× — see below).
+
+### kNN-barycentric wildcard (F-variant in the original plan): FAILED
+
+- Library PR: https://github.com/PyAutoLabs/PyAutoArray/pull/318
+- Developer regression: https://github.com/PyAutoLabs/autolens_workspace_developer/pull/70
+- Smoke: https://github.com/PyAutoLabs/autolens_workspace_test/pull/99
+- Negative-result summary on issue: https://github.com/PyAutoLabs/PyAutoArray/issues/317
+
+Result at the HST imaging fiducial: `log_evidence = 26872.33` vs
+Delaunay's `26288.32` — **2.22% drift, fails even rtol=1e-2** (the
+abandon threshold from the gate decision tree).
+
+**Root cause is structural, not numerical**: ~5% of mesh vertices
+(60/1291) are *never* in any query's nearest-3 nor in any split-point's
+nearest-3. They're paid for at mesh-construction time and discarded.
+Delaunay's triangulation guarantees every vertex belongs to at least
+one simplex — kNN topology makes no such guarantee, and that gap is what
+breaks the science. This is a topology issue (which the original F-variant
+section didn't consider), not a weight-quality issue, so retrying with
+different kernels (Wendland → barycentric → other) cannot recover it.
+
+The infrastructure shipped as additive library code: `aa.mesh.KNNBarycentric`
+exists in the repo (8 unit tests), but it should not be used for production
+science. The regression script in `autolens_workspace_developer` pins
+the observed `log_evidence` as a regression catch and prints the FAILED
+verdict block at the end of each run.
+
+**Implication for this doc**: the F-variant subsection below is
+superseded by the negative result above. Approaches based on kernel-only
+or kNN-only weighting (without a triangulation-style guarantee that
+every mesh vertex is reachable) will hit the same structural ceiling.
+
+### Option A (split the callback): ALREADY IMPLEMENTED, SHELVED
+
+- Shelved doc: `PyAutoPrompt/shelved/delaunay_jax_find_simplex_split.md`
+- Branch (pushed): `feature/delaunay-jax-find-simplex` on `PyAutoLabs/PyAutoArray`
+- Commit: `eda747c2` (2026-05-11)
+- Code: ready-to-ship (488 LOC, validated 0/15361 disagreements vs scipy)
+
+The measured speedup at production batch=20 on A100 fp64 was
+**disappointing relative to this doc's projection**:
+
+| Config | full_pipeline ms/elem | speedup |
+|---|---:|---:|
+| Baseline (current main) | 69.5 | 1.00× |
+| `delaunay_jax_find_simplex=true` | 58.27 | **1.19×** |
+| + `delaunay_scipy_pool_workers=4` | 56.67 | **1.23×** |
+| + `delaunay_scipy_pool_workers=8` | 60.35 | 1.15× (worse — IPC saturates) |
+
+The original doc projected 1.4× from A alone and 1.5–1.8× combined with
+B. Actual numbers came in at ~1.2× combined, because:
+- find_simplex on A100 GPU was already faster than projected, so the
+  saving over scipy was smaller than expected (~11 ms/element, not the
+  projected ~13 ms).
+- scipy.Delaunay per call is ~3–5 ms — small enough that process-pool
+  IPC overhead (~1–2 ms per dispatch) eats most of the parallelism gain
+  at batch=20.
+- pool_workers=8 is *slower* than pool_workers=4 — diminishing returns
+  set in fast.
+
+A was shelved on 2026-05-11 specifically because the wildcard
+(kNN-barycentric) was considered a higher-payoff bet — if the wildcard
+worked, it would have obsoleted A entirely by eliminating scipy from the
+hot path. **The wildcard has now failed, so A's 1.19× becomes the
+recommended next ship**: it's the only realistic JAX-native lever that
+preserves Delaunay's science guarantees.
+
+### Recommended next action
+
+**Resume option A.** The code is ready; remaining work is roughly half
+a day (per the shelved doc's "Steps to resume and ship"):
+- End-to-end `log_evidence` validation at `rtol=1e-4` on the HST
+  imaging + SMA interferometer fiducials with the flag on
+- Workspace smoke (`autolens_workspace_test/scripts/jax_assertions/nnls.py`)
+- Default decision (flag-on by default if rtol=1e-4 passes; opt-in if
+  only rtol=1e-3 passes)
+- Open the PR
+
+Issue this as a new prompt (`autoarray/delaunay_jax_find_simplex_resume.md`
+or similar) when ready.
+
+### Option B (spatial hash) — only if A's 1.19× isn't enough
+
+The original doc lists "spatial-hash + brute-force on cell candidates"
+as a 10× improvement over A's brute-force point location. At A100
+production scale where A's find_simplex is already ~11 ms saved,
+B's 10× on top would save another ~10 ms → realistic ~1.3–1.4× full
+pipeline (versus baseline). Worth pursuing *after* A ships and the
+production speedup has been measured at the real likelihood scale — not
+before, because the gain may be smaller than projected for the same
+reason A's was (GPU brute-force is already fast enough that
+spatial-acceleration saves less than projected).
+
+Implementation cost: maybe a week. Requires careful padding to keep
+JAX shapes static across batch elements. **Not recommended now** —
+only revisit if A ships, gets measured at production, and falls short
+of the speedup target.
+
+### Original analysis preserved below for context
+
+The cost decomposition, the approach catalogue (A–G), and the validation
+gates all remain accurate. The recommended action plan at the bottom is
+superseded by this update.
+
+---
+
+**Bottom line up front (original)**: yes, by 2-5× without changing the science.
 The lever isn't pure-JAX Delaunay (basically infeasible) — it's
 **splitting the scipy callback in two**: keep scipy for triangulation
 (small, fast), and move `find_simplex` point location to a JAX-native
@@ -9,6 +120,8 @@ implementation that vmaps across the batch.
 A secondary lever is multiprocessing the scipy callback. Combined,
 realistic speedup is 3-5× on the Delaunay-specific cost, which translates
 to ~1.5-1.8× on the full production likelihood at batch=20.
+
+(Measured: 1.19×–1.23× at batch=20 on A100 fp64. See update above.)
 
 ## What is actually inside the 16.87 ms/element scipy callback
 

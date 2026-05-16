@@ -1,4 +1,44 @@
 
+## knn-barycentric (NEGATIVE result)
+- issue: https://github.com/PyAutoLabs/PyAutoArray/issues/317
+- completed: 2026-05-16
+- library-pr: https://github.com/PyAutoLabs/PyAutoArray/pull/318 (merge-commit 7c728f75)
+- developer-pr: https://github.com/PyAutoLabs/autolens_workspace_developer/pull/70 (merge-commit 5011943d)
+- smoke-pr: https://github.com/PyAutoLabs/autolens_workspace_test/pull/99 (merge-commit 9bf1d889)
+- verdict: WILDCARD FAILED science gate (2.22% drift vs Delaunay, fails rtol=1e-2)
+- summary: |
+    Tried the kNN-barycentric wildcard for replacing scipy.spatial.Delaunay
+    in PyAutoArray's source-plane interpolation: pick top-3 nearest mesh
+    vertices in source plane, compute exact barycentric weights on the
+    triangle they form, clip+renormalize on outside-triangle.
+
+    Library code works — 8 unit tests pass, smoke passes, infrastructure
+    is correct and additive. But at the HST imaging fiducial,
+    log_evidence drifts from Delaunay by 2.22% (584 nats higher), failing
+    even the lenient rtol=1e-2 abandon gate.
+
+    Root cause is structural: ~5% of mesh vertices (60/1291) are never in
+    any query's nearest-3 nor any split-point's nearest-3 — they're paid
+    for but never used. Delaunay's topology guarantees every vertex
+    belongs to at least one simplex; kNN doesn't. That gap is what
+    breaks the science.
+
+    What stays in the repo as additive infrastructure:
+      - aa.mesh.KNNBarycentric mesh class
+      - InterpolatorKNNBarycentric (k=3 + clip-renorm barycentric)
+      - barycentric_weights_from_3_nearest helper
+      - 8 unit tests (regression-guard for writability + split-padding bugs found during integration)
+      - Regression script (documents the negative result, pins observed
+        log_evidence, prints verdict block)
+      - Smoke script (covers convex-combination invariant, Delaunay
+        bit-equivalence on matching-triangle queries, degenerate fallback)
+
+    Recommended next: resume option A (split-callback) per the updated
+    PyAutoPrompt/autoarray/delaunay_research.md. Ready-to-ship code on
+    feature/delaunay-jax-find-simplex (commit eda747c2) gives 1.19-1.23×
+    speedup, modest but the only realistic JAX-native lever now that the
+    wildcard is gone.
+
 ## instrument-dashboard
 - issue: https://github.com/PyAutoLabs/autolens_profiling/issues/6
 - completed: 2026-05-16
