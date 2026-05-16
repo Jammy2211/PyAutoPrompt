@@ -1,3 +1,25 @@
+## nss-install-extra
+- issue: https://github.com/PyAutoLabs/PyAutoFit/issues/1276
+- session: claude --resume "nss-install-extra"
+- status: library-dev
+- worktree: ~/Code/PyAutoLabs-wt/nss-install-extra
+- repos:
+- summary: |
+    Phase 4 of nss_first_class_sampler — add `autofit[nss]` install extra
+    so `pip install autofit[nss]` is a single safe command. Replaces the
+    multi-step install saga documented in FINDINGS_v3.md.
+
+    Approach: Option C from the prompt (pyproject.toml extra with pinned
+    git+ URLs for handley-lab/blackjax fork + yallup/nss, plus
+    `fastprogress<1.1` pin). Fallback to Option D (`python -m autofit.install_nss`
+    helper) if pip's resolver can't sequence the URL deps cleanly. Original
+    prompt recommended full vendoring (Option A, ~1300 LOC) — investigation
+    revealed modern pip handles URL-direct deps well, so the lighter path
+    is the right first attempt.
+
+    New CI workflow does a fresh-venv install + import smoke on every PR +
+    weekly cron to catch upstream regressions.
+
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
 - session: claude --resume "profile-smoke-test-runtime"
