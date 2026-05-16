@@ -151,11 +151,21 @@
 ## knn-barycentric
 - issue: https://github.com/PyAutoLabs/PyAutoArray/issues/317
 - session: claude --resume "knn-barycentric"
-- status: workspace-dev
+- status: shipped-pending-merge — NEGATIVE result
 - library-pr: https://github.com/PyAutoLabs/PyAutoArray/pull/318
+- developer-pr: https://github.com/PyAutoLabs/autolens_workspace_developer/pull/70
+- smoke-pr: https://github.com/PyAutoLabs/autolens_workspace_test/pull/99
 - worktree: ~/Code/PyAutoLabs-wt/knn-barycentric
 - repos:
   - PyAutoArray: feature/knn-barycentric
   - autolens_workspace_developer: feature/knn-barycentric
   - autolens_workspace_test: feature/knn-barycentric
+- summary: |
+    Wildcard failed the science gate. KNNBarycentric log_evidence drifts
+    from Delaunay by 2.22% at HST fiducial (fails even rtol=1e-2 abandon
+    threshold). Root cause: ~5% of mesh vertices (60/1291) are never in
+    any query's nearest-3 nor any split-point's nearest-3, making H
+    structurally rank-deficient. PRs ship as documentary evidence + reusable
+    library infrastructure. Next: split-callback approach per
+    PyAutoPrompt/issued/delaunay_research.md.
 
