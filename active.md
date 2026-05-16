@@ -4,6 +4,8 @@
 - status: library-dev
 - worktree: ~/Code/PyAutoLabs-wt/nss-checkpointing-and-visualization
 - repos:
+  - PyAutoFit: feature/nss-checkpointing-and-visualization
+  - autolens_workspace_developer: feature/nss-checkpointing-and-visualization
 - summary: |
     Phases 2-3 of nss_first_class_sampler — wire up checkpointing (Phase 2)
     and on-the-fly visualization (Phase 3) for af.NSS. Inline the outer
