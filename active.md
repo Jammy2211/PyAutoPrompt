@@ -121,4 +121,5 @@
 - status: workspace-dev
 - worktree: ~/Code/PyAutoLabs-wt/group-double-einstein-ring
 - repos:
+  - autolens_workspace: feature/group-double-einstein-ring
 
