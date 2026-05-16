@@ -4,6 +4,7 @@
 - status: library-dev
 - worktree: ~/Code/PyAutoLabs-wt/nss-install-extra
 - repos:
+  - PyAutoFit: feature/nss-install-extra
 - summary: |
     Phase 4 of nss_first_class_sampler — add `autofit[nss]` install extra
     so `pip install autofit[nss]` is a single safe command. Replaces the
