@@ -1,4 +1,51 @@
 
+## ci-actions
+- issue: https://github.com/PyAutoLabs/autolens_profiling/issues/7
+- completed: 2026-05-16
+- repo-pr: https://github.com/PyAutoLabs/autolens_profiling/pull/11
+- merge-commit: e18685b
+- summary: |
+    Phase 5 (final) of the autolens_profiling z_feature. Wired up two
+    GitHub Actions workflows + threaded AUTOLENS_PROFILING_SMOKE=1 into
+    every profile script so the lint workflow's smoke step is cheap.
+
+    What landed:
+    - ruff.toml at repo root (conservative E/F/W/I/UP/B selection;
+      E501/E402/F401/B008 ignored for scientific code patterns)
+    - .github/workflows/lint.yml — PR + push-to-main gate, <5min target,
+      CPU-only ubuntu-latest. Steps: ruff check, ruff format --check,
+      build_readme.py --check (dashboard idempotence), lychee link-rot,
+      smoke one script per section with AUTOLENS_PROFILING_SMOKE=1.
+    - .github/workflows/profile.yml — workflow_dispatch (with sections
+      filter) + on release:published. Runs every profile script
+      continue-on-error per section, runs build_readme.py, commits diff
+      back to main as github-actions[bot] with [skip ci]. Skips
+      simulators/point_source.py in the loop (default dataset_name
+      overwrites Phase 1 tracked JSONs).
+    - .github/workflows/README.md documenting both + design decisions.
+    - AUTOLENS_PROFILING_SMOKE=1 threaded into 17 scripts (likelihood/*,
+      simulators/*, searches/nautilus/*) via AST helper at the first
+      non-import top-level statement. Each script exits 0 in <1s with
+      "[smoke] ... imports + module setup OK" when the env var is set.
+
+    Design decisions resolved:
+    - CPU-only github-hosted runners (self-hosted GPU additive later)
+    - workflow_dispatch + release-only (no weekly cron)
+    - github-actions[bot] with [skip ci] subject
+    - continue-on-error per section (single regression -> ERR cell,
+      not blocked dashboard refresh)
+    - ruff.toml standalone (no pyproject.toml because this isn't a
+      Python package)
+
+    Smoke: yaml.safe_load PASSED on both workflows; py_compile PASSED on
+    all 17 SMOKE-instrumented scripts; the SMOKE flag verified working
+    on 3 representative scripts locally; build_readme.py --check still
+    exits 0 after the SMOKE insertions (Phase 4 idempotence preserved).
+
+    First real CI run will be against any PR after this lands — local
+    yaml parse is necessary but not sufficient; any GitHub Actions
+    runtime issues get follow-up PRs.
+
 ## knn-barycentric (NEGATIVE result)
 - issue: https://github.com/PyAutoLabs/PyAutoArray/issues/317
 - completed: 2026-05-16
@@ -283,7 +330,8 @@
     unit tests passed; user opted to merge without smoke tests given the
     surgical 3-line scope.
 
-## jit-regression-drift
+## jit-regression-constant-drift
+- task-alias: jit-regression-drift  (matches active.md / worktree name during execution; full filename-stem slug here so the z_features audit picks this up as shipped)
 - issue: https://github.com/PyAutoLabs/autolens_workspace_developer/issues/67
 - completed: 2026-05-16
 - repo-pr: https://github.com/PyAutoLabs/autolens_profiling/pull/3

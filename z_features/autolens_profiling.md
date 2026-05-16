@@ -112,16 +112,21 @@ them).
 |---|-------|-------------|------------|
 | 4 ✓ | Top-level + per-section README dashboard with instrument framing | `autolens_profiling/instrument_readme_dashboard.md` | Phases 1, 2 |
 
-## Phase 5 — CI / GitHub Actions
+## Phase 5 — CI / GitHub Actions ✓ shipped
 
 Wire up lint / format checks on PR, plus a `workflow_dispatch` workflow that
 re-runs the profiling scripts (CPU first; GPU / HPC runners as a follow-up
 decision) and commits updated JSON / PNG results + README tables. Frequency,
 cost, and whether to use self-hosted runners are decisions for the sub-prompt.
 
+Shipped 2026-05-16 via https://github.com/PyAutoLabs/autolens_profiling/pull/11.
+CPU-only GitHub-hosted runners; workflow_dispatch + release-triggered for the
+profile job; `AUTOLENS_PROFILING_SMOKE=1` threaded into all 17 profile scripts
+for the lint smoke step.
+
 | # | Title | Prompt file | Depends on |
 |---|-------|-------------|------------|
-| 5 | GitHub Actions for lint + profile re-runs + README refresh | `autolens_profiling/ci_actions.md` | Phase 0 (refinement after Phase 4) |
+| 5 ✓ | GitHub Actions for lint + profile re-runs + README refresh | `autolens_profiling/ci_actions.md` | Phase 0 (refinement after Phase 4) |
 
 ## Follow-ups (surfaced by earlier phases)
 

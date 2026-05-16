@@ -25,33 +25,6 @@
     AFTER this feasibility ADR — autofit/visualization_subprocess_production.md
     (to be written during this task).
 
-## ci-actions
-- issue: https://github.com/PyAutoLabs/autolens_profiling/issues/7
-- session: claude --resume "ci-actions"
-- status: workspace-dev
-- worktree: ~/Code/PyAutoLabs-wt/ci-actions
-- repos:
-- note: |
-    Phase 5 of the autolens_profiling z_feature (tracker:
-    PyAutoPrompt/z_features/autolens_profiling.md). Wires up GitHub
-    Actions: lint.yml (PR + push, <5min CPU-only) + profile.yml (manual
-    + release-triggered profile re-run + dashboard refresh). Also adds
-    pyproject.toml with ruff config copied from PyAutoLens.
-
-    Benefits from (but does not block on) Phase 4's
-    scripts/build_readme.py — if Phase 4 hasn't shipped yet,
-    Workflow 2's "refresh README" step is a TODO stub that just commits
-    new JSONs.
-
-    Touches every profile script to add AUTOLENS_PROFILING_SMOKE=1
-    short-circuit (~10 scripts: likelihood/*, simulators/*,
-    searches/nautilus/*).
-
-    /start_workspace doesn't fit autolens_profiling. Manual worktree:
-      source admin_jammy/software/worktree.sh
-      worktree_create ci-actions autolens_profiling
-      cd ~/Code/PyAutoLabs-wt/ci-actions/autolens_profiling
-      git checkout -b feature/ci-actions
 
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
