@@ -86,16 +86,6 @@
       8. End-to-end library integration test
       (workspace) extend convolution.py + new convolution_oversampled.py + simulator.py
 
-## use-jax-for-vis-default
-- issue: https://github.com/PyAutoLabs/PyAutoFit/issues/1275
-- session: claude --resume "use-jax-for-vis-default"
-- status: library-shipped, workspace-pending
-- library-pr: https://github.com/PyAutoLabs/PyAutoFit/pull/1278
-- worktree: ~/Code/PyAutoLabs-wt/use-jax-for-vis-default
-- repos:
-  - PyAutoFit: feature/use-jax-for-vis-default
-  - autofit_workspace_test: feature/use-jax-for-vis-default
-
 ## group-double-einstein-ring
 - issue: https://github.com/PyAutoLabs/autolens_workspace/issues/156
 - session: claude --resume "group-double-einstein-ring"
