@@ -68,6 +68,7 @@
 - status: workspace-dev
 - worktree: ~/Code/PyAutoLabs-wt/group-mass-stellar-dark
 - repos:
+  - autolens_workspace: feature/group-mass-stellar-dark
 - note: |
     Unblocked from planned.md on 2026-05-16 once jax-phase3-adoption
     shipped and released autolens_workspace. Original issue + plan
@@ -115,3 +116,10 @@
       8. End-to-end library integration test
       (workspace) extend convolution.py + new convolution_oversampled.py + simulator.py
 
+
+## rectangular-adapt-cdf
+- issue: https://github.com/PyAutoLabs/PyAutoArray/issues/322
+- session: claude --resume "rectangular-adapt-cdf"
+- status: library-dev
+- worktree: ~/Code/PyAutoLabs-wt/rectangular-adapt-cdf
+- repos:
