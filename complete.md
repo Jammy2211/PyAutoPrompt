@@ -1,4 +1,53 @@
 
+## jit-regression-drift
+- issue: https://github.com/PyAutoLabs/autolens_workspace_developer/issues/67
+- completed: 2026-05-16
+- repo-pr: https://github.com/PyAutoLabs/autolens_profiling/pull/3
+- merge-commit: aa131a7
+- upstream-issues-filed:
+  - PyAutoLens#514 — eager log_likelihood drift in AnalysisPoint chain (real upstream behaviour change, not constant-refresh)
+  - autolens_workspace_developer#68 — jit/imaging/pixelization.py JIT vs eager mapping matrix shape mismatch
+  - autolens_workspace_developer#69 — jit/imaging/delaunay.py log_evidence rebuild returns -inf
+- summary: |
+    Follow-up F1 of autolens_profiling z_feature. Smoked all 10
+    jax_profiling/jit/ scripts against clean origin/main of _developer
+    on PyAutoLens 2026.5.14.2 and found the original drift picture was
+    wrong in interesting ways:
+
+    1. The Phase 1 imaging/mge.py "drift" (+0.6%) was NOT a real upstream
+       drift — Phase 1 mirror was made from the dirty _developer canonical
+       checkout, which had locally-modified dataset/imaging/hst/*.fits.
+       On clean main, imaging/mge.py PASSES (27379.388907 matches the
+       constant). Re-mirror in autolens_profiling PR #3 fixes this:
+       refreshes scripts + datasets from clean origin/main, also pulls
+       in dataset/interferometer/hannah/ that Phase 1 missed (828K, 5
+       files). datacube/delaunay.py default instrument also restored
+       from "sma" (dirty canonical) to "hannah" (clean main).
+
+    2. point_source/{image_plane,source_plane}.py drift IS real and IS
+       upstream — magnitudes too large for floating-point drift
+       (image_plane: 0.075 → -362.21, sign change + 4843×; source_plane:
+       -294 → -3599, 12×). Light bisect of PyAutoLens/PyAutoGalaxy/
+       PyAutoArray commits since 2026-04-24 (cfa5378, when constants were
+       set) surfaced candidates but no smoking gun. Filed PyAutoLens#514
+       for upstream investigation. **Constants left as-is — failing
+       regression assertions are load-bearing while #514 is open.**
+
+    3. Two unrelated pre-existing bugs uncovered by the 10-script smoke
+       (Phase 1 only smoked 1 per subfolder):
+       - imaging/pixelization.py: JIT vs eager mapping matrix shape
+         mismatch (1285×1285 vs 1225×1225) at the curvature+regularization
+         add step. Filed as _developer#68.
+       - imaging/delaunay.py: log_evidence rebuild returns -inf vs
+         FitImaging's finite 26288.32. Filed as _developer#69.
+
+    No code shipped to _developer (constants stay as-is). One PR shipped
+    to autolens_profiling (#3, re-mirror hygiene). Three upstream issues
+    filed for follow-on investigation by maintainer.
+
+    Smoke logs + result-artifact backups preserved at
+    /tmp/jit_drift_smoke/ in case useful for upstream triage.
+
 ## use-jax-for-vis-default
 - issue: https://github.com/PyAutoLabs/PyAutoFit/issues/1275
 - completed: 2026-05-16

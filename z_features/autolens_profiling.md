@@ -117,7 +117,7 @@ ship before this z_feature is considered closed.
 
 | # | Title | Prompt file | Origin |
 |---|-------|-------------|--------|
-| F1 | Triage drifted `EXPECTED_LOG_LIKELIHOOD_*` regression constants in `_developer/jax_profiling/jit/{imaging/mge.py,point_source/image_plane.py}` (and refresh the mirrored copies) | `autolens_workspace_developer/jit_regression_constant_drift.md` | Surfaced by Phase 1 smoke on 2026-05-16 — imaging/mge drifted +0.6%, point_source/image_plane drifted ~5000× with a sign change (likely real behaviour change in PointSolver / FitPositionsImagePairAll). |
+| F1 ✓ | Triage drifted `EXPECTED_LOG_LIKELIHOOD_*` regression constants in `_developer/jax_profiling/jit/{imaging/mge.py,point_source/image_plane.py}` (and refresh the mirrored copies) | `autolens_workspace_developer/jit_regression_constant_drift.md` | Surfaced by Phase 1 smoke on 2026-05-16. **Triaged 2026-05-16** — imaging/mge "drift" was Phase 1 dirty-canonical hygiene (fixed via PyAutoLabs/autolens_profiling#3); point_source drift is real upstream behaviour change filed as PyAutoLabs/PyAutoLens#514 (constants stay as-is until resolved). Two pre-existing imaging crashes also surfaced and filed as PyAutoLabs/autolens_workspace_developer#68 (pixelization shape mismatch) and #69 (delaunay log_evidence -inf). |
 
 ## Background — original framing
 

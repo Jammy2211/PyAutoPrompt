@@ -25,32 +25,6 @@
     (PR #157) already shipped use_jax=True on its rewritten modeling.py,
     so that file dropped from scope; companion chaining.py kept.
 
-## jit-regression-drift
-- issue: https://github.com/PyAutoLabs/autolens_workspace_developer/issues/67
-- session: claude --resume "jit-regression-drift"
-- status: workspace-dev
-- worktree: ~/Code/PyAutoLabs-wt/jit-regression-drift
-- repos:
-- note: |
-    Follow-up F1 of the autolens_profiling z_feature (tracker:
-    PyAutoPrompt/z_features/autolens_profiling.md). Triages drifted
-    EXPECTED_LOG_LIKELIHOOD_* constants in autolens_workspace_developer's
-    jax_profiling/jit/ scripts:
-      - imaging/mge.py:853 — drifted +0.6% on 2026.5.14.2 (likely numerical)
-      - point_source/image_plane.py:444 — drifted ~5000× with sign change
-        (likely real behaviour change in PointSolver/FitPositionsImagePairAll)
-      - point_source/source_plane.py:492 — untested, verify in this task
-      - interferometer/mge.py:489 — PASSED in Phase 1 smoke
-    Plus 6 other jit scripts to smoke for hidden drift.
-
-    Worktree should claim BOTH repos: autolens_workspace_developer (primary,
-    source-of-truth constants) AND autolens_profiling (mirror, same
-    constants carried verbatim in Phase 1). Final ship is a PR pair —
-    one per repo — cross-referenced.
-
-    Pre-existing dirty state on _developer canonical (unrelated work) is
-    not a blocker; worktree gives clean origin/main copy.
-
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
 - session: claude --resume "profile-smoke-test-runtime"
