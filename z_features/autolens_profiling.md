@@ -65,16 +65,18 @@ below.
 |---|-------|-------------|------------|
 | 1 ✓ | Mirror JIT likelihood profiling scripts + per-section READMEs | `autolens_profiling/likelihood_jit_mirror.md` | Phase 0 |
 
-## Phase 2 — Simulators profiling mirror
+## Phase 2 — Simulators profiling mirror ✓ shipped
 
 Mirror `autolens_workspace_developer/jax_profiling/simulators/*` into
 `autolens_profiling/simulators/`, with first-class run-time tracking for each
 simulator. Where JIT for the simulator is not implemented yet, document the
 placeholder and link to the upstream issue.
 
+Shipped 2026-05-16 via https://github.com/PyAutoLabs/autolens_profiling/pull/9.
+
 | # | Title | Prompt file | Depends on |
 |---|-------|-------------|------------|
-| 2 | Mirror simulator profiling scripts + run-time tracking | `autolens_profiling/simulators_mirror.md` | Phase 0 |
+| 2 ✓ | Mirror simulator profiling scripts + run-time tracking | `autolens_profiling/simulators_mirror.md` | Phase 0 |
 
 ## Phase 3 — Searches profiling (Nautilus first pass) ✓ shipped
 

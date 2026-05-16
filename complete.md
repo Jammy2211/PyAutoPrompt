@@ -1,4 +1,71 @@
 
+## al-assistant-style
+- issue: https://github.com/PyAutoLabs/autolens_workspace/issues/160
+- completed: 2026-05-16
+- workspace-pr: https://github.com/PyAutoLabs/autolens_workspace/pull/161
+- merge-commit: fd80fa45
+- summary: |
+    Added autolens_workspace/skills/al_assistant_style.md as the canonical
+    writing guide for PyAutoLens-Assistant skills (four required properties,
+    adaptive depth, Orient → Ask → Branch → Combine conversation arc, voice
+    do/don't rules). Rewrote skills/al_load_results.md against it: same
+    technical content, restructured from "Steps 1..7" into a conversation
+    arc with six narrative sub-task branches. Updated skills/README.md to
+    reframe the folder as PyAutoLens-Assistant and flag the style guide as
+    "read first."
+
+    Style guide is treated as iteration round 1 — expected to evolve as
+    more skills land. Future skills surfaced by name in al_load_results'
+    "Skill combinations" section: al_load_results_many (bulk), al_compare_fits,
+    al_refit_with_perturbation, al_plot_caustics.
+
+    Shipped in parallel with jax-phase3-adoption (which also held
+    autolens_workspace) via a separate worktree on disjoint files (skills/
+    only). No merge conflicts.
+
+## simulators-mirror
+- issue: https://github.com/PyAutoLabs/autolens_profiling/issues/4
+- completed: 2026-05-16
+- repo-pr: https://github.com/PyAutoLabs/autolens_profiling/pull/9
+- merge-commit: 75a562f
+- summary: |
+    Phase 2 of the autolens_profiling z_feature. Mirrored 6 simulator
+    profiling scripts (~2040 LOC) from clean origin/main of
+    _developer/jax_profiling/simulators/ into autolens_profiling/simulators/,
+    plus replaced the Phase 0 placeholder README with a section README
+    covering all 6 scripts.
+
+    Files mirrored:
+      imaging.py, interferometer.py, point_source.py,
+      cluster.py, group.py, multi.py
+
+    Path rewrites applied uniformly:
+    - `_workspace_root / "jax_profiling" / "dataset"` -> `_workspace_root / "dataset"`
+    - `_workspace_root / "jax_profiling" / "results" / "simulators"`
+        -> `_workspace_root / "results" / "simulators"`
+    - `_script_dir.parents[1]` -> `_script_dir.parents[0]`
+        (one level shallower than Phase 1 because simulators are at
+         simulators/<name>.py vs jax_profiling/simulators/<name>.py)
+    - Docstring `python jax_profiling/simulators/<name>.py`
+        -> `python simulators/<name>.py`
+
+    The artifact filename convention is unchanged:
+    `results/simulators/<script>_summary_v<al.__version__>.{json,png}`
+
+    Smoke: py_compile PASSED for all 6. Full runtime smoke skipped
+    intentionally — simulators/point_source.py at default
+    dataset_name="simple" writes to dataset/point_source/simple/
+    which holds Phase 1's tracked likelihood input JSONs
+    (point_dataset_positions_only.json, tracer.json). Running it
+    without changing the dataset_name would corrupt those tracked
+    files. Phase 5's AUTOLENS_PROFILING_SMOKE=1 short-circuit will
+    provide a clean smoke path; until then, smoke manually by
+    passing a non-conflicting dataset_name (e.g. "smoke").
+
+    F1 lesson applied: copies came from worktree's clean origin/main
+    of _developer (NOT the canonical, which is dirty with ~36
+    modified files).
+
 ## nautilus-mirror
 - issue: https://github.com/PyAutoLabs/autolens_profiling/issues/5
 - completed: 2026-05-16

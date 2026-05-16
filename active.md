@@ -86,33 +86,6 @@
       cd ~/Code/PyAutoLabs-wt/instrument-dashboard/autolens_profiling
       git checkout -b feature/instrument-dashboard
 
-## simulators-mirror
-- issue: https://github.com/PyAutoLabs/autolens_profiling/issues/4
-- session: claude --resume "simulators-mirror"
-- status: workspace-dev
-- worktree: ~/Code/PyAutoLabs-wt/simulators-mirror
-- repos:
-- note: |
-    Phase 2 of the autolens_profiling z_feature (tracker:
-    PyAutoPrompt/z_features/autolens_profiling.md). Mirrors 6 simulator
-    scripts (~2040 LOC) from _developer/jax_profiling/simulators/ into
-    autolens_profiling/simulators/ + writes section README + smokes each.
-
-    Smaller scope than Phase 1 (no input-dataset mirroring decision —
-    simulators PRODUCE datasets). Uses Phase 1's locked-in top-level
-    `dataset/<type>/<name>/` layout for produced outputs.
-
-    Apply F1 lesson: copy from the worktree's clean origin/main of
-    _developer, NOT the canonical (which had ~36 modified files when
-    Phase 1 was made and contaminated that mirror).
-
-    /start_workspace does not fit autolens_profiling (no smoke harness,
-    no activate.sh, no config/). Manual worktree:
-      source admin_jammy/software/worktree.sh
-      worktree_create simulators-mirror autolens_profiling
-      cd ~/Code/PyAutoLabs-wt/simulators-mirror/autolens_profiling
-      git checkout -b feature/simulators-mirror
-
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
 - session: claude --resume "profile-smoke-test-runtime"
@@ -185,13 +158,4 @@
   - PyAutoArray: feature/knn-barycentric
   - autolens_workspace_developer: feature/knn-barycentric
   - autolens_workspace_test: feature/knn-barycentric
-
-## al-assistant-style
-- issue: https://github.com/PyAutoLabs/autolens_workspace/issues/160
-- session: claude --resume "al-assistant-style"
-- status: workspace-dev
-- worktree: ~/Code/PyAutoLabs-wt/al-assistant-style
-- overlap: shares autolens_workspace with jax-phase3-adoption — different files (skills/ vs JAX adoption), user accepted overlap risk
-- repos:
-  - autolens_workspace: feature/al-assistant-style
 
