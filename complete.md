@@ -1,4 +1,36 @@
 
+## nss-checkpointing-and-visualization
+- issue: https://github.com/PyAutoLabs/PyAutoFit/issues/1273
+- completed: 2026-05-16
+- library-prs:
+  - PyAutoFit: https://github.com/PyAutoLabs/PyAutoFit/pull/1274
+  - autolens_workspace_developer: https://github.com/PyAutoLabs/autolens_workspace_developer/pull/66
+- notes: |
+    Phases 2-3 of nss_first_class_sampler. Inlined the upstream
+    run_nested_sampling outer loop in NSS._fit (blackjax.nss + manual while +
+    finalise + log_weights) so we could hook checkpoint writes +
+    analysis.visualize() between iterations. New `checkpoint_interval=100`
+    kwarg; `iterations_per_quick_update` (Phase 1 no-op) now functional.
+    Atomic tmp-and-rename pickle write with NumPy round-trip for JAX
+    pytree portability. Post-success cleanup deletes the checkpoint.
+
+    Architectural insight (corrected the roadmap): nss.ns.run_nested_sampling's
+    outer loop is plain Python — the JIT boundary is `one_step` processing
+    num_delete deaths per iteration. No upstream yallup/nss PR needed; both
+    phases ship in one PyAutoFit PR.
+
+    Validation: pytest test_autofit 1258 passed/1 skipped (1252 baseline +
+    6 new checkpoint tests). End-to-end resume smoke
+    (autolens_workspace_developer/searches_minimal/nss_checkpoint_resume.py):
+    capture pass + resume pass produce identical log_evidence=-0.0096,
+    Phase 3 viz fires 4 times during capture, post-success cleanup deletes
+    the checkpoint on both passes. Phase 1 Gaussian smoke regression-free
+    (7s wall, ESS 94/95).
+
+    Roadmap status: Phase 4 (`pip install autofit[nss]` extra) and Phase 5
+    (workspace tutorial scripts: autolens_workspace/searches/nss.py etc.)
+    remain. Both are small + standalone — neither blocks the other.
+
 ## nss-search-wrapper
 - issue: https://github.com/PyAutoLabs/PyAutoFit/issues/1271
 - completed: 2026-05-16
