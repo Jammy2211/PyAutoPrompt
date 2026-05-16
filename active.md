@@ -198,4 +198,5 @@
 - worktree: ~/Code/PyAutoLabs-wt/al-assistant-style
 - overlap: shares autolens_workspace with jax-phase3-adoption — different files (skills/ vs JAX adoption), user accepted overlap risk
 - repos:
+  - autolens_workspace: feature/al-assistant-style
 
