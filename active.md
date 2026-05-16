@@ -86,11 +86,3 @@
       8. End-to-end library integration test
       (workspace) extend convolution.py + new convolution_oversampled.py + simulator.py
 
-## group-double-einstein-ring
-- issue: https://github.com/PyAutoLabs/autolens_workspace/issues/156
-- session: claude --resume "group-double-einstein-ring"
-- status: workspace-dev
-- worktree: ~/Code/PyAutoLabs-wt/group-double-einstein-ring
-- repos:
-  - autolens_workspace: feature/group-double-einstein-ring
-
