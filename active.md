@@ -112,4 +112,5 @@
 - status: library-dev
 - worktree: ~/Code/PyAutoLabs-wt/use-jax-for-vis-default
 - repos:
+  - PyAutoFit: feature/use-jax-for-vis-default
 
