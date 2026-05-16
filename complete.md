@@ -1,4 +1,38 @@
 
+## nss-tutorial-dispatch
+- issue: https://github.com/PyAutoLabs/autofit_workspace/issues/59
+- completed: 2026-05-16
+- workspace-prs:
+  - autofit_workspace: https://github.com/PyAutoLabs/autofit_workspace/pull/60
+- notes: |
+    Phase 5 of nss_first_class_sampler — the workspace capstone. Added an
+    "Search: NSS" section to autofit_workspace/scripts/searches/nest.py so
+    end users discover af.NSS from the canonical nested-sampler tutorial.
+    Extended the top docstring + Contents block, added an
+    "Install Precondition for NSS" callout (pip install autofit[nss]),
+    added a "When to use NSS" paragraph to the searches/README.md.
+
+    Real bug caught during validation: the default af.ex.Analysis uses
+    NumPy internally, which trips TracerArrayConversionError when NSS
+    JIT-traces through it. Fix: build a separate af.ex.Analysis with
+    use_jax=True for the NSS section. Turned this into a natural teaching
+    moment in the tutorial — production users adopting NSS need to
+    construct their Analysis with use_jax=True.
+
+    Validation: nest.py runs end-to-end through all four nested samplers
+    (DynestyStatic, DynestyDynamic, Nautilus, NSS) producing finite
+    log_evidence (NSS: log_evidence=-67.02, max log L=-50.40). autofit_workspace
+    smoke 9/9 passes — searches/nest.py is in smoke_tests.txt so this
+    exercises the new NSS section on every smoke run.
+
+    Scope intentionally narrow: autofit_workspace only. autogalaxy_workspace
+    and autolens_workspace NSS adoption deferred to separate follow-ups —
+    those workspaces don't have scripts/searches/ directories.
+
+    With this PR, Phases 0-5 of the nss_first_class_sampler z_feature are
+    all shipped. Ready to archive the tracker via
+    `/start_dev z_features/nss_first_class_sampler.md` (audit-only mode).
+
 ## nss-install-extra
 - issue: https://github.com/PyAutoLabs/PyAutoFit/issues/1276
 - completed: 2026-05-16
