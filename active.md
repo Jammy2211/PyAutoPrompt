@@ -115,3 +115,10 @@
   - PyAutoFit: feature/use-jax-for-vis-default
   - autofit_workspace_test: feature/use-jax-for-vis-default
 
+## group-double-einstein-ring
+- issue: https://github.com/PyAutoLabs/autolens_workspace/issues/156
+- session: claude --resume "group-double-einstein-ring"
+- status: workspace-dev
+- worktree: ~/Code/PyAutoLabs-wt/group-double-einstein-ring
+- repos:
+
