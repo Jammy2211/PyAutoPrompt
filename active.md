@@ -28,6 +28,21 @@
     work from there. Smoke step = manual per-subfolder script runs
     (see issue body step 8).
 
+## nss-tutorial-dispatch
+- issue: https://github.com/PyAutoLabs/autofit_workspace/issues/59
+- session: claude --resume "nss-tutorial-dispatch"
+- status: workspace-dev
+- worktree: ~/Code/PyAutoLabs-wt/nss-tutorial-dispatch
+- repos:
+- summary: |
+    Phase 5 of nss_first_class_sampler — workspace capstone. Add an
+    "Search: NSS" section to autofit_workspace/scripts/searches/nest.py so
+    end users discover af.NSS from the canonical nested-sampler tutorial.
+    Scope is intentionally autofit_workspace only; autogalaxy / autolens
+    follow-ups come once we see user reactions.
+
+    Tutorial prose stays on Opus per feedback_tutorial_prose_opus.md.
+
 ## smoke-test-optimization
 - issue: https://github.com/rhayes777/PyAutoFit/issues/1183
 - session: claude --resume "profile-smoke-test-runtime"
