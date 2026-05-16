@@ -1,15 +1,9 @@
-- We had codex generate the userfacing aspect of the al_load_results skill, as we begin to write more skills I thinkw e need
-- this to be built into the Claude / codex context so it always writes skills in this style.
-
-- iprove al_load_results using claude, it needs a more descriptive and conversation tone that a user can really grasp
-the concepts and it should encourage the user to ask follow up questions about how the skill performs the task.
 
 - Euclid loading from output .fits with codex seemed to make mistakes, or at least it wasnt maybe plotting what it
 thoguths and it didnt use the mask. I thinkw e need to update the result start_here.py scripts to have full hdu mapping information
 for all .fits files, or at least a link to a script which provides this information explcitily. I as a user are sitll having to
 instruct codex here. Codex got there with a small nudge so I think we just need to have it in the start_here (or follow up script) context.
 It perhaps just need one example and the point to be more explicit that HDU information contains data type mappings and this needs to be carefully paired.
-
 
 - Visualization needs dediciated skill or skills, including the plot module of the workspace being read more carefully and like having fully
 mapltotlib code for customizeable figures in there. User then has option of using built in autolens visual library (simple and automated but less customization),
