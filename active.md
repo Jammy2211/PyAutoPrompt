@@ -1,3 +1,30 @@
+## viz-subprocess-feasibility
+- issue: https://github.com/PyAutoLabs/PyAutoFit/issues/1279
+- session: claude --resume "viz-subprocess-feasibility"
+- status: library-dev
+- worktree: ~/Code/PyAutoLabs-wt/viz-subprocess-feasibility
+- repos:
+- note: |
+    Phase 4 of the (archived) z_features/jax_visualization.md roadmap.
+    Feasibility prototype + ADR, NOT production implementation. Picks
+    IPC mechanism (mp.Process+Queue vs ProcessPoolExecutor vs disk-staged
+    Popen), settles FitImaging picklability (highest-risk question),
+    chooses backpressure policy (drop/queue/coalesce), demonstrates
+    failure isolation.
+
+    Touches PyAutoFit (library, primary — new autofit/non_linear/
+    visualization/ module + ADR at docs/adr/0001-subprocess-visualization.md)
+    and autolens_workspace_test (one new demo script in
+    scripts/jax_assertions/subprocess_viz_prototype.py).
+
+    File-level coexistence cleared on autolens_workspace_test alongside
+    knn-barycentric (both write to scripts/jax_assertions/, different
+    filenames). Same precedent as ag-interferometer-kwargs.
+
+    Production implementation is a SEPARATE follow-up prompt authored
+    AFTER this feasibility ADR — autofit/visualization_subprocess_production.md
+    (to be written during this task).
+
 ## ci-actions
 - issue: https://github.com/PyAutoLabs/autolens_profiling/issues/7
 - session: claude --resume "ci-actions"
