@@ -1,4 +1,50 @@
 
+## likelihood-jit-mirror
+- issue: https://github.com/PyAutoLabs/autolens_profiling/issues/1
+- completed: 2026-05-16
+- repo-pr: https://github.com/PyAutoLabs/autolens_profiling/pull/2
+- merge-commit: 7c464c2
+- summary: |
+    Phase 1 of the autolens_profiling z_feature. Mirrored the JIT
+    likelihood profiling scripts and their tracked input datasets from
+    autolens_workspace_developer/jax_profiling/jit/ into the new
+    autolens_profiling repo at likelihood/ and dataset/. _developer
+    stays the source of truth — nothing moved or deleted upstream.
+
+    9 scripts + 1 __init__.py mirrored verbatim (filename-preserving)
+    across imaging/, interferometer/, point_source/, datacube/. ~7,400 LOC.
+    14 dataset files mirrored (~900K, checksums verified). 5 READMEs
+    authored: top-level likelihood/README.md + 4 per-section.
+
+    Path rewrites applied uniformly across all 9 scripts:
+      Path("jax_profiling") / "dataset"     -> Path("dataset")
+      _script_dir.parents[2]                -> _script_dir.parents[1]
+      "jax_profiling" / "results" / "jit"   -> "results" / "likelihood"
+      docstring sibling refs                -> new layout
+    The if should_simulate(...) block at the top of each script was
+    replaced with a clear FileNotFoundError pointing back at
+    _developer/jax_profiling/dataset_setup/ for regeneration (Phase 1
+    out of scope).
+
+    Decision locked in: dataset/ lives at top-level (shared with Phase 2
+    simulators and Phase 3 searches), NOT under likelihood/.
+
+    Smoke (CPU, all 4 produced artifacts at expected results/likelihood/
+    paths):
+      - imaging/mge.py [hst]: artifacts ✓; regression assertion
+        pre-existing drift (constant unchanged from _developer).
+      - interferometer/mge.py [sma]: ALL PASSED.
+      - point_source/image_plane.py [simple]: artifacts ✓; regression
+        assertion pre-existing drift (large: 0.07 → -362, sign change).
+      - datacube/delaunay.py [sma × 4]: ALL PASSED (both eager and
+        full-pipeline cube regressions).
+
+    Pre-existing drift in imaging/mge and point_source/image_plane is
+    upstream science work for _developer — same drift would manifest if
+    those scripts ran on PyAutoLens 2026.5.14.2. Worth a separate
+    follow-up issue against _developer (especially the point_source one,
+    which suggests a real behaviour change rather than fp noise).
+
 ## nss-tutorial-dispatch
 - issue: https://github.com/PyAutoLabs/autofit_workspace/issues/59
 - completed: 2026-05-16
