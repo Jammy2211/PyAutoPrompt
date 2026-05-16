@@ -9,9 +9,13 @@ I want these skills to have the following properties:
 - I want there to be a convservation tone and encourages the user to also ask questions about how things work, not sure do the task or work for them.
 - However, the strength is of course once users begin putting skills together they will realise they can do things that is otherwise not possible running just one script.
 
+Please ask me follow up questions on your interpretation of the above so I can guide you further on what we are aiming
+for with PyAutoLens-Assistant
 
 Can you maybe have the way I desire skills be written be a claude skill or memory in and of itself? Getting this style
-right may take iteration. Do this as you try and update this skill to the right style the one there now was writtten by
+right may take iteration. 
+
+Do this as you try and update this skill to the right style the one there now was writtten by
 codex which I think means it ended up a bit more codey and mechanical, less like an AI assistant.
 
 -

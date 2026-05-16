@@ -210,11 +210,13 @@
 ## knn-barycentric
 - issue: https://github.com/PyAutoLabs/PyAutoArray/issues/317
 - session: claude --resume "knn-barycentric"
-- status: library-shipped, workspace-pending
+- status: workspace-dev
 - library-pr: https://github.com/PyAutoLabs/PyAutoArray/pull/318
 - worktree: ~/Code/PyAutoLabs-wt/knn-barycentric
 - repos:
   - PyAutoArray: feature/knn-barycentric
+  - autolens_workspace_developer: feature/knn-barycentric
+  - autolens_workspace_test: feature/knn-barycentric
 
 ## critical-curves-linewidth
 - session: claude --resume "critical-curves-linewidth"
