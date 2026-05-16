@@ -1,3 +1,64 @@
+## ci-actions
+- issue: https://github.com/PyAutoLabs/autolens_profiling/issues/7
+- session: claude --resume "ci-actions"
+- status: workspace-dev
+- worktree: ~/Code/PyAutoLabs-wt/ci-actions
+- repos:
+- note: |
+    Phase 5 of the autolens_profiling z_feature (tracker:
+    PyAutoPrompt/z_features/autolens_profiling.md). Wires up GitHub
+    Actions: lint.yml (PR + push, <5min CPU-only) + profile.yml (manual
+    + release-triggered profile re-run + dashboard refresh). Also adds
+    pyproject.toml with ruff config copied from PyAutoLens.
+
+    Benefits from (but does not block on) Phase 4's
+    scripts/build_readme.py — if Phase 4 hasn't shipped yet,
+    Workflow 2's "refresh README" step is a TODO stub that just commits
+    new JSONs.
+
+    Touches every profile script to add AUTOLENS_PROFILING_SMOKE=1
+    short-circuit (~10 scripts: likelihood/*, simulators/*,
+    searches/nautilus/*).
+
+    /start_workspace doesn't fit autolens_profiling. Manual worktree:
+      source admin_jammy/software/worktree.sh
+      worktree_create ci-actions autolens_profiling
+      cd ~/Code/PyAutoLabs-wt/ci-actions/autolens_profiling
+      git checkout -b feature/ci-actions
+
+## instrument-dashboard
+- issue: https://github.com/PyAutoLabs/autolens_profiling/issues/6
+- session: claude --resume "instrument-dashboard"
+- status: workspace-dev
+- worktree: ~/Code/PyAutoLabs-wt/instrument-dashboard
+- repos:
+- note: |
+    Phase 4 of the autolens_profiling z_feature (tracker:
+    PyAutoPrompt/z_features/autolens_profiling.md). Builds the public-
+    facing READMEs framed by astronomy instrument (HST, Euclid, JWST,
+    ALMA, …) — the user's explicitly most-wanted deliverable.
+
+    Adds scripts/build_readme.py that scans results/**/*_summary_v*.json,
+    picks the latest per axis, regenerates markdown tables in every
+    relevant README between sentinel comments. Idempotent.
+
+    Depends on Phase 1 (shipped) + Phase 2 (in flight, #4). Best to wait
+    until Phase 2 ships before starting so the dashboard has results to
+    populate; Phase 3 (Nautilus, #5) is independent of the skeleton but
+    rounds out section coverage.
+
+    Open implementer decisions to make in scope:
+      - CPU/laptop-GPU/HPC-GPU split: 3 cols per cell vs 3 stacked sub-tables
+      - Versioning: keep last 6 minor releases? archive older?
+      - "Cool extras" the user asked about — pick 1-2 to land
+        (regression-watch badge, plotly timeline, flamegraphs).
+
+    /start_workspace doesn't fit autolens_profiling. Manual worktree:
+      source admin_jammy/software/worktree.sh
+      worktree_create instrument-dashboard autolens_profiling
+      cd ~/Code/PyAutoLabs-wt/instrument-dashboard/autolens_profiling
+      git checkout -b feature/instrument-dashboard
+
 ## nautilus-mirror
 - issue: https://github.com/PyAutoLabs/autolens_profiling/issues/5
 - session: claude --resume "nautilus-mirror"
