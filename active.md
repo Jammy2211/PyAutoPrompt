@@ -4,6 +4,8 @@
 - status: library-dev
 - worktree: ~/Code/PyAutoLabs-wt/nss-search-wrapper
 - repos:
+  - PyAutoFit: feature/nss-search-wrapper
+  - autolens_workspace_developer: feature/nss-search-wrapper
 - summary: |
     Phase 1 of nss_first_class_sampler — add `af.NSS` as a first-class
     NonLinearSearch wrapping `nss.ns.run_nested_sampling`. New module
