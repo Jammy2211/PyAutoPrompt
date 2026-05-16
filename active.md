@@ -93,4 +93,5 @@
 - status: library-dev
 - worktree: ~/Code/PyAutoLabs-wt/knn-barycentric
 - repos:
+  - PyAutoArray: feature/knn-barycentric
 
