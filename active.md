@@ -87,3 +87,10 @@
       8. End-to-end library integration test
       (workspace) extend convolution.py + new convolution_oversampled.py + simulator.py
 
+## knn-barycentric
+- issue: https://github.com/PyAutoLabs/PyAutoArray/issues/317
+- session: claude --resume "knn-barycentric"
+- status: library-dev
+- worktree: ~/Code/PyAutoLabs-wt/knn-barycentric
+- repos:
+
